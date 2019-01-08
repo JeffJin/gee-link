@@ -1,5 +1,6 @@
 import React from 'react';
-import {Redirect, Switch, Route, BrowserRouter as Router} from "react-router-dom";
+import {Redirect, Switch, Route} from "react-router-dom";
+import {Provider} from "react-redux";
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import {withStyles} from '@material-ui/core/styles';
@@ -21,6 +22,7 @@ import MainPage from "./components/pages/main-page";
 import UserStats from "./components/pages/user-stats";
 import DataStats from "./components/pages/data-stats";
 import KeywordStats from "./components/pages/keyword-stats";
+import {store} from "./store/store";
 
 const drawerWidth = 240;
 
@@ -190,4 +192,12 @@ App.propTypes = {
   classes: PropTypes.object.isRequired,
 };
 
-export default withStyles(styles)(App);
+const StyledApp = withStyles(styles)(App);
+
+const WrappedApp = () => (
+  <Provider store={store}>
+    <StyledApp />
+  </Provider>
+);
+
+export default WrappedApp;
