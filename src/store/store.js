@@ -33,7 +33,21 @@ const reducer = combineReducers({
   searchUserTop10: searchUserTop10Reducer,
   search: searchReducer,
   searchResult: searchResultReducer,
-  searchResultItemDetails: searchResultItemDetailsReducer,
+  searchResultItemDetails: searchResultItemDetailsReducer
 });
 
-export const store = createStore(reducer);
+const initialStates = {
+  totalStats: [],
+  realTimeSearchChartData: {},
+  individualSearchChartData: {},
+  realTimeUserChartData: {},
+  userLocationMapData: {},
+  keywordSearchTop10: {},
+  dataBrowseTop10: {},
+  searchUserTop10: {},
+  search: {},
+  searchResult: {},
+  searchResultItemDetails: {}
+};
+
+export const store = createStore(reducer, initialStates);

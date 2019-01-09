@@ -1,7 +1,6 @@
 import React from 'react';
 import MainRealTimeChart from "../presentation/main-real-time-chart";
 import RankingList from "../presentation/ranking-list";
-import PropTypes from "prop-types";
 import {connect} from "react-redux";
 import {dataService} from "../../services/data.service";
 
@@ -84,6 +83,7 @@ const mapDispatchToMainPageProps = (dispatch) => (
 );
 
 class MainPageContent extends React.Component {
+
   constructor(props) {
     super(props);
   }
@@ -94,6 +94,7 @@ class MainPageContent extends React.Component {
 
   getTotalStats = () => {
     dataService.getTotalStats().then(stats => {
+      console.log('data service returned', stats);
       this.props.onLoadStats(stats);
     });
   };

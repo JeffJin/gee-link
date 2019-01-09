@@ -24,7 +24,7 @@ import DataStats from "./components/pages/data-stats";
 import KeywordStats from "./components/pages/keyword-stats";
 import {store} from "./store/store";
 
-const drawerWidth = 240;
+const drawerWidth = 180;
 
 const styles = theme => ({
   root: {
