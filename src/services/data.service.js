@@ -20,18 +20,27 @@ class DataService {
     }
   }
 
-  getAlbums(albumIds) {
-    // See note about tokens above
-    const url = (
-      '/api/albums?ids=' + albumIds.join(',') + '&token=' + this.token
-    );
-    return fetch(url, {
-      method: 'get',
-      headers: {
-        accept: 'application/json',
-      },
-    }).then(this.checkStatus)
-      .then(this.parseJson);
+  getTotalStats() {
+    const result = {
+      totalData: 111126,
+      totalSearch: 479,
+      individualSearch: 267,
+      individualUsers: 1
+    };
+    return new Promise(function(resolve, reject) {
+      setTimeout(function () {
+        resolve(result);
+      }, 500);
+    });
+
+    // const url = '/api/total-stats';
+    // return fetch(url, {
+    //   method: 'get',
+    //   headers: {
+    //     accept: 'application/json',
+    //   },
+    // }).then(this.checkStatus)
+    //   .then(this.parseJson);
   }
 
 

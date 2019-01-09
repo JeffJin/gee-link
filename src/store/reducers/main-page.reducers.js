@@ -1,4 +1,4 @@
-export function totalDataReducer(state = [], action) {
+export function totalStatsReducer(state = [], action) {
   switch (action.type) {
     case 'SEARCH': {
       return state;
@@ -42,28 +42,6 @@ export function realTimeSearchChartDataReducer(state = [], action) {
   }
 }
 
-export function individualUserNumberReducer(state = [], action) {
-  switch (action.type) {
-    case 'SEARCH': {
-      return state;
-    }
-    default: {
-      return state;
-    }
-  }
-}
-
-export function individualSearchNumberReducer(state = [], action) {
-  switch (action.type) {
-    case 'SEARCH': {
-      return state;
-    }
-    default: {
-      return state;
-    }
-  }
-}
-
 export function userLocationMapDataReducer(state = [], action) {
   switch (action.type) {
     case 'SEARCH': {
@@ -87,17 +65,6 @@ export function keywordSearchTop10Reducer(state = [], action) {
 }
 
 export function dataBrowseTop10Reducer(state = [], action) {
-  switch (action.type) {
-    case 'SEARCH': {
-      return state;
-    }
-    default: {
-      return state;
-    }
-  }
-}
-
-export function totalSearchNumberReducer(state = [], action) {
   switch (action.type) {
     case 'SEARCH': {
       return state;
