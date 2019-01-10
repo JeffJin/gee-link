@@ -1,72 +1,58 @@
 import React from 'react';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
-import ListItemText from '@material-ui/core/ListItemText';
-import DashboardIcon from '@material-ui/icons/Dashboard';
-import ShoppingCartIcon from '@material-ui/icons/ShoppingCart';
-import PeopleIcon from '@material-ui/icons/People';
-import BarChartIcon from '@material-ui/icons/BarChart';
+import StarBorderOutlined from '@material-ui/icons/StarBorderOutlined';
+import PublicOutlined from '@material-ui/icons/PublicOutlined';
+import InsertChartOutlined from '@material-ui/icons/InsertChartOutlined';
+import PeopleOutlined from '@material-ui/icons/PeopleOutlined';
 import {NavLink} from "react-router-dom";
+import {KeyboardArrowRight} from "@material-ui/icons";
 
 export const leftMenuItems = (
-  <div>
-    <div>
-      <NavLink
-        to='/main'
-        className='nav'
-      >
-        首页 >
+  <div className={'menu'}>
+    <ListItem button className={'menu-list-item'}>
+      <ListItemIcon className={'menu-icon'}>
+        <StarBorderOutlined/>
+      </ListItemIcon>
+      <NavLink to={'/main'} className='nav'>
+        首页
       </NavLink>
-    </div>
-    <div>
-      <NavLink
-        to={'/keyword'}
-        className='nav'
-      >
-        关键词统计 >
+      <ListItemIcon className={'menu-icon'}>
+        <KeyboardArrowRight/>
+      </ListItemIcon>
+    </ListItem>
+    <ListItem button className={'menu-list-item'}>
+      <ListItemIcon className={'menu-icon'}>
+        <PublicOutlined/>
+      </ListItemIcon>
+      <NavLink to={'/keyword'} className='nav'>
+        关键词统计
       </NavLink>
-    </div>
-    <div>
-
-      <NavLink
-        to={'/data'}
-        className='nav'
-      >
-        数据统计 >
+      <ListItemIcon className={'menu-icon'}>
+        <KeyboardArrowRight/>
+      </ListItemIcon>
+    </ListItem>
+    <ListItem button className={'menu-list-item'}>
+      <ListItemIcon className={'menu-icon'}>
+        <InsertChartOutlined/>
+      </ListItemIcon>
+      <NavLink to={'/data'} className='nav'>
+        数据统计
       </NavLink>
-    </div>
-    <div>
-
-      <NavLink
-        to={'/user'}
-        className='nav'
-      >
-        用户统计 >
+      <ListItemIcon className={'menu-icon'}>
+        <KeyboardArrowRight/>
+      </ListItemIcon>
+    </ListItem>
+    <ListItem button className={'menu-list-item'}>
+      <ListItemIcon className={'menu-icon'}>
+        <PeopleOutlined/>
+      </ListItemIcon>
+      <NavLink to={'/user'} className='nav'>
+        用户统计
       </NavLink>
-    </div>
-    {/*<ListItem button>*/}
-    {/*<ListItemIcon>*/}
-    {/*<DashboardIcon />*/}
-    {/*</ListItemIcon>*/}
-    {/*<ListItemText primary="首页 >" />*/}
-    {/*</ListItem>*/}
-    {/*<ListItem button>*/}
-    {/*<ListItemIcon>*/}
-    {/*<ShoppingCartIcon />*/}
-    {/*</ListItemIcon>*/}
-    {/*<ListItemText primary="关键词统计 >" />*/}
-    {/*</ListItem>*/}
-    {/*<ListItem button>*/}
-    {/*<ListItemIcon>*/}
-    {/*<PeopleIcon />*/}
-    {/*</ListItemIcon>*/}
-    {/*<ListItemText primary="数据统计 >" />*/}
-    {/*</ListItem>*/}
-    {/*<ListItem button>*/}
-    {/*<ListItemIcon>*/}
-    {/*<BarChartIcon />*/}
-    {/*</ListItemIcon>*/}
-    {/*<ListItemText primary="用户统计 >" />*/}
-    {/*</ListItem>*/}
+      <ListItemIcon className={'menu-icon'}>
+        <KeyboardArrowRight/>
+      </ListItemIcon>
+    </ListItem>
   </div>
 );

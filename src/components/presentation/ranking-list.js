@@ -1,6 +1,5 @@
 import React from 'react';
 
-
 function RankingList(props) {
   return (
     <div className="ranking-container">

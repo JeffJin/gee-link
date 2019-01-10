@@ -1,61 +1,117 @@
-.App 
-  text-align: center
-
-
-.App-logo 
-  animation: App-logo-spin infinite 20s linear
-  height: 40vmin
-
-
-.App-header 
-  background-color: #282c34
-  min-height: 100vh
+.root
   display: flex
-  flex-direction: column
-  align-items: center
-  justify-content: center
-  font-size: calc(10px + 2vmin)
-  color: white
+
+  .toolbar
+    padding-right: 24px // keep right padding when drawer closed
+
+  .toolbar-icon
+    display: flex
+    align-items: center
+    justify-content: flex-end
+    padding: 0 8px
+    background: url("/assets/geelink.png") no-repeat center
+    background-size: 160px
+    width: 180px
+    height: 69px
+
+  .menu
+    .menu-list-item
+      padding-right: 0
+
+    .menu-icon
+      color: #92999f
+
+    .nav
+      color: #92999f
+      width: 82px
+      text-decoration: none
+
+  .title
+    flex-grow: 1
+
+  .divider
+    background-color: #3c474c
+
+  .drawer-paper
+    position: relative
+    white-space: nowrap
+    width: 180px
+    transition: width 2s ease
+    background-color: #263238
+
+  .drawer-paper-close
+    overflow-x: hidden
+    transition: width 2s ease
+    width: 84px
 
 
-.App-link 
-  color: #61dafb
+  .main
+    min-width: 843px
 
-.main
-  min-width: 843px
+  .content
+    flex-grow: 1
+    padding: 30px
+    height: 100vh
+    overflow: auto
 
-.content
-  flex-grow: 1
-  padding: 30px
-  height: 100vh
-  overflow: auto
+    .stat-box-container
+      display: block
+      height: 180px
+      width: 760px
+      margin: 20px auto
 
-.stat-box-container
-  display: block
-  height: 180px
+      .stat-box
+        display: inline-block
+        float: left
+        height: 120px
+        width: 150px
+        border: 1px solid #0095e9
+        border-radius: 5px
+        margin: 20px
+        
+        .value
+          position: relative
+          top: 31px
+          font-size: 35px
+          font-weight: 600
+          text-align: center
+          color: #666
+        .desc
+          position: relative
+          top: 44px
+          text-align: center
 
-.stat-box
-  display: inline-block
-  float: left
-  height: 120px
-  width: 150px
-  border: 1px solid blue
-  border-radius: 5px
-  margin: 20px
+    .chart-container
+      display: block
+      height: 200px
 
-.chart-container
-  display: block
-  height: 200px
-
-.table-container
-  height: 320px
+    .table-container
+      height: 320px
 
 
-@keyframes App-logo-spin 
-  from 
-    transform: rotate(0deg)
-  
-  to 
-    transform: rotate(360deg)
-  
+    .search-box
+      padding: 2px 4px
+      display: block
+      align-items: center
+      width: 400px
+      border: solid #0095e9 2px
+      margin: 0 auto
 
+      .input
+        margin-left: 8px
+        flex: 1
+
+      .icon-button
+        padding: 8px
+        background-color: #0095e9
+        display: block
+        float: right
+        border-radius: 0 4px 4px 0
+        position: relative
+        top: -4px
+        right: -4px
+
+      .divider
+        width: 1px
+        height: 28px
+        margin: 4px
