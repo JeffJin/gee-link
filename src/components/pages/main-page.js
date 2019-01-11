@@ -1,8 +1,10 @@
 import React from 'react';
 import MainRealTimeChart from "../presentation/main-real-time-chart";
-import RankingList from "../presentation/ranking-list";
+
 import {connect} from "react-redux";
 import {dataService} from "../../services/data.service";
+import UserLocationMap from "../presentation/user-location-map";
+import {RankingLists} from "../ranking-list";
 
 
 function openStatDetails(id) {
@@ -11,7 +13,6 @@ function openStatDetails(id) {
     id: id,
   };
 }
-
 
 function loadTotalStats(stats) {
   return {
@@ -69,6 +70,7 @@ const TotalStats = connect(
   mapDispatchToStatBoxProps
 )(StateBoxes);
 
+
 const mapStateToMainPageProps = (state) => {
   return {...state};
 };
@@ -83,7 +85,6 @@ const mapDispatchToMainPageProps = (dispatch) => (
 );
 
 class MainPageContent extends React.Component {
-
   constructor(props) {
     super(props);
   }
@@ -94,8 +95,15 @@ class MainPageContent extends React.Component {
 
   getTotalStats = () => {
     dataService.getTotalStats().then(stats => {
-      console.log('data service returned', stats);
+      console.log('data service getTotalStats returned', stats);
       this.props.onLoadStats(stats);
+    });
+  };
+
+  getRankingLists = () => {
+    dataService.getRankingLists().then(list => {
+      console.log('data service getRankingLists returned', list);
+      this.props.onLoadRankings(list);
     });
   };
 
@@ -104,12 +112,14 @@ class MainPageContent extends React.Component {
       <div className="main">
         <TotalStats/>
         <div className={'chart-container'}>
-          <MainRealTimeChart />
-          <div>China Map</div>
+          <div className={'map'}>
+            <MainRealTimeChart />
+          </div>
+          <div className={'map'}>
+            <UserLocationMap />
+          </div>
         </div>
-        <div className={'table-container'}>
-          <RankingList />
-        </div>
+        <RankingLists/>
       </div>
     );
   }
