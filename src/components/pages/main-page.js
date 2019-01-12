@@ -1,18 +1,12 @@
 import React from 'react';
-import MainRealTimeChart from "../presentation/main-real-time-chart";
-
+import RealTimeSearchChart from "../presentation/real-time-search-chart";
 import {connect} from "react-redux";
 import {dataService} from "../../services/data.service";
 import UserLocationMap from "../presentation/user-location-map";
 import {RankingLists} from "../ranking-list";
-
-
-function openStatDetails(id) {
-  return {
-    type: 'OPEN_STAT_DETAILS',
-    id: id,
-  };
-}
+import {TotalStats} from "../state-boxes";
+import IndividualSearchChart from "../presentation/individual-search-chart";
+import RealTimeUserChart from "../presentation/realtime-user-chart";
 
 function loadTotalStats(stats) {
   return {
@@ -20,56 +14,6 @@ function loadTotalStats(stats) {
     payload: stats,
   };
 }
-
-const labelDictionary = {
-  totalData: '总数据数',
-  totalSearch: '总搜索数',
-  individualSearch: '独立搜索数',
-  individualUsers: '独立用户数'
-};
-
-const StateBoxes = (props) => {
-  return <div className={'stat-box-container'}>
-      {
-        props.stateBoxes.map((box, index) => (
-          <div
-            key={index}
-            className={'stat-box'}
-            onClick={() => props.onClick(box.key)}
-          >
-            <div className={'value'}>{box.value}</div>
-            <div className={'desc'}>{box.label}</div>
-          </div>
-        ))
-      }
-    </div>;
-};
-
-const mapStateToStatBoxProps = (state) => {
-  const stateBoxes = [];
-  for (let k in state.totalStats) {
-    if (state.totalStats.hasOwnProperty(k)) {
-      stateBoxes.push({key: k, value: state.totalStats[k], label: labelDictionary[k]})
-    }
-  }
-  return {
-    stateBoxes,
-  };
-};
-
-const mapDispatchToStatBoxProps = (dispatch) => (
-  {
-    onClick: (id) => (
-      dispatch(openStatDetails(id))
-    ),
-  }
-);
-
-const TotalStats = connect(
-  mapStateToStatBoxProps,
-  mapDispatchToStatBoxProps
-)(StateBoxes);
-
 
 const mapStateToMainPageProps = (state) => {
   return {...state};
@@ -91,6 +35,8 @@ class MainPageContent extends React.Component {
 
   componentDidMount() {
     this.getTotalStats();
+    // this.getRankingLists();
+    this.getRealtimeChartData();
   }
 
   getTotalStats = () => {
@@ -107,13 +53,26 @@ class MainPageContent extends React.Component {
     });
   };
 
+  getRealtimeChartData = () => {
+    dataService.getRealtimeChartData().then(list => {
+      console.log('data service getRealtimeChartData returned', list);
+      this.props.onLoadChartData(list);
+    });
+  };
+
   render() {
     return (
       <div className="main">
         <TotalStats/>
         <div className={'chart-container'}>
           <div className={'map'}>
-            <MainRealTimeChart />
+            <div className={'chart-header'}>
+              <div className={'char-header-block'}></div>
+              <div class="title">实时搜索</div>
+            </div>
+            <RealTimeSearchChart />
+            <IndividualSearchChart />
+            <RealTimeUserChart />
           </div>
           <div className={'map'}>
             <UserLocationMap />
