@@ -3,15 +3,29 @@ import RealTimeSearchChart from "../presentation/real-time-search-chart";
 import {connect} from "react-redux";
 import {dataService} from "../../services/data.service";
 import UserLocationMap from "../presentation/user-location-map";
-import {RankingLists} from "../ranking-list";
-import {TotalStats} from "../state-boxes";
+import {RankingLists} from "../containers/ranking-list";
+import {TotalStats} from "../containers/state-boxes";
 import IndividualSearchChart from "../presentation/individual-search-chart";
 import RealTimeUserChart from "../presentation/realtime-user-chart";
 
-function loadTotalStats(stats) {
+function loadTotalStatsAction(stats) {
   return {
     type: 'LOAD_TOTAL_STATS',
     payload: stats,
+  };
+}
+
+function loadRankingsAction(data) {
+  return {
+    type: 'LOAD_MAIN_RANKINGS',
+    payload: data,
+  };
+}
+
+function loadChartDataAction(data) {
+  return {
+    type: 'LOAD_MAIN_CHART_DATA',
+    payload: data,
   };
 }
 
@@ -22,7 +36,13 @@ const mapStateToMainPageProps = (state) => {
 const mapDispatchToMainPageProps = (dispatch) => (
   {
     onLoadStats: (stats) => (
-      dispatch(loadTotalStats(stats))
+      dispatch(loadTotalStatsAction(stats))
+    ),
+    onLoadRankings: (rankings) => (
+      dispatch(loadRankingsAction(rankings))
+    ),
+    onLoadChartData: (data) => (
+      dispatch(loadChartDataAction(data))
     ),
     dispatch: dispatch
   }
@@ -68,7 +88,7 @@ class MainPageContent extends React.Component {
           <div className={'map'}>
             <div className={'chart-header'}>
               <div className={'char-header-block'}></div>
-              <div class="title">实时搜索</div>
+              <div className={'title'}>实时搜索</div>
             </div>
             <RealTimeSearchChart />
             <IndividualSearchChart />

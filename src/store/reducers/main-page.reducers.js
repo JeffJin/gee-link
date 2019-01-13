@@ -17,8 +17,8 @@ export function realTimeUserChartDataReducer(state = [], action) {
   console.log('realTimeUserChartDataReducer', state, action);
 
   switch (action.type) {
-    case 'SEARCH': {
-      return state;
+    case 'LOAD_MAIN_CHART_DATA': {
+      return state.realTimeSearchChartData;
     }
     default: {
       console.log('realTimeUserChartDataReducer returning default');
@@ -32,8 +32,8 @@ export function individualSearchChartDataReducer(state = [], action) {
   console.log('individualSearchChartDataReducer', state, action);
 
   switch (action.type) {
-    case 'SEARCH': {
-      return state;
+    case 'LOAD_MAIN_CHART_DATA': {
+      return state.individualSearchChartData;
     }
     default: {
       console.log('individualSearchChartDataReducer returning default');
@@ -47,8 +47,8 @@ export function realTimeSearchChartDataReducer(state = [], action) {
   console.log('realTimeSearchChartDataReducer', state, action);
 
   switch (action.type) {
-    case 'SEARCH': {
-      return state;
+    case 'LOAD_MAIN_CHART_DATA': {
+      return state.realTimeUserChartData;
     }
     default: {
       console.log('realTimeSearchChartDataReducer returning default');

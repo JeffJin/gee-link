@@ -11428,7 +11428,7 @@ class DataService {
 
     const url = 'https://cdn.rawgit.com/highcharts/highcharts/' +
       '057b672172ccc6c08fe7dbb27fc17ebca3f5b770/samples/data/usdeur.json';
-    const result = await fetch(url, {
+    return await fetch(url, {
       method: 'get',
       headers: {
         accept: 'application/json',
@@ -11437,9 +11437,9 @@ class DataService {
       .then(this.parseJson)
       .then((result) => {
         return {
-          keywordSearchRankings: result,
-          dataBrowseRankings: result,
-          searchUserRankings: result
+          realTimeSearchChartData: result,
+          individualSearchChartData: result,
+          realTimeUserChartData: result
         };
       });
   }
