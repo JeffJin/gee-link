@@ -2,7 +2,8 @@
   display: flex
 
   .toolbar
-    padding-right: 24px // keep right padding when drawer closed
+    padding-right: 24px
+  // keep right padding when drawer closed
 
   .toolbar-icon
     display: flex
@@ -49,21 +50,115 @@
     padding: 30px
     height: 100vh
     overflow: auto
+
     .main
       min-width: 843px
 
       .chart-container
         display: flex
+
         .map
           flex: 1
           display: inline-block
           width: 48%
           margin: 1%
-          height: 610px
+          height: 652px
           border: 2px solid #1194e9
           border-radius: 3px
 
+        .chart-header
+          .chart-header-block
+            display: inline-block
+            width: 12px
+            height: 20px
+            margin: 12px
+            background: linear-gradient(180deg, rgba(51, 102, 204, 1) 0%, rgba(51, 102, 204, 1) 0%, rgba(0, 153, 153, 1) 100%, rgba(0, 153, 153, 1) 100%)
+
+          .title
+            display: inline-block
+            vertical-align: top
+            padding-top: 13px
+
+          .help
+            display: inline-block
+
+            .icon
+
+            .content
+              display: none
+
+            &.active
+              border: 1px solid grey
+              position: absolute
+              z-index: 100
+              top: 250px
+              left: 260px
+              background: white
+              .content
+                display: block
+                width: 220px
+                height: 200px
+
+
       .ranking-container
+        display: flex
+
+        .ranking
+          flex: 1
+          border: 2px solid #0095e9
+          padding: 10px
+          margin: 10px
+          .ranking-header-block
+            display: inline-block
+            width: 12px
+            height: 20px
+            background: linear-gradient(180deg, rgba(51, 102, 204, 1) 0%, rgba(51, 102, 204, 1) 0%, rgba(0, 153, 153, 1) 100%, rgba(0, 153, 153, 1) 100%)
+
+          .title
+            display: inline-block
+            vertical-align: top
+            padding: 2px 0 0 10px
+            color: #cc6633
+          .headers
+            display: flex
+            border-bottom: 1px solid #01989a
+            border-top: 1px solid #3267cb
+            margin: 6px 0
+            padding: 4px 0
+            color: #3366cc
+
+            .header-0
+              flex: 1
+            .header-1
+              flex: 4
+              text-align: left
+              padding-left: 20px
+            .header-2
+              flex: 3
+              text-align: right
+
+
+          .ranking-items
+            display: block
+
+            .ranking-item
+              display: flex
+              padding: 5px
+
+              .col-0
+                color: #069
+                flex: 1
+              .col-1
+                flex: 4
+                text-align: left
+                padding-left: 10px
+                a
+                  color: grey
+              .col-2
+                flex: 2
+                text-align: right
+                color: grey
+
 
       .stat-box-container
         display: block
@@ -87,6 +182,7 @@
             font-weight: 600
             text-align: center
             color: #666
+
           .desc
             position: relative
             top: 44px
@@ -118,3 +214,69 @@
         width: 1px
         height: 28px
         margin: 4px
+
+
+    .keyword-stats
+      display: block
+
+      .row-1
+        display: flex
+        width: 100%
+        height: 405px
+        margin: 20px 0
+
+        .col-1
+          flex: 2.5
+          height: 100%
+          margin: 0 10px 0 0
+
+          .box
+            border: 1px solid #1194e9
+            width: 100%
+            height: 30%
+
+            .value
+              position: relative
+              top: 18px
+              font-size: 30px
+              font-weight: 600
+              text-align: center
+              color: #666
+
+            .desc
+              position: relative
+              top: 28px
+              text-align: center
+
+            &.box-1
+              margin-top: 3px
+
+            &.box-2
+              margin: 18px 0 0 0
+
+            &.box-3
+              margin: 18px 0 0 0
+
+        .col-2
+          flex: 5
+          border: 1px solid #1194e9
+          height: 100%
+          margin: 0 10px
+        .col-3
+          flex: 3
+          border: 1px solid #1194e9
+          height: 100%
+          margin: 0 0 0 10px
+
+      .row-2
+        display: flex
+        .col-1
+          flex: 5
+          border: 1px solid #1194e9
+          height: 500px
+          margin: 10px 20px 10px 0
+        .col-2
+          flex: 3
+          border: 1px solid #1194e9
+          height: 500px
+          margin: 10px 0

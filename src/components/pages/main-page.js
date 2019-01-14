@@ -1,12 +1,10 @@
 import React from 'react';
-import RealTimeSearchChart from "../presentation/real-time-search-chart";
 import {connect} from "react-redux";
 import {dataService} from "../../services/data.service";
-import UserLocationMap from "../presentation/user-location-map";
 import {RankingLists} from "../containers/ranking-list";
-import {TotalStats} from "../containers/state-boxes";
-import IndividualSearchChart from "../presentation/individual-search-chart";
-import RealTimeUserChart from "../presentation/realtime-user-chart";
+import {MainTotalStats} from "../containers/main-state-boxes";
+import {MainChartList} from "../containers/main-chart-list";
+import {MainUserMap} from "../containers/main-user-map";
 
 function loadTotalStatsAction(stats) {
   return {
@@ -29,6 +27,13 @@ function loadChartDataAction(data) {
   };
 }
 
+function loadUserMapAction(data) {
+  return {
+    type: 'LOAD_MAIN_USER_MAP',
+    payload: data,
+  };
+}
+
 const mapStateToMainPageProps = (state) => {
   return {...state};
 };
@@ -44,6 +49,9 @@ const mapDispatchToMainPageProps = (dispatch) => (
     onLoadChartData: (data) => (
       dispatch(loadChartDataAction(data))
     ),
+    onLoadUserMapData: (data) => (
+      dispatch(loadUserMapAction(data))
+    ),
     dispatch: dispatch
   }
 );
@@ -51,12 +59,16 @@ const mapDispatchToMainPageProps = (dispatch) => (
 class MainPageContent extends React.Component {
   constructor(props) {
     super(props);
+    this.state = {
+      isChartHelpShown: false
+    };
   }
 
   componentDidMount() {
     this.getTotalStats();
-    // this.getRankingLists();
+    this.getRankingLists();
     this.getRealtimeChartData();
+    this.getUserMapData();
   }
 
   getTotalStats = () => {
@@ -80,23 +92,20 @@ class MainPageContent extends React.Component {
     });
   };
 
+  getUserMapData = () => {
+    dataService.getUserLocationMapData().then(data => {
+      console.log('data service getUserMapData returned', data);
+      this.props.onLoadUserMapData(data);
+    });
+  };
+
   render() {
     return (
       <div className="main">
-        <TotalStats/>
+        <MainTotalStats/>
         <div className={'chart-container'}>
-          <div className={'map'}>
-            <div className={'chart-header'}>
-              <div className={'char-header-block'}></div>
-              <div className={'title'}>实时搜索</div>
-            </div>
-            <RealTimeSearchChart />
-            <IndividualSearchChart />
-            <RealTimeUserChart />
-          </div>
-          <div className={'map'}>
-            <UserLocationMap />
-          </div>
+          <MainChartList />
+          <MainUserMap />
         </div>
         <RankingLists/>
       </div>

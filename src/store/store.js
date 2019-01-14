@@ -41,7 +41,7 @@ const initialStates = {
   realTimeSearchChartData: {},
   individualSearchChartData: {},
   realTimeUserChartData: {},
-  userLocationMapData: {},
+  userLocationMapData: [],
   keywordSearchRankings: [],
   dataBrowseRankings: [],
   searchUserRankings: [],

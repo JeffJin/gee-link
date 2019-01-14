@@ -1,32 +1,35 @@
 import React from 'react';
+import {NavLink} from "react-router-dom";
 
 function Ranking(props) {
 
   return (
     <div className="items-container">
-      <div className={'title-wrapper'}>
-        <div className={'icon'}></div>
+      <div className={'ranking-header'}>
+        <div className={'ranking-header-block'}></div>
         <div className={'title'}>{props.data.title}</div>
         <div className={'tooltip'}></div>
       </div>
       <div className={'headers'}>
         {
           props.data.headers.map((h, index) => (
-            <div className={'header-' + index}>
+            <div key={index} className={'header-' + index}>
               {h}
             </div>
           ))
         }
       </div>
+      <div className={'ranking-items'}>
       {
-        props.data.rankingItems.map((rank, index) => (
+        props.data.rankingItems.map((item, index) => (
           <div key={index} className="ranking-item">
-            <span className={'col-1'}>{index}.</span>
-            <span className={'col-2'}>{rank.desc}</span>
-            <span className={'col-3'}>{rank.value}</span>
+            <div className={'col-0'}>{item.rank}.</div>
+            <div className={'col-1'}><NavLink to={`${props.data.route}/${item.id}`} className='nav'>{item.desc}</NavLink></div>
+            <div className={'col-2'}>{item.value}</div>
           </div>
         ))
       }
+      </div>
     </div>
   );
 }

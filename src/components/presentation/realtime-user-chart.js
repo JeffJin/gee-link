@@ -2,14 +2,14 @@ import React from 'react';
 import Highcharts from 'highcharts'
 import HighchartsReact from 'highcharts-react-official'
 
-function RealTimeSearchChart(props) {
+function RealTimeUserChart(props) {
   const chartConfig = {
     chart: {
       zoomType: 'x',
       height: '200'
     },
     title: {
-      text: '实时搜索数'
+      text: '实时用户数'
     },
     subtitle: {
       text: ''
@@ -54,13 +54,13 @@ function RealTimeSearchChart(props) {
 
     series: [{
       type: 'area',
-      name: '实时搜索数',
+      name: '实时用户数',
       data: props.data
     }]
   };
 
   return (
-    <div className="real-time-search-chart">
+    <div className="real-time-user-chart">
       <HighchartsReact
         highcharts={Highcharts}
         options={chartConfig}
@@ -69,4 +69,4 @@ function RealTimeSearchChart(props) {
   );
 }
 
-export default RealTimeSearchChart;
+export default RealTimeUserChart;

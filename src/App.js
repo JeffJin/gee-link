@@ -16,6 +16,9 @@ import UserStats from "./components/pages/user-stats";
 import DataStats from "./components/pages/data-stats";
 import KeywordStats from "./components/pages/keyword-stats";
 import {store} from "./store/store";
+import KeywordDetails from "./components/containers/keyword-details";
+import UserDetails from "./components/containers/user-details";
+import DataDetails from "./components/containers/data-search-details";
 
 class App extends React.Component {
   state = {
@@ -42,9 +45,40 @@ class App extends React.Component {
         <main className={'content'}>
           <SearchBox />
           <Switch>
-            <Route path='/keyword' component={KeywordStats}/>
-            <Route path='/data' component={DataStats}/>
-            <Route path='/user' component={UserStats}/>
+            <Route exact path='/keyword' component={KeywordStats}/>
+            <Route exact path='/data' component={DataStats}/>
+            <Route exact path='/user' component={UserStats}/>
+            <Route path='/main' component={MainPage}/>
+            <Route
+              path={'/keyword/:id'}
+              render={({ match }) => {
+                return (
+                  <KeywordDetails
+                    keywordId={match.params.id}
+                  />
+                );
+              }}
+            />
+            <Route
+              path={'/user/:id'}
+              render={({ match }) => {
+                return (
+                  <UserDetails
+                    userId={match.params.id}
+                  />
+                );
+              }}
+            />
+            <Route
+              path={'/data/:id'}
+              render={({ match }) => {
+                return (
+                  <DataDetails
+                    dataId={match.params.id}
+                  />
+                );
+              }}
+            />
             <Route exact path='/' render={() => (
               <Redirect
                 to='/main'
