@@ -166,7 +166,78 @@ class DataService {
     //     return result;
     //   });
   }
+  async getDataStats() {
+    const data = {
+      totalData: 44567,
+      todaySearch: 2134,
+      individualSearch: 43232,
+      read: 768,
+      liked: 432,
+      forwarded: 987,
+      commented: 1234,
+      dataUsageRatio: [{
+        name: '使用',
+        y: 61.41,
+        sliced: true,
+        selected: true
+      }, {
+        name: '未使用',
+        color: '#ed7d31',
+        y: 38.59
+      }],
+      dataSearchRatio: [{
+        name: '被搜出来',
+        y: 31.41,
+        sliced: true,
+        selected: true
+      }, {
+        name: '未被搜出',
+        color: '#ed7d31',
+        y: 68.59
+      }]
+    };
+    return new Promise(function(resolve, reject) {
+      setTimeout(function () {
+        resolve(data);
+      }, 500);
+    });
+  }
 
+  async getDataUsageTrend() {
+    const data = [
+      ['周一', 242],
+      ['周二', 208],
+      ['周三', 149],
+      ['周四', 137],
+      ['周五', 131],
+      ['周六', 127],
+      ['周日', 124]
+    ];
+    return new Promise(function(resolve, reject) {
+      setTimeout(function () {
+        resolve(data);
+      }, 500);
+    });
+  }
+
+  async getDataUsageRankings() {
+    const data = [
+      {id: 1, rank: 1, desc: '大数据', value: 123},
+      {id: 2, rank: 2, desc: '人工智能', value: 111},
+      {id: 3, rank: 3, desc: '自然语言', value: 110},
+      {id: 4, rank: 4, desc: '算法', value: 99},
+      {id: 5, rank: 5, desc: '机器学习', value: 88},
+      {id: 6, rank: 6, desc: 'Angular', value: 77},
+      {id: 7, rank: 7, desc: '云计算', value: 76},
+      {id: 8, rank: 8, desc: 'Python', value: 44},
+      {id: 9, rank: 9, desc: '服务器', value: 33},
+      {id: 10, rank: 10, desc: 'AI', value: 32}];
+    return new Promise(function(resolve, reject) {
+      setTimeout(function () {
+        resolve(data);
+      }, 500);
+    });
+  }
 
   isLoggedIn() {
     return !!this.token;

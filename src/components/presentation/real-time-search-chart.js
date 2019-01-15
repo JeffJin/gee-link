@@ -9,7 +9,10 @@ function RealTimeSearchChart(props) {
       height: '200'
     },
     title: {
-      text: '实时搜索数'
+      text: '实时搜索数',
+      style: {
+        color: '#cc6633',
+      }
     },
     subtitle: {
       text: ''

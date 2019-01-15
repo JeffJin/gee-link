@@ -9,7 +9,10 @@ function RealTimeUserChart(props) {
       height: '200'
     },
     title: {
-      text: '实时用户数'
+      text: '实时用户数',
+      style: {
+        color: '#cc6633',
+      }
     },
     subtitle: {
       text: ''

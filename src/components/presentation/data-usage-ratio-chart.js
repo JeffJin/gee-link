@@ -11,7 +11,10 @@ function DataUsageRatioChart(props) {
         type: 'pie'
     },
     title: {
-      text: '数据使用占比'
+      text: '数据使用占比',
+      style: {
+        color: '#cc6633',
+      }
     },
     tooltip: {
       pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
@@ -29,16 +32,7 @@ function DataUsageRatioChart(props) {
     series: [{
       name: '数据使用占比',
       colorByPoint: true,
-      data: [{
-        name: '使用',
-        y: 61.41,
-        sliced: true,
-        selected: true
-      }, {
-        name: '未使用',
-        color: '#ed7d31',
-        y: 38.59
-      }]
+      data: props.data
     }]
   };
   return (

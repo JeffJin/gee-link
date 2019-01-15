@@ -11,7 +11,10 @@ function DataSearchRatioChart(props) {
       type: 'pie'
     },
     title: {
-      text: '数据搜索占比'
+      text: '数据搜索占比',
+      style: {
+        color: '#cc6633',
+      }
     },
     tooltip: {
       pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
@@ -29,18 +32,9 @@ function DataSearchRatioChart(props) {
     series: [{
       name: '数据搜索占比',
       colorByPoint: true,
-      data: [{
-        name: '被搜出来',
-        y: 31.41,
-        sliced: true,
-        selected: true
-      }, {
-        name: '未被搜出',
-        color: '#ed7d31',
-        y: 68.59
-      }]
+      data: props.data
     }]
-  }
+  };
   return (
     <div className="data-search-ratio-chart">
       <HighchartsReact

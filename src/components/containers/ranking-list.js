@@ -2,13 +2,6 @@ import Ranking from "../presentation/ranking";
 import connect from "react-redux/es/connect/connect";
 import React from "react";
 
-function loadRankings(rankings) {
-  return {
-    type: 'LOAD_RANKINGS',
-    payload: rankings,
-  };
-}
-
 const RankingListContent = (props) => {
   return <div className={'ranking-container'}>
     <div className={'ranking'}><Ranking data={props.keywordSearchTop10}/></div>
@@ -48,9 +41,6 @@ const mapStateToRankingListProps = (state) => {
 
 const mapDispatchToRankingListProps = (dispatch) => (
   {
-    onLoadRankings: (stats) => (
-      dispatch(loadRankings(stats))
-    ),
     dispatch: dispatch
   }
 );

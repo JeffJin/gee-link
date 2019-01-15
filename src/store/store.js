@@ -1,5 +1,5 @@
 import {
-  dataBrowseTop10Reducer,
+  dataBrowseTop10Reducer, dataStatsReducer, dataUsageRankingReducer, dataUsageTrendReducer,
   individualSearchChartDataReducer,
   keywordSearchTop10Reducer,
   realTimeSearchChartDataReducer,
@@ -7,7 +7,7 @@ import {
   searchUserTop10Reducer,
   totalStatsReducer,
   userLocationMapDataReducer
-} from "./reducers/main-page.reducers";
+} from "./reducers/reducers";
 import {combineReducers, createStore} from "redux";
 
 function searchReducer(state = [], action) {
@@ -24,6 +24,7 @@ function searchResultItemDetailsReducer(state = [], action) {
 
 const reducer = combineReducers({
   totalStats: totalStatsReducer,
+  dataStats: dataStatsReducer,
   realTimeSearchChartData: realTimeSearchChartDataReducer,
   individualSearchChartData: individualSearchChartDataReducer,
   realTimeUserChartData: realTimeUserChartDataReducer,
@@ -31,6 +32,8 @@ const reducer = combineReducers({
   keywordSearchRankings: keywordSearchTop10Reducer,
   dataBrowseRankings: dataBrowseTop10Reducer,
   searchUserRankings: searchUserTop10Reducer,
+  dataUsageRankings: dataUsageRankingReducer,
+  dataUsageTrend: dataUsageTrendReducer,
   search: searchReducer,
   searchResult: searchResultReducer,
   searchResultItemDetails: searchResultItemDetailsReducer

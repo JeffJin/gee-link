@@ -1,8 +1,17 @@
 export function totalStatsReducer(state = [], action) {
-  // console.log('totalStatsReducer', state, action);
-
   switch (action.type) {
     case 'LOAD_TOTAL_STATS': {
+      return action.payload;
+    }
+    default: {
+      return state;
+    }
+  }
+}
+
+export function dataStatsReducer(state = [], action) {
+  switch (action.type) {
+    case 'LOAD_DATA_STATS': {
       return action.payload;
     }
     default: {
@@ -51,8 +60,6 @@ export function realTimeSearchChartDataReducer(state = [], action) {
 }
 
 export function userLocationMapDataReducer(state = [], action) {
-  console.log('userLocationMapDataReducer', state, action);
-
   switch (action.type) {
     case 'LOAD_MAIN_USER_MAP': {
       return action.payload;
@@ -64,8 +71,6 @@ export function userLocationMapDataReducer(state = [], action) {
 }
 
 export function keywordSearchTop10Reducer(state = [], action) {
-  // console.log('keywordSearchTop10Reducer', state, action);
-
   switch (action.type) {
     case 'LOAD_MAIN_RANKINGS': {
       return action.payload.keywordSearchRankings;
@@ -77,8 +82,6 @@ export function keywordSearchTop10Reducer(state = [], action) {
 }
 
 export function dataBrowseTop10Reducer(state = [], action) {
-  // console.log('dataBrowseTop10Reducer', state, action);
-
   switch (action.type) {
     case 'LOAD_MAIN_RANKINGS': {
       return action.payload.dataBrowseRankings;
@@ -90,11 +93,31 @@ export function dataBrowseTop10Reducer(state = [], action) {
 }
 
 export function searchUserTop10Reducer(state = [], action) {
-  // console.log('searchUserTop10Reducer', state, action);
-
   switch (action.type) {
     case 'LOAD_MAIN_RANKINGS': {
       return action.payload.searchUserRankings;
+    }
+    default: {
+      return state;
+    }
+  }
+}
+
+export function dataUsageRankingReducer(state = [], action) {
+  switch (action.type) {
+    case 'LOAD_DATA_USAGE_RANKINGS': {
+      return action.payload;
+    }
+    default: {
+      return state;
+    }
+  }
+}
+
+export function dataUsageTrendReducer(state = [], action) {
+  switch (action.type) {
+    case 'LOAD_DATA_USAGE_TREND': {
+      return action.payload;
     }
     default: {
       return state;

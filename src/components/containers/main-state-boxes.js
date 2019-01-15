@@ -18,7 +18,7 @@ function openStatDetails(id) {
 const MainStateBoxes = (props) => {
   return <div className={'stat-box-container'}>
     {
-      props.stateBoxes.map((box, index) => (
+      props.stateBoxes.filter(b => !!labelDictionary[b.key]).map((box, index) => (
         <div
           key={index}
           className={'stat-box'}

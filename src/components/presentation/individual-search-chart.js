@@ -9,7 +9,10 @@ function IndividualSearchChart(props) {
       height: '200'
     },
     title: {
-      text: '独立搜索数'
+      text: '独立搜索数',
+      style: {
+        color: '#cc6633',
+      }
     },
     subtitle: {
       text: ''
