@@ -4,7 +4,7 @@ import {NavLink} from "react-router-dom";
 function Ranking(props) {
 
   return (
-    <div className="items-container">
+    <div className="ranking">
       <div className={'ranking-header'}>
         <div className={'ranking-header-block'}></div>
         <div className={'title'}>{props.data.title}</div>

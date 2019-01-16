@@ -147,9 +147,7 @@ class DataStatsContent extends React.Component {
             <DataUsageTrend  data={this.props.dataUsageTrend}/>
           </div>
           <div className={'data-stats-col-2'}>
-            <div className={'ranking'}>
-              <Ranking data={this.props.dataUsageRankings}/>
-              </div>
+            <Ranking data={this.props.dataUsageRankings}/>
           </div>
         </div>
       </div>

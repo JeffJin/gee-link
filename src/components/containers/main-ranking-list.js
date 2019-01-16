@@ -2,11 +2,11 @@ import Ranking from "../presentation/ranking";
 import connect from "react-redux/es/connect/connect";
 import React from "react";
 
-const RankingListContent = (props) => {
+const MainRankingListContent = (props) => {
   return <div className={'ranking-container'}>
-    <div className={'ranking'}><Ranking data={props.keywordSearchTop10}/></div>
-    <div className={'ranking'}><Ranking data={props.dataBrowseTop10} /></div>
-    <div className={'ranking'}><Ranking data={props.searchUserTop10} /></div>
+    <Ranking data={props.keywordSearchTop10}/>
+    <Ranking data={props.dataBrowseTop10} />
+    <Ranking data={props.searchUserTop10} />
   </div>;
 };
 
@@ -45,7 +45,7 @@ const mapDispatchToRankingListProps = (dispatch) => (
   }
 );
 
-export const RankingLists = connect(
+export const MainRankingLists = connect(
   mapStateToRankingListProps,
   mapDispatchToRankingListProps
-)(RankingListContent);
+)(MainRankingListContent);

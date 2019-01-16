@@ -1,9 +1,9 @@
 import {
   dataBrowseTop10Reducer, dataStatsReducer, dataUsageRankingReducer, dataUsageTrendReducer,
   individualSearchChartDataReducer,
-  keywordSearchTop10Reducer,
+  keywordSearchTop10Reducer, keywordSearchTrendReducer, keywordStatsReducer, missedKeywordsRankingReducer,
   realTimeSearchChartDataReducer,
-  realTimeUserChartDataReducer,
+  realTimeUserChartDataReducer, searchConversionReducer, searchedKeywordsRankingReducer,
   searchUserTop10Reducer,
   totalStatsReducer,
   userLocationMapDataReducer
@@ -23,8 +23,8 @@ function searchResultItemDetailsReducer(state = [], action) {
 }
 
 const reducer = combineReducers({
+  // main page reducers
   totalStats: totalStatsReducer,
-  dataStats: dataStatsReducer,
   realTimeSearchChartData: realTimeSearchChartDataReducer,
   individualSearchChartData: individualSearchChartDataReducer,
   realTimeUserChartData: realTimeUserChartDataReducer,
@@ -32,15 +32,28 @@ const reducer = combineReducers({
   keywordSearchRankings: keywordSearchTop10Reducer,
   dataBrowseRankings: dataBrowseTop10Reducer,
   searchUserRankings: searchUserTop10Reducer,
+
+  //data stat page reducers
+  dataStats: dataStatsReducer,
   dataUsageRankings: dataUsageRankingReducer,
   dataUsageTrend: dataUsageTrendReducer,
+
+  //keyword page reducers
+  keywordStats: keywordStatsReducer,
+  searchedKeywordsRanking: searchedKeywordsRankingReducer,
+  keywordSearchTrend: keywordSearchTrendReducer,
+  searchConversion: searchConversionReducer,
+  topMissedKeywordsRanking: missedKeywordsRankingReducer,
+
+  // search reducers
   search: searchReducer,
   searchResult: searchResultReducer,
   searchResultItemDetails: searchResultItemDetailsReducer
 });
 
 const initialStates = {
-  totalStats: [],
+  totalStats: {},
+  dataStats: {},
   realTimeSearchChartData: {},
   individualSearchChartData: {},
   realTimeUserChartData: {},
@@ -50,7 +63,15 @@ const initialStates = {
   searchUserRankings: [],
   search: {},
   searchResult: {},
-  searchResultItemDetails: {}
+  searchResultItemDetails: {},
+
+  // keyword stats page
+  keywordStats: {},
+  searchedKeywordsRanking: [],
+  topMissedKeywordsRanking: [],
+  keywordSearchTrend: [],
+  searchConversion: [],
+
 };
 
 export const store = createStore(reducer, initialStates);

@@ -18,6 +18,7 @@ const MainUserMapContent = (props) => {
   const hideMapHelp = () => {
     isMapHelpShown = false;
   };
+
   const mapOptions = {
     title: {
       text: ''

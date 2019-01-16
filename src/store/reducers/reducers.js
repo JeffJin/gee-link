@@ -1,4 +1,4 @@
-export function totalStatsReducer(state = [], action) {
+export function totalStatsReducer(state = {}, action) {
   switch (action.type) {
     case 'LOAD_TOTAL_STATS': {
       return action.payload;
@@ -9,7 +9,7 @@ export function totalStatsReducer(state = [], action) {
   }
 }
 
-export function dataStatsReducer(state = [], action) {
+export function dataStatsReducer(state = {}, action) {
   switch (action.type) {
     case 'LOAD_DATA_STATS': {
       return action.payload;
@@ -117,6 +117,62 @@ export function dataUsageRankingReducer(state = [], action) {
 export function dataUsageTrendReducer(state = [], action) {
   switch (action.type) {
     case 'LOAD_DATA_USAGE_TREND': {
+      return action.payload;
+    }
+    default: {
+      return state;
+    }
+  }
+}
+
+// ************Keyword Stats Page
+export function keywordSearchTrendReducer(state = [], action) {
+  switch (action.type) {
+    case 'LOAD_KEYWORD_SEARCH_TREND': {
+      return action.payload;
+    }
+    default: {
+      return state;
+    }
+  }
+}
+
+export function searchConversionReducer(state = [], action) {
+  switch (action.type) {
+    case 'LOAD_KEYWORD_CONVERSION': {
+      return action.payload;
+    }
+    default: {
+      return state;
+    }
+  }
+}
+
+export function keywordStatsReducer(state = {}, action) {
+  switch (action.type) {
+    case 'LOAD_KEYWORD_STATS': {
+      return action.payload;
+    }
+    default: {
+      return state;
+    }
+  }
+}
+
+export function missedKeywordsRankingReducer(state = [], action) {
+  switch (action.type) {
+    case 'LOAD_MISSED_KEYWORDS_RANKING': {
+      return action.payload;
+    }
+    default: {
+      return state;
+    }
+  }
+}
+
+export function searchedKeywordsRankingReducer(state = [], action) {
+  switch (action.type) {
+    case 'LOAD_SEARCHED_KEYWORDS_RANKING': {
       return action.payload;
     }
     default: {
