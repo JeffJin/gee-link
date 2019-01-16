@@ -1,0 +1,58 @@
+import connect from "react-redux/es/connect/connect";
+import React from "react";
+
+const labelDictionary = {
+  totalSearch: '总搜索数',
+  todaySearch: '今日数据数',
+  averageSearch: '人均搜索数',
+  individualSearch: '独立搜索数'
+};
+
+function openStatDetails(id) {
+  return {
+    type: 'OPEN_STAT_DETAILS',
+    id: id,
+  };
+}
+
+const KeywordStateBoxContents = (props) => {
+  return <div className={'stat-box-container'}>
+    {
+      props.stateBoxes.filter(b => !!labelDictionary[b.key]).map((box, index) => (
+        <div
+          key={index}
+          className={'stat-box'}
+          onClick={() => props.onClick(box.key)}
+        >
+          <div className={'value'}>{box.value}</div>
+          <div className={'desc'}>{box.label}</div>
+        </div>
+      ))
+    }
+  </div>;
+};
+
+const mapStateToStatBoxProps = (state) => {
+  const stateBoxes = [];
+  for (let k in state.keywordStats) {
+    if (state.keywordStats.hasOwnProperty(k)) {
+      stateBoxes.push({key: k, value: state.keywordStats[k], label: labelDictionary[k]})
+    }
+  }
+  return {
+    stateBoxes,
+  };
+};
+
+const mapDispatchToStatBoxProps = (dispatch) => (
+  {
+    onClick: (id) => (
+      dispatch(openStatDetails(id))
+    ),
+  }
+);
+
+export const KeywordStatBoxes = connect(
+  mapStateToStatBoxProps,
+  mapDispatchToStatBoxProps
+)(KeywordStateBoxContents);
