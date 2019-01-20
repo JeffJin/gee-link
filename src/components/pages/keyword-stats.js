@@ -138,13 +138,13 @@ class KeywordStatsContent extends React.Component {
 
   render() {
     return (
-      <div className="keyword-stats">
-        <div className={'left'}>
+      <div className="keyword-stats flex-box">
+        <div className={'left flex-5'}>
           <KeywordStatBoxes></KeywordStatBoxes>
           <SearchConversion data={this.props.searchConversion}/>
           <KeywordSearchTrend data={this.props.keywordSearchTrend}/>
         </div>
-        <div className={'right'}>
+        <div className={'right flex-2'}>
           <Ranking data={this.props.searchedKeywordsRanking}/>
           <Ranking data={this.props.topMissedKeywordsRanking}/>
         </div>

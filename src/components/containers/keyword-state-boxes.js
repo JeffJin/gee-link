@@ -1,5 +1,6 @@
 import connect from "react-redux/es/connect/connect";
 import React from "react";
+import StateBox from "../common/stat-box";
 
 const labelDictionary = {
   totalSearch: '总搜索数',
@@ -16,17 +17,10 @@ function openStatDetails(id) {
 }
 
 const KeywordStateBoxContents = (props) => {
-  return <div className={'stat-box-container'}>
+  return <div className={'stat-box-container flex-box'}>
     {
       props.stateBoxes.filter(b => !!labelDictionary[b.key]).map((box, index) => (
-        <div
-          key={index}
-          className={'stat-box'}
-          onClick={() => props.onClick(box.key)}
-        >
-          <div className={'value'}>{box.value}</div>
-          <div className={'desc'}>{box.label}</div>
-        </div>
+        <StateBox key={index} onClick={() => props.onClick(box.key)} data={box}/>
       ))
     }
   </div>;
