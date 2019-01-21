@@ -5,11 +5,12 @@ import DataUsageRatioChart from "../presentation/data-usage-ratio-chart";
 import DataSearchRatioChart from "../presentation/data-search-ratio-chart";
 import DataUsageTrend from "../containers/data-usage-trend";
 import Ranking from "../presentation/ranking";
+import {DataPageStatBoxes} from "../containers/data-stat-boxes";
 
 
-function loadDataStatsAction(data) {
+function loadDataPageStatsAction(data) {
   return {
-    type: 'LOAD_DATA_STATS',
+    type: 'LOAD_DATA_PAGE_STATS',
     payload: data,
   };
 }
@@ -28,6 +29,29 @@ function loadDataUsageTrendAction(data) {
   };
 }
 
+function loadDataUsageRecordAction(data) {
+  return {
+    type: 'LOAD_DATA_USAGE_RECORD',
+    payload: data,
+  };
+}
+
+function loadDataUsageRatioAction(data) {
+  return {
+    type: 'LOAD_DATA_USAGE_RATIO',
+    payload: data,
+  };
+}
+
+function loadDataSearchRatioAction(data) {
+  return {
+    type: 'LOAD_DATA_SEARCH_RATIO',
+    payload: data,
+  };
+}
+
+
+
 const mapStateToDataStatsPageProps = (state) => {
   const dataUsageRankings = {
     rankingItems: state.dataUsageRankings,
@@ -38,29 +62,38 @@ const mapStateToDataStatsPageProps = (state) => {
 
   return {
     totalData: state.dataStats.totalData,
-    todaySearch: state.dataStats.todaySearch,
-    individualSearch: state.dataStats.individualSearch,
+    todayBrowse: state.dataStats.todayBrowse,
+    individualBrowse: state.dataStats.individualBrowse,
     dataUsageRatio: state.dataStats.dataUsageRatio,
     dataSearchRatio: state.dataStats.dataSearchRatio,
     read: state.dataStats.read,
     liked: state.dataStats.liked,
     forwarded: state.dataStats.forwarded,
     commented: state.dataStats.commented,
-    dataUsageRankings: dataUsageRankings,
-    dataUsageTrend: state.dataUsageTrend
+    dataUsageRankings: state.dataStats.dataUsageRankings,
+    dataUsageTrend: state.dataStats.dataUsageTrend
   };
 };
 
 const mapDispatchToDataStatsProps = (dispatch) => (
   {
-    onLoadDataStats: (stats) => (
-      dispatch(loadDataStatsAction(stats))
+    onLoadDataPageStats: (results) => (
+      dispatch(loadDataPageStatsAction(results))
     ),
-    onLoadDataUsageRankings: (stats) => (
-      dispatch(loadDataUsageRankingAction(stats))
+    onLoadDataUsageRankings: (results) => (
+      dispatch(loadDataUsageRankingAction(results))
     ),
-    onLoadDataUsageTrend: (stats) => (
-      dispatch(loadDataUsageTrendAction(stats))
+    onLoadDataUsageTrend: (results) => (
+      dispatch(loadDataUsageTrendAction(results))
+    ),
+    onLoadDataUsageRecord: (results) => (
+      dispatch(loadDataUsageRecordAction(results))
+    ),
+    onLoadDataUsageRatio: (results) => (
+      dispatch(loadDataUsageRatioAction(results))
+    ),
+    onLoadDataSearchRatio: (results) => (
+      dispatch(loadDataSearchRatioAction(results))
     ),
     dispatch: dispatch
   }
@@ -74,45 +107,63 @@ class DataStatsContent extends React.Component {
   }
 
   componentDidMount() {
-    this.getDataStats();
+    this.getDataPageStats();
+    this.getDataUsageRecord();
+    this.getDataUsageRatio();
+    this.getDataSearchRatio();
     this.getDataUsageRanking();
     this.getDataUsageTrend();
   }
 
-  getDataStats = () => {
-    dataService.getDataStats().then(stats => {
-      this.props.onLoadDataStats(stats);
+  getDataPageStats = () => {
+    dataService.getDataPageStats().then(results => {
+      this.props.onLoadDataPageStats(results);
+    });
+  };
+
+  getDataPageStats = () => {
+    dataService.getDataPageStats().then(results => {
+      this.props.onLoadDataPageStats(results);
+    });
+  };
+
+  getDataUsageRecord = () => {
+    dataService.getDataUsageRecord().then(results => {
+      this.props.onLoadDataUsageRecord(results);
+    });
+  };
+
+  getDataUsageRatio = () => {
+    dataService.getDataUsageRatio().then(results => {
+      this.props.onLoadDataUsageRatio(results);
+    });
+  };
+
+  getDataSearchRatio = () => {
+    dataService.getDataSearchRatio().then(results => {
+      this.props.onLoadDataSearchRatio(results);
     });
   };
 
   getDataUsageRanking = () => {
-    dataService.getDataUsageRankings().then(stats => {
-      this.props.onLoadDataUsageRankings(stats);
+    dataService.getDataUsageRankings().then(results => {
+      this.props.onLoadDataUsageRankings(results);
     });
   };
+
   getDataUsageTrend = () => {
-    dataService.getDataUsageTrend().then(stats => {
-      this.props.onLoadDataUsageTrend(stats);
+    dataService.getDataUsageTrend().then(results => {
+      this.props.onLoadDataUsageTrend(results);
     });
   };
+
 
   render() {
     return (
       <div className="data-stats">
         <div className={'data-stats-row-1'}>
           <div className={'data-stats-col-1'}>
-            <div className={'box box-1'}>
-              <div className={'value'}>{this.props.totalData || 0}</div>
-              <div className={'desc'}>总数据条数</div>
-            </div>
-            <div className={'box box-2'}>
-              <div className={'value'}>{this.props.todaySearch || 0}</div>
-              <div className={'desc'}>今日被浏览数据数</div>
-            </div>
-            <div className={'box box-3'}>
-              <div className={'value'}>{this.props.individualSearch || 0}</div>
-              <div className={'desc'}>独立浏览次数</div>
-            </div>
+            <DataPageStatBoxes/>
           </div>
           <div className={'data-stats-col-2'}>
             <DataUsageRatioChart data={this.props.dataUsageRatio}/>

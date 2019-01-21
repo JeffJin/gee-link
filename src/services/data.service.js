@@ -145,39 +145,61 @@ class DataService {
     });
   }
 
-  async getDataStats() {
-    const data = {
-      totalData: 44567,
-      todaySearch: 2134,
-      individualSearch: 43232,
-      read: 768,
-      liked: 432,
-      forwarded: 987,
-      commented: 1234,
-      dataUsageRatio: [{
-        name: '使用',
-        y: 61.41,
-        sliced: true,
-        selected: true
-      }, {
-        name: '未使用',
-        color: '#ed7d31',
-        y: 38.59
-      }],
-      dataSearchRatio: [{
-        name: '被搜出来',
-        y: 31.41,
-        sliced: true,
-        selected: true
-      }, {
-        name: '未被搜出',
-        color: '#ed7d31',
-        y: 68.59
-      }]
-    };
+  // data page services
+  getDataPageStats() {
     return new Promise(function(resolve, reject) {
       setTimeout(function () {
-        resolve(data);
+        resolve({
+          totalData: 44567,
+          todayBrowse: 2134,
+          individualBrowse: 43232});
+      }, 500);
+    });
+  }
+
+  getDataUsageRecord() {
+    return new Promise(function(resolve, reject) {
+      setTimeout(function () {
+        resolve({
+          read: 768,
+          liked: 432,
+          forwarded: 987,
+          commented: 1234
+        });
+      }, 500);
+    });
+  }
+
+  getDataUsageRatio() {
+    return new Promise(function(resolve, reject) {
+      setTimeout(function () {
+        resolve([{
+          name: '使用',
+          y: 61.41,
+          sliced: true,
+          selected: true
+        }, {
+          name: '未使用',
+          color: '#ed7d31',
+          y: 38.59
+        }]);
+      }, 500);
+    });
+  }
+
+  getDataSearchRatio() {
+    return new Promise(function(resolve, reject) {
+      setTimeout(function () {
+        resolve([{
+          name: '被搜出来',
+          y: 31.41,
+          sliced: true,
+          selected: true
+        }, {
+          name: '未被搜出',
+          color: '#ed7d31',
+          y: 68.59
+        }]);
       }, 500);
     });
   }

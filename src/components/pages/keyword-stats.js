@@ -1,5 +1,5 @@
 import React from 'react';
-import {KeywordStatBoxes} from "../containers/keyword-state-boxes";
+import {KeywordStatBoxes} from "../containers/keyword-stat-boxes";
 import KeywordSearchTrend from "../containers/keyword-search-trend";
 import SearchConversion from "../containers/search-conversion";
 import Ranking from "../presentation/ranking";
@@ -140,7 +140,7 @@ class KeywordStatsContent extends React.Component {
     return (
       <div className="keyword-stats flex-box">
         <div className={'left flex-5'}>
-          <KeywordStatBoxes></KeywordStatBoxes>
+          <KeywordStatBoxes/>
           <SearchConversion data={this.props.searchConversion}/>
           <KeywordSearchTrend data={this.props.keywordSearchTrend}/>
         </div>

@@ -2,7 +2,7 @@ import React from 'react';
 import {connect} from "react-redux";
 import {dataService} from "../../services/data.service";
 import {MainRankingLists} from "../containers/main-ranking-list";
-import {MainTotalStats} from "../containers/main-state-boxes";
+import {MainStatBoxes} from "../containers/main-stat-boxes";
 import {MainChartList} from "../containers/main-chart-list";
 import {MainUserMap} from "../containers/main-user-map";
 
@@ -101,8 +101,8 @@ class MainPageContent extends React.Component {
 
   render() {
     return (
-      <div className="main">
-        <MainTotalStats/>
+      <div className="main-page">
+        <MainStatBoxes/>
         <div className={'chart-container'}>
           <MainChartList />
           <MainUserMap />

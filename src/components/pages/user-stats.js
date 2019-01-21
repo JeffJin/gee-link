@@ -1,6 +1,4 @@
 import React from 'react';
-import SearchConversion from "../containers/search-conversion";
-import KeywordSearchTrend from "../containers/keyword-search-trend";
 import Ranking from "../presentation/ranking";
 import {chinaMap} from "../../data/china-map";
 import HighchartsReact from "highcharts-react-official";

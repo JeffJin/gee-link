@@ -1,31 +1,6 @@
-@import "ranking"
-@import "stat-box"
-
-.flex-1
-  flex: 1
-.flex-2
-  flex: 2
-.flex-3
-  flex: 3
-.flex-4
-  flex: 4
-.flex-5
-  flex: 5
-.flex-6
-  flex: 6
-.flex-7
-  flex: 7
-.flex-8
-  flex: 8
-.flex-9
-  flex: 9
-.flex-box
-  display: flex
-.flex-vertical
-  flex-direction: column
-.flex-horizontal
-  flex-direction: column
-
+@import "./components/common"
+@import "./components/ranking"
+@import "./components/stat-box"
 
 .root
   display: flex
@@ -55,6 +30,8 @@
       color: #92999f
       width: 82px
       text-decoration: none
+      &.active
+        color: whitesmoke
 
   .title
     flex-grow: 1
@@ -133,200 +110,10 @@
       width: 100%
       padding: 0 30px
 
-    .main
-      min-width: 843px
+    @import "main-page"
 
-      .chart-container
-        display: flex
+    @import "data-stat"
 
-        .map
-          flex: 1
-          display: inline-block
-          width: 48%
-          margin: 1%
-          height: 652px
-          border: 2px solid #1194e9
-          border-radius: 3px
+    @import "keyword-stat"
 
-        .chart-header
-          .chart-header-block
-            display: inline-block
-            width: 12px
-            height: 20px
-            margin: 12px
-            background: linear-gradient(180deg, rgba(51, 102, 204, 1) 0%, rgba(51, 102, 204, 1) 0%, rgba(0, 153, 153, 1) 100%, rgba(0, 153, 153, 1) 100%)
-
-          .title
-            display: inline-block
-            vertical-align: top
-            padding-top: 13px
-
-          .help
-            display: inline-block
-
-            .icon
-
-            .content
-              display: none
-
-            &.active
-              border: 1px solid grey
-              position: absolute
-              z-index: 100
-              top: 250px
-              left: 260px
-              background: white
-              .content
-                display: block
-                width: 220px
-                height: 200px
-
-
-      .ranking-container
-        display: flex
-        .ranking
-          margin: 10px
-
-
-    .data-stats
-      display: block
-      color: #cc6633
-
-      .data-stats-row-1
-        display: flex
-        width: 100%
-        height: 405px
-        margin: 20px 0
-
-        .data-stats-col-1
-          flex: 2.5
-          height: 100%
-          margin: 0 10px 0 0
-
-          .box
-            border: 2px solid #1194e9
-            border-radius: 3px
-            width: 100%
-            height: 30%
-
-            .value
-              position: relative
-              top: 18px
-              font-size: 30px
-              font-weight: 600
-              text-align: center
-              color: #666
-
-            .desc
-              position: relative
-              top: 28px
-              text-align: center
-
-            &.box-1
-              margin-top: 0
-
-            &.box-2
-              margin: 20px 0 0 0
-
-            &.box-3
-              margin: 20px 0 0 0
-
-        .data-stats-col-2
-          flex: 5
-          border: 2px solid #1194e9
-          border-radius: 3px
-          height: 100%
-          margin: 0 10px
-        .data-stats-col-3
-          flex: 3
-          border: 2px solid #1194e9
-          border-radius: 3px
-          height: 100%
-          margin: 0 0 0 10px
-          .title
-            padding: 6px
-            font-weight: bold
-
-          .stats
-            display: flex
-            flex-direction: column
-            height: 88%
-
-            .stat
-              flex: 1
-              font-weight: normal
-              font-size: smaller
-              border: 1px solid #1194e9
-              border-radius: 2px
-              margin: 5%
-              width: 90%
-              .value
-                text-align: center
-                padding-top: 6px
-
-
-      .data-stats-row-2
-        display: flex
-        .data-stats-col-1
-          flex: 5
-          border: 2px solid #1194e9
-          border-radius: 3px
-          height: 500px
-          margin: 10px 20px 10px 0
-        .data-stats-col-2
-          flex: 3
-          height: 500px
-          margin: 10px 0
-
-
-    .keyword-stats
-      width: 100%
-
-      .left
-
-        .stat-box-container
-          .stat-box
-            margin: 30px 15px 20px
-
-        .search-conversion
-          border: 2px solid #0095e9
-          border-radius: 3px
-          margin: 10px 45px
-
-        .keyword-search-trend
-          border: 2px solid #0095e9
-          border-radius: 3px
-          margin: 10px 45px
-
-      .right
-        margin: 30px 40px 20px 0
-        .ranking
-          margin-bottom: 20px
-
-
-    .user-stats
-
-      .left
-        float: left
-        margin: 0 auto
-
-        .user-search-trend
-          width: 660px
-          margin: 44px 20px 20px 0
-          border: 2px solid #0095e9
-          border-radius: 3px
-
-        .main-user-map
-          width: 660px
-          border: 2px solid #0095e9
-          border-radius: 3px
-
-
-      .right
-        margin: 40px auto
-        width: 275px
-        float: left
-
-        .ranking
-          margin-bottom: 20px
-
+    @import "user-stat"

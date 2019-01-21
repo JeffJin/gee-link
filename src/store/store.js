@@ -1,42 +1,30 @@
-import {
-  dataBrowseTop10Reducer, dataStatsReducer, dataUsageRankingReducer, dataUsageTrendReducer,
-  individualSearchChartDataReducer,
-  keywordSearchTop10Reducer, keywordSearchTrendReducer, keywordStatsReducer, missedKeywordsRankingReducer,
-  realTimeSearchChartDataReducer,
-  realTimeUserChartDataReducer, searchConversionReducer, searchedKeywordsRankingReducer,
-  searchUserTop10Reducer,
-  totalStatsReducer,
-  userLocationMapDataReducer
-} from "./reducers/reducers";
+
 import {combineReducers, createStore} from "redux";
-
-function searchReducer(state = [], action) {
-  return state;
-}
-
-function searchResultReducer(state = [], action) {
-  return state;
-}
-
-function searchResultItemDetailsReducer(state = [], action) {
-  return state;
-}
+import {searchReducer, searchResultsReducer} from "./reducers/search-reducers";
+import {
+  dataPageSearchRatioReducer,
+  dataPageStatsReducer,
+  dataPageUsageRankingsReducer, dataPageUsageRatioReducer,
+  dataPageUsageRecordReducer, dataPageUsageTrendReducer
+} from "./reducers/data-page-reducers";
 
 const reducer = combineReducers({
   // main page reducers
-  totalStats: totalStatsReducer,
-  realTimeSearchChartData: realTimeSearchChartDataReducer,
-  individualSearchChartData: individualSearchChartDataReducer,
-  realTimeUserChartData: realTimeUserChartDataReducer,
-  userLocationMapData: userLocationMapDataReducer,
-  keywordSearchRankings: keywordSearchTop10Reducer,
-  dataBrowseRankings: dataBrowseTop10Reducer,
-  searchUserRankings: searchUserTop10Reducer,
+  mainPageStats: mainPageStatsReducer,
+  mainPageRealTimeSearchChartData: mainPageRealTimeSearchChartDataReducer,
+  mainPageIndividualSearchChartData: mainPageIndividualSearchChartDataReducer,
+  mainPageRealTimeUserChartData: mainPageRealTimeUserChartDataReducer,
+  mainPageKeywordSearchRankings: mainPageKeywordSearchRankingsReducer,
+  mainPageDataBrowseRankings: mainPageDataBrowseRankingsReducer,
+  mainPageSearchUserRankings: mainPageSearchUserRankingsReducer,
 
   //data stat page reducers
-  dataStats: dataStatsReducer,
-  dataUsageRankings: dataUsageRankingReducer,
-  dataUsageTrend: dataUsageTrendReducer,
+  dataPageStats: dataPageStatsReducer,
+  dataPageUsageRecord: dataPageUsageRecordReducer,
+  dataPageUsageRatio: dataPageUsageRatioReducer,
+  dataPageSearchRatio: dataPageSearchRatioReducer,
+  dataPageUsageRankings: dataPageUsageRankingsReducer,
+  dataPageUsageTrend: dataPageUsageTrendReducer,
 
   //keyword page reducers
   keywordStats: keywordStatsReducer,
@@ -45,10 +33,15 @@ const reducer = combineReducers({
   searchConversion: searchConversionReducer,
   topMissedKeywordsRanking: missedKeywordsRankingReducer,
 
+  // user page reducers
+  userPageSearchTrend: userPageSearchTrendReducer,
+  userPageLocationMapData: userPageLocationMapDataReducer,
+  userPageSearchUserRankings: userPageSearchUserRankingsReducer,
+  userPageBrowseUserRankings: userPageBrowseUserRankingsReducer,
+
   // search reducers
   search: searchReducer,
-  searchResult: searchResultReducer,
-  searchResultItemDetails: searchResultItemDetailsReducer
+  searchResults: searchResultsReducer,
 });
 
 const initialStates = {
@@ -61,9 +54,10 @@ const initialStates = {
   keywordSearchRankings: [],
   dataBrowseRankings: [],
   searchUserRankings: [],
+
+  //search
   search: {},
-  searchResult: {},
-  searchResultItemDetails: {},
+  searchResults: [],
 
   // keyword stats page
   keywordStats: {},

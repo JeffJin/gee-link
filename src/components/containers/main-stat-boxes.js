@@ -16,7 +16,7 @@ function openStatDetails(id) {
   };
 }
 
-const MainStateBoxes = (props) => {
+const MainStatBoxContents = (props) => {
   return <div className={'stat-box-container flex-box'}>
     {
       props.stateBoxes.filter(b => !!labelDictionary[b.key]).map((box, index) => (
@@ -46,7 +46,7 @@ const mapDispatchToStatBoxProps = (dispatch) => (
   }
 );
 
-export const MainTotalStats = connect(
+export const MainStatBoxes = connect(
   mapStateToStatBoxProps,
   mapDispatchToStatBoxProps
-)(MainStateBoxes);
+)(MainStatBoxContents);

@@ -16,7 +16,7 @@ function openStatDetails(id) {
   };
 }
 
-const KeywordStateBoxContents = (props) => {
+const KeywordStatBoxContents = (props) => {
   return <div className={'stat-box-container flex-box'}>
     {
       props.stateBoxes.filter(b => !!labelDictionary[b.key]).map((box, index) => (
@@ -49,4 +49,4 @@ const mapDispatchToStatBoxProps = (dispatch) => (
 export const KeywordStatBoxes = connect(
   mapStateToStatBoxProps,
   mapDispatchToStatBoxProps
-)(KeywordStateBoxContents);
+)(KeywordStatBoxContents);
