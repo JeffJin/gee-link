@@ -11,10 +11,7 @@ import {
 } from "./reducers/data-page-reducers";
 import {
   mainPageDataBrowseRankingsReducer,
-  mainPageIndividualSearchChartDataReducer,
   mainPageKeywordSearchRankingsReducer,
-  mainPageRealTimeSearchChartDataReducer,
-  mainPageRealTimeUserChartDataReducer,
   mainPageSearchUserRankingsReducer,
   mainPageStatsReducer
 } from "./reducers/main-page-reducers";
@@ -26,17 +23,23 @@ import {
   keywordPageStatsReducer
 } from "./reducers/keyword-page-reducers";
 import {
-  userPageBrowseUserRankingsReducer,
-  userPageLocationMapDataReducer, userPageSearchTrendReducer,
-  userPageSearchUserRankingsReducer
+  userBrowseRankingsReducer, userLocationMapDataReducer,
+  userSearchRankingsReducer, userSearchTrendReducer
 } from "./reducers/user-page-reducers";
+import {
+  individualSearchChartDataReducer,
+  realTimeSearchChartDataReducer,
+  realTimeUserChartDataReducer
+} from "./reducers/common-reducers";
 
 const reducer = combineReducers({
+
+  realTimeSearchChartData: realTimeSearchChartDataReducer,
+  individualSearchChartData: individualSearchChartDataReducer,
+  realTimeUserChartData: realTimeUserChartDataReducer,
+
   // main page reducers
   mainPageStats: mainPageStatsReducer,
-  mainPageRealTimeSearchChartData: mainPageRealTimeSearchChartDataReducer,
-  mainPageIndividualSearchChartData: mainPageIndividualSearchChartDataReducer,
-  mainPageRealTimeUserChartData: mainPageRealTimeUserChartDataReducer,
   mainPageKeywordSearchRankings: mainPageKeywordSearchRankingsReducer,
   mainPageDataBrowseRankings: mainPageDataBrowseRankingsReducer,
   mainPageSearchUserRankings: mainPageSearchUserRankingsReducer,
@@ -57,10 +60,10 @@ const reducer = combineReducers({
   keywordPageTopMissedKeywordsRanking: keywordPageMissedKeywordsRankingReducer,
 
   // user page reducers
-  userPageSearchTrend: userPageSearchTrendReducer,
-  userPageLocationMapData: userPageLocationMapDataReducer,
-  userPageSearchUserRankings: userPageSearchUserRankingsReducer,
-  userPageBrowseUserRankings: userPageBrowseUserRankingsReducer,
+  userSearchTrend: userSearchTrendReducer,
+  userLocationMapData: userLocationMapDataReducer,
+  userSearchRankings: userSearchRankingsReducer,
+  userBrowseRankings: userBrowseRankingsReducer,
 
   // search reducers
   search: searchReducer,

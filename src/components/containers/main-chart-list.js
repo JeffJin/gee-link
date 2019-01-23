@@ -1,10 +1,9 @@
-import connect from "react-redux/es/connect/connect";
 import React from "react";
-import RealTimeSearchChart from "../presentation/real-time-search-chart";
 import IndividualSearchChart from "../presentation/individual-search-chart";
 import RealTimeUserChart from "../presentation/realtime-user-chart";
+import {RealTimeSearchChart} from "../common/real-time-search-chart";
 
-const MainChartListContent = (props) => {
+const MainChartList = (props) => {
   let isChartHelpShown = false;
 
   const showChartHelp = () => {
@@ -32,31 +31,9 @@ const MainChartListContent = (props) => {
       </div>
     </div>
     <div className={'main-chart-list'}>
-      <RealTimeSearchChart data={props.realTimeSearchChartData}/>
-      <IndividualSearchChart data={props.individualSearchChartData}/>
-      <RealTimeUserChart data={props.realTimeUserChartData}/>
+      <RealTimeSearchChart/>
+      <IndividualSearchChart/>
+      <RealTimeUserChart/>
     </div>
   </div>  ;
 };
-
-const mapStateToMainChartListProps = (state) => {
-  // console.log('mapStateToMainChartListProps get called', state);
-  return {
-    realTimeSearchChartData: state.realTimeSearchChartData,
-    individualSearchChartData: state.individualSearchChartData,
-    realTimeUserChartData: state.realTimeUserChartData,
-  };
-};
-
-const mapDispatchToMainChartListProps = (dispatch) => (
-  {
-    onClick: (id) => ( ''
-      // dispatch(openChartDetails(id))
-    ),
-  }
-);
-
-export const MainChartList = connect(
-  mapStateToMainChartListProps,
-  mapDispatchToMainChartListProps
-)(MainChartListContent);

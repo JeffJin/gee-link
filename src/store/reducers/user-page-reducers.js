@@ -1,8 +1,8 @@
-import {UserPageAction} from "./actions";
+import {UserAction} from "./actions";
 
-export function userPageBrowseUserRankingsReducer(state = [], action) {
+export function userBrowseRankingsReducer(state = [], action) {
   switch (action.type) {
-    case UserPageAction.LOAD_BROWSE_USER_RANKINGS: {
+    case UserAction.LOAD_BROWSE_USER_RANKINGS: {
       return action.payload;
     }
     default: {
@@ -11,9 +11,9 @@ export function userPageBrowseUserRankingsReducer(state = [], action) {
   }
 }
 
-export function userPageSearchUserRankingsReducer(state = [], action) {
+export function userSearchRankingsReducer(state = [], action) {
   switch (action.type) {
-    case UserPageAction.LOAD_SEARCH_USER_RANKINGS: {
+    case UserAction.LOAD_SEARCH_USER_RANKINGS: {
       return action.payload;
     }
     default: {
@@ -22,9 +22,9 @@ export function userPageSearchUserRankingsReducer(state = [], action) {
   }
 }
 
-export function userPageLocationMapDataReducer(state = [], action) {
+export function userLocationMapDataReducer(state = [], action) {
   switch (action.type) {
-    case UserPageAction.LOAD_LOCATION_MAP_DATA: {
+    case UserAction.LOAD_LOCATION_MAP_DATA: {
       return action.payload;
     }
     default: {
@@ -33,9 +33,9 @@ export function userPageLocationMapDataReducer(state = [], action) {
   }
 }
 
-export function userPageSearchTrendReducer(state = [], action) {
+export function userSearchTrendReducer(state = [], action) {
   switch (action.type) {
-    case UserPageAction.LOAD_SEARCH_TREND: {
+    case UserAction.LOAD_SEARCH_TREND: {
       return action.payload.searchUserRankings;
     }
     default: {

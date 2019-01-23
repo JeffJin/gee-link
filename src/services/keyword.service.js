@@ -7,7 +7,7 @@ class KeywordService extends BaseService {
     super();
   }
 
-  getKeywordStats() {
+  getKeywordPageStats() {
     const data = {
       totalSearch: 111126,
       todaySearch: 479,

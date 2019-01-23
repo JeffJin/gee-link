@@ -5,31 +5,53 @@ import {MainRankingLists} from "../containers/main-ranking-list";
 import {MainStatBoxes} from "../containers/main-stat-boxes";
 import {MainChartList} from "../containers/main-chart-list";
 import {MainUserMap} from "../containers/main-user-map";
+import {MainPageAction} from "../../store/reducers/actions";
 
 function loadTotalStatsAction(stats) {
   return {
-    type: 'LOAD_TOTAL_STATS',
+    type: MainPageAction.LOAD_STATS,
     payload: stats,
   };
 }
 
-function loadRankingsAction(data) {
+function loadSearchUserRankingsAction(data) {
   return {
-    type: 'LOAD_MAIN_RANKINGS',
+    type: MainPageAction.LOAD_SEARCH_USER_RANKINGS,
     payload: data,
   };
 }
 
-function loadChartDataAction(data) {
+function loadDataBrowseRankingsAction(data) {
   return {
-    type: 'LOAD_MAIN_CHART_DATA',
+    type: MainPageAction.LOAD_DATA_BROWSE_RANKINGS,
+    payload: data,
+  };
+}
+
+function loadKeywordSearchRankingsAction(data) {
+  return {
+    type: MainPageAction.LOAD_KEYWORD_SEARCH_RANKINGS,
+    payload: data,
+  };
+}
+
+function loadReaTimeUserDataAction(data) {
+  return {
+    type: MainPageAction.LOAD_REAL_TIME_USER_DATA,
+    payload: data,
+  };
+}
+
+function loadIndividualSearchDataAction(data) {
+  return {
+    type: MainPageAction.LOAD_INDIVIDUAL_SEARCH_DATA,
     payload: data,
   };
 }
 
 function loadUserMapAction(data) {
   return {
-    type: 'LOAD_MAIN_USER_MAP',
+    type: MainPageAction.LOAD_USER_LOCATION_MAP_DATA,
     payload: data,
   };
 }
@@ -43,12 +65,23 @@ const mapDispatchToMainPageProps = (dispatch) => (
     onLoadStats: (stats) => (
       dispatch(loadTotalStatsAction(stats))
     ),
-    onLoadRankings: (rankings) => (
-      dispatch(loadRankingsAction(rankings))
+    onLoadSearchUserRankings: (rankings) => (
+      dispatch(loadSearchUserRankingsAction(rankings))
     ),
-    onLoadChartData: (data) => (
-      dispatch(loadChartDataAction(data))
+    onLoadDataBrowseRankings: (rankings) => (
+      dispatch(loadDataBrowseRankingsAction(rankings))
     ),
+    onLoadKeywordSearchRankings: (rankings) => (
+      dispatch(loadKeywordSearchRankingsAction(rankings))
+    ),
+    // charts
+    onLoadReaTimeUserData: (data) => (
+      dispatch(loadReaTimeUserDataAction(data))
+    ),
+    onLoadIndividualSearchData: (data) => (
+      dispatch(loadIndividualSearchDataAction(data))
+    ),
+    // map
     onLoadUserMapData: (data) => (
       dispatch(loadUserMapAction(data))
     ),
