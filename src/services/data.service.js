@@ -7,12 +7,9 @@ class DataService extends BaseService {
     super();
   }
 
-  getMainPageStats() {
+  getTotalSearchStats() {
     const result = {
-      totalData: 111126,
       totalSearch: 479,
-      individualSearch: 267,
-      individualUsers: 1
     };
     return new Promise(function(resolve, reject) {
       setTimeout(function () {
@@ -21,11 +18,53 @@ class DataService extends BaseService {
     });
   }
 
-  getDataPageStats() {
+  getTotalDataStats() {
     const result = {
       totalData: 111126,
-      todayBrowsed: 333,
-      individuallyBrowsed: 267,
+    };
+    return new Promise(function(resolve, reject) {
+      setTimeout(function () {
+        resolve(result);
+      }, 500);
+    });
+  }
+
+  getIndividualSearchStats() {
+    const result = {
+      individualSearch: 267,
+    };
+    return new Promise(function(resolve, reject) {
+      setTimeout(function () {
+        resolve(result);
+      }, 500);
+    });
+  }
+
+  getIndividualUserStats() {
+    const result = {
+      individualUsers: 432,
+    };
+    return new Promise(function(resolve, reject) {
+      setTimeout(function () {
+        resolve(result);
+      }, 500);
+    });
+  }
+
+  getIndividuallyBrowsedStats() {
+    const result = {
+      individuallyBrowsed: 4232,
+    };
+    return new Promise(function(resolve, reject) {
+      setTimeout(function () {
+        resolve(result);
+      }, 500);
+    });
+  }
+
+  getIndividuallyBrowsedStats() {
+    const result = {
+      todayBrowsed: 422,
     };
     return new Promise(function(resolve, reject) {
       setTimeout(function () {

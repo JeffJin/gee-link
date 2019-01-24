@@ -1,69 +1,44 @@
-
 import {combineReducers, createStore} from "redux";
 import {searchReducer, searchResultsReducer} from "./reducers/search-reducers";
-import {
-  dataPageSearchRatioReducer,
-  dataPageStatsReducer,
-  dataPageUsageRankingsReducer,
-  dataPageUsageRatioReducer,
-  dataPageUsageRecordReducer,
-  dataPageUsageTrendReducer
-} from "./reducers/data-page-reducers";
-import {
-  mainPageDataBrowseRankingsReducer,
-  mainPageKeywordSearchRankingsReducer,
-  mainPageSearchUserRankingsReducer,
-  mainPageStatsReducer
-} from "./reducers/main-page-reducers";
-import {
-  keywordPageMissedKeywordsRankingReducer,
-  keywordPageSearchConversionReducer,
-  keywordPageSearchedKeywordsRankingReducer,
-  keywordPageSearchTrendReducer,
-  keywordPageStatsReducer
-} from "./reducers/keyword-page-reducers";
-import {
-  userBrowseRankingsReducer, userLocationMapDataReducer,
-  userSearchRankingsReducer, userSearchTrendReducer
-} from "./reducers/user-page-reducers";
-import {
-  individualSearchChartDataReducer,
-  realTimeSearchChartDataReducer,
-  realTimeUserChartDataReducer
-} from "./reducers/common-reducers";
+import {statsReducer} from "./reducers/stats-reducers";
+import {dataUsageRecordReducer} from "./reducers/data-reducers";
+import {chartDataReducer, rankingDataReducer} from "./reducers/common-reducers";
 
 const reducer = combineReducers({
 
-  realTimeSearchChartData: realTimeSearchChartDataReducer,
-  individualSearchChartData: individualSearchChartDataReducer,
-  realTimeUserChartData: realTimeUserChartDataReducer,
+  // chart data reducers
+  individualSearchChartData: chartDataReducer,
+  realTimeUserChartData: chartDataReducer,
+  realTimeSearchChartData: chartDataReducer,
+  keywordSearchConversion: chartDataReducer,
+  keywordSearchTrend: chartDataReducer,
+  userSearchTrend: chartDataReducer,
+  userLocationMapData: chartDataReducer,
+  dataUsageRatio: chartDataReducer,
+  dataSearchRatio: chartDataReducer,
+  dataUsageTrend: chartDataReducer,
 
-  // main page reducers
-  mainPageStats: mainPageStatsReducer,
-  mainPageKeywordSearchRankings: mainPageKeywordSearchRankingsReducer,
-  mainPageDataBrowseRankings: mainPageDataBrowseRankingsReducer,
-  mainPageSearchUserRankings: mainPageSearchUserRankingsReducer,
+  
+  // ranking reducers
+  dataBrowseRanking: rankingDataReducer,
+  dataUsageRanking: rankingDataReducer,
+  searchedKeywordsRanking: rankingDataReducer,
+  searchUserRanking: rankingDataReducer,
+  browseUserRanking: rankingDataReducer,
+  missedKeywordRanking: rankingDataReducer,
+
+  // stats reducers
+  totalDataStats: statsReducer,
+  totalSearchStats: statsReducer,
+  todaySearchStats: statsReducer,
+  todayBrowsedStats: statsReducer,
+  averageSearchStats: statsReducer,
+  individualSearchStats: statsReducer,
+  individualUserStats: statsReducer,
+  individuallyBrowsedStats: statsReducer,
 
   //data stat page reducers
-  dataPageStats: dataPageStatsReducer,
-  dataPageUsageRatio: dataPageUsageRatioReducer,
-  dataPageSearchRatio: dataPageSearchRatioReducer,
-  dataPageUsageRecord: dataPageUsageRecordReducer,
-  dataPageUsageTrend: dataPageUsageTrendReducer,
-  dataPageUsageRankings: dataPageUsageRankingsReducer,
-
-  //keyword page reducers
-  keywordPageStats: keywordPageStatsReducer,
-  keywordPageSearchedKeywordsRanking: keywordPageSearchedKeywordsRankingReducer,
-  keywordPageSearchTrend: keywordPageSearchTrendReducer,
-  keywordPageSearchConversion: keywordPageSearchConversionReducer,
-  keywordPageTopMissedKeywordsRanking: keywordPageMissedKeywordsRankingReducer,
-
-  // user page reducers
-  userSearchTrend: userSearchTrendReducer,
-  userLocationMapData: userLocationMapDataReducer,
-  userSearchRankings: userSearchRankingsReducer,
-  userBrowseRankings: userBrowseRankingsReducer,
+  dataUsageRecord: dataUsageRecordReducer,
 
   // search reducers
   search: searchReducer,
@@ -71,35 +46,26 @@ const reducer = combineReducers({
 });
 
 const initialStates = {
-  //main page
-  mainPageStats: {},
-  mainPageRealTimeSearchChartData: {},
-  mainPageIndividualSearchChartData: {},
-  mainPageRealTimeUserChartData: {},
-  mainPageKeywordSearchRankings: [],
-  mainPageDataBrowseRankings: [],
-  mainPageSearchUserRankings: [],
+  // stats
+  totalDataStats: [],
+  totalSearchStats: [],
+  todaySearchStats: [],
+  todayBrowsedStats: [],
+  averageSearchStats: [],
+  individualSearchStats: [],
+  individualUserStats: [],
+  individuallyBrowsedStats: [],
 
-  //data page
-  dataPageStats: [],
-  dataPageUsageRecord: [],
-  dataPageUsageRatio: [],
-  dataPageSearchRatio: [],
-  dataPageUsageRankings: [],
-  dataPageUsageTrend: [],
+  // ranking
+  dataBrowseRanking: [],
+  searchedKeywordsRanking: [],
+  searchUserRanking: [],
+  browseUserRanking: [],
+  missedKeywordRanking: [],
+  dataUsageRanking: [],
 
-  //keyword stats page
-  keywordPageStats: {},
-  keywordPageSearchedKeywordsRanking: [],
-  keywordPageSearchTrend: [],
-  keywordPageSearchConversion: [],
-  keywordPageTopMissedKeywordsRanking: [],
+  // charts
 
-  //user page
-  userPageSearchTrend: [],
-  userPageLocationMapData: [],
-  userPageSearchUserRankings: [],
-  userPageBrowseUserRankings: [],
 
   //search
   search: {},

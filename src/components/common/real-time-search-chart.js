@@ -3,11 +3,11 @@ import React from "react";
 import Highcharts from "highcharts";
 import HighchartsReact from "highcharts-react-official";
 import {dataService} from "../../services/data.service";
-import {MainPageAction} from "../../store/reducers/actions";
+import {CommonAction} from "../../store/reducers/actions";
 
 function loadReaTimeSearchDataAction(data) {
   return {
-    type: MainPageAction.LOAD_REAL_TIME_SEARCH_DATA,
+    type: CommonAction.LOAD_REAL_TIME_SEARCH_DATA,
     payload: data,
   };
 }

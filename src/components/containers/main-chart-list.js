@@ -3,7 +3,7 @@ import IndividualSearchChart from "../presentation/individual-search-chart";
 import RealTimeUserChart from "../presentation/realtime-user-chart";
 import {RealTimeSearchChart} from "../common/real-time-search-chart";
 
-const MainChartList = (props) => {
+export const MainChartList = (props) => {
   let isChartHelpShown = false;
 
   const showChartHelp = () => {
@@ -37,3 +37,5 @@ const MainChartList = (props) => {
     </div>
   </div>  ;
 };
+
+

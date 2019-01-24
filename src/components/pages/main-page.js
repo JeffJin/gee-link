@@ -4,54 +4,33 @@ import {dataService} from "../../services/data.service";
 import {MainRankingLists} from "../containers/main-ranking-list";
 import {MainStatBoxes} from "../containers/main-stat-boxes";
 import {MainChartList} from "../containers/main-chart-list";
-import {MainUserMap} from "../containers/main-user-map";
-import {MainPageAction} from "../../store/reducers/actions";
+import {UserLocationMap} from "../common/user-location-map";
+import {CommonAction, StatsAction} from "../../store/reducers/actions";
 
 function loadTotalStatsAction(stats) {
   return {
-    type: MainPageAction.LOAD_STATS,
+    type: StatsAction.LOAD_TOTAL_SEARCH,
     payload: stats,
   };
 }
 
 function loadSearchUserRankingsAction(data) {
   return {
-    type: MainPageAction.LOAD_SEARCH_USER_RANKINGS,
+    type: CommonAction.LOAD_SEARCH_USER_RANKINGS,
     payload: data,
   };
 }
 
 function loadDataBrowseRankingsAction(data) {
   return {
-    type: MainPageAction.LOAD_DATA_BROWSE_RANKINGS,
+    type: CommonAction.LOAD_DATA_BROWSE_RANKINGS,
     payload: data,
   };
 }
 
 function loadKeywordSearchRankingsAction(data) {
   return {
-    type: MainPageAction.LOAD_KEYWORD_SEARCH_RANKINGS,
-    payload: data,
-  };
-}
-
-function loadReaTimeUserDataAction(data) {
-  return {
-    type: MainPageAction.LOAD_REAL_TIME_USER_DATA,
-    payload: data,
-  };
-}
-
-function loadIndividualSearchDataAction(data) {
-  return {
-    type: MainPageAction.LOAD_INDIVIDUAL_SEARCH_DATA,
-    payload: data,
-  };
-}
-
-function loadUserMapAction(data) {
-  return {
-    type: MainPageAction.LOAD_USER_LOCATION_MAP_DATA,
+    type: CommonAction.LOAD_SEARCHED_KEYWORD_RANKINGS,
     payload: data,
   };
 }
@@ -74,17 +53,6 @@ const mapDispatchToMainPageProps = (dispatch) => (
     onLoadKeywordSearchRankings: (rankings) => (
       dispatch(loadKeywordSearchRankingsAction(rankings))
     ),
-    // charts
-    onLoadReaTimeUserData: (data) => (
-      dispatch(loadReaTimeUserDataAction(data))
-    ),
-    onLoadIndividualSearchData: (data) => (
-      dispatch(loadIndividualSearchDataAction(data))
-    ),
-    // map
-    onLoadUserMapData: (data) => (
-      dispatch(loadUserMapAction(data))
-    ),
     dispatch: dispatch
   }
 );
@@ -100,35 +68,12 @@ class MainPageContent extends React.Component {
   componentDidMount() {
     this.getTotalStats();
     this.getRankingLists();
-    this.getRealtimeChartData();
-    this.getUserMapData();
   }
 
   getTotalStats = () => {
-    dataService.getTotalStats().then(stats => {
+    dataService.getMainPageStats().then(stats => {
       console.log('data service getTotalStats returned', stats);
-      this.props.onLoadStats(stats);
-    });
-  };
-
-  getRankingLists = () => {
-    dataService.getRankingLists().then(list => {
-      console.log('data service getRankingLists returned', list);
-      this.props.onLoadRankings(list);
-    });
-  };
-
-  getRealtimeChartData = () => {
-    dataService.getRealtimeChartData().then(list => {
-      console.log('data service getRealtimeChartData returned', list);
-      this.props.onLoadChartData(list);
-    });
-  };
-
-  getUserMapData = () => {
-    dataService.getUserLocationMapData().then(data => {
-      console.log('data service getUserMapData returned', data);
-      this.props.onLoadUserMapData(data);
+      this.props.onLoadSearchUserRankings(stats);
     });
   };
 
@@ -138,7 +83,7 @@ class MainPageContent extends React.Component {
         <MainStatBoxes/>
         <div className={'chart-container'}>
           <MainChartList />
-          <MainUserMap />
+          <UserLocationMap />
         </div>
         <MainRankingLists/>
       </div>

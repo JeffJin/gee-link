@@ -5,7 +5,6 @@ import Highcharts from 'highcharts/highcharts'
 import HighchartsReact from 'highcharts-react-official';
 import {chinaMap} from "../../data/china-map";
 import {CommonAction} from "../../store/reducers/actions";
-import {dataService} from "../../services/data.service";
 import {userService} from "../../services/user.service";
 
 HC_map(Highcharts);
@@ -102,7 +101,10 @@ class UserLocationMapContent extends React.Component {
 }
 
 const mapStateToProps = (state) => {
-  return state.userLocationMapData;
+
+  return {
+    data: state.userLocationMapData
+  };
 };
 
 const mapDispatchToProps = (dispatch) => (
