@@ -72,7 +72,7 @@ class DataService extends BaseService {
       }, 500);
     });
   }
-
+  //实时搜索数
   async getRealTimeSearchData() {
     const url = 'https://cdn.rawgit.com/highcharts/highcharts/' +
       '057b672172ccc6c08fe7dbb27fc17ebca3f5b770/samples/data/usdeur.json';
@@ -87,7 +87,7 @@ class DataService extends BaseService {
         return result;
       });
   }
-
+  //独立搜索数
   async getIndividualSearchData() {
     const url = 'https://cdn.rawgit.com/highcharts/highcharts/' +
       '057b672172ccc6c08fe7dbb27fc17ebca3f5b770/samples/data/usdeur.json';
@@ -102,7 +102,7 @@ class DataService extends BaseService {
         return result;
       });
   }
-
+  //实时用户数
   async getRealTimeUserData() {
     const url = 'https://cdn.rawgit.com/highcharts/highcharts/' +
       '057b672172ccc6c08fe7dbb27fc17ebca3f5b770/samples/data/usdeur.json';
@@ -118,28 +118,7 @@ class DataService extends BaseService {
       });
   }
 
-
-  getDataBrowseRanking() {
-    const result = [
-        {id: 1, rank: 1, desc: '那些年的自然语言', value: 544},
-        {id: 2, rank: 2, desc: '人工智能的前世与今生', value: 444},
-        {id: 3, rank: 3, desc: '自然语言能否识别文字', value: 322},
-        {id: 4, rank: 4, desc: '算法的运用', value: 311},
-        {id: 5, rank: 5, desc: '机器学习的模型建立', value: 222},
-        {id: 6, rank: 6, desc: 'python入门教程', value: 221},
-        {id: 7, rank: 7, desc: '云计算的概念', value: 190},
-        {id: 8, rank: 8, desc: '服务器的维护', value: 188},
-        {id: 9, rank: 9, desc: '服务器', value: 111},
-        {id: 10, rank: 10, desc: 'AI和BI有什么区别', value: 22},
-        {id: 11, rank: 11, desc: 'BI', value: 11}
-      ];
-    return new Promise(function(resolve, reject) {
-      setTimeout(function () {
-        resolve(result);
-      }, 500);
-    });
-  }
-
+  //数据使用情况
   // data page services
   getDataUsageRecord() {
     return new Promise(function(resolve, reject) {
@@ -154,6 +133,7 @@ class DataService extends BaseService {
     });
   }
 
+  //数据使用占比
   getDataUsageRatio() {
     return new Promise(function(resolve, reject) {
       setTimeout(function () {
@@ -171,6 +151,7 @@ class DataService extends BaseService {
     });
   }
 
+  //数据搜索占比
   getDataSearchRatio() {
     return new Promise(function(resolve, reject) {
       setTimeout(function () {
@@ -188,6 +169,7 @@ class DataService extends BaseService {
     });
   }
 
+  //数据使用趋势图
   async getDataUsageTrend() {
     const data = [
       ['周一', 242],
@@ -204,19 +186,36 @@ class DataService extends BaseService {
       }, 500);
     });
   }
-
-  async getDataUsageRankings() {
+  //搜索点击转化率
+  getKeywordConversion() {
     const data = [
-      {id: 1, rank: 1, desc: '大数据', value: 123},
-      {id: 2, rank: 2, desc: '人工智能', value: 111},
-      {id: 3, rank: 3, desc: '自然语言', value: 110},
-      {id: 4, rank: 4, desc: '算法', value: 99},
-      {id: 5, rank: 5, desc: '机器学习', value: 88},
-      {id: 6, rank: 6, desc: 'Angular', value: 77},
-      {id: 7, rank: 7, desc: '云计算', value: 76},
-      {id: 8, rank: 8, desc: 'Python', value: 44},
-      {id: 9, rank: 9, desc: '服务器', value: 33},
-      {id: 10, rank: 10, desc: 'AI', value: 32}];
+      ['周一', 0.22],
+      ['周二', 0.20],
+      ['周三', 0.14],
+      ['周四', 0.13],
+      ['周五', 0.13],
+      ['周六', 0.12],
+      ['周日', 0.12]
+    ];
+
+    return new Promise(function(resolve, reject) {
+      setTimeout(function () {
+        resolve(data);
+      }, 500);
+    });
+  }
+  //关键词搜索趋势图
+  getKeywordSearchTrend() {
+    const data = [
+      ['周一', 2222],
+      ['周二', 2028],
+      ['周三', 1429],
+      ['周四', 1327],
+      ['周五', 1321],
+      ['周六', 1227],
+      ['周日', 1224]
+    ];
+
     return new Promise(function(resolve, reject) {
       setTimeout(function () {
         resolve(data);

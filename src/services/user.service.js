@@ -5,7 +5,7 @@ class UserService extends BaseService {
   constructor() {
     super();
   }
-
+  //用户搜索趋势图
   getUserSearchTrendData() {
     const data = {
       time: [
@@ -33,7 +33,7 @@ class UserService extends BaseService {
       }, 500);
     });
   }
-
+  //用户地理位置分布图
   async getUserLocationMapData() {
     const data = [
       ['cn-3664', 0],
@@ -75,52 +75,6 @@ class UserService extends BaseService {
       }, 500);
     });
   }
-
-  getSearchUserRanking() {
-    const result = [
-      {id: 1, rank: 1, desc: '223345746745', value: 999},
-      {id: 2, rank: 2, desc: '666645746745', value: 777},
-      {id: 3, rank: 3, desc: '845645746745', value: 666},
-      {id: 4, rank: 4, desc: '905645746745', value: 664},
-      {id: 5, rank: 5, desc: '115645746745', value: 444},
-      {id: 6, rank: 6, desc: '225645746745', value: 77},
-      {id: 7, rank: 7, desc: '335645746745', value: 76},
-      {id: 8, rank: 8, desc: '345645746745', value: 44},
-      {id: 9, rank: 9, desc: '665645746745', value: 33},
-      {id: 10, rank: 10, desc: '885645746745', value: 32},
-      {id: 11, rank: 11, desc: '9945645746745I', value: 22}
-    ];
-    return new Promise(function(resolve, reject) {
-      setTimeout(function () {
-        resolve(result);
-      }, 500);
-    });
-  }
-
-
-
-  getBrowseUserRanking() {
-    const result = [
-      {id: 1, rank: 1, desc: '223345746745', value: 999},
-      {id: 2, rank: 2, desc: '666645746745', value: 777},
-      {id: 3, rank: 3, desc: '845645746745', value: 666},
-      {id: 4, rank: 4, desc: '905645746745', value: 664},
-      {id: 5, rank: 5, desc: '115645746745', value: 444},
-      {id: 6, rank: 6, desc: '225645746745', value: 77},
-      {id: 7, rank: 7, desc: '335645746745', value: 76},
-      {id: 8, rank: 8, desc: '345645746745', value: 44},
-      {id: 9, rank: 9, desc: '665645746745', value: 33},
-      {id: 10, rank: 10, desc: '885645746745', value: 32},
-      {id: 11, rank: 11, desc: '9945645746745I', value: 22}
-    ];
-    return new Promise(function(resolve, reject) {
-      setTimeout(function () {
-        resolve(result);
-      }, 500);
-    });
-  }
-
-
 }
 
 export const userService = new UserService();
