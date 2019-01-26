@@ -5,14 +5,14 @@ import HighchartsReact from "highcharts-react-official";
 import {dataService} from "../../services/data.service";
 import {CommonAction} from "../../store/reducers/actions";
 
-function loadReaTimeUserDataAction(data) {
+function loadIndividualSearchDataAction(data) {
   return {
-    type: CommonAction.LOAD_REAL_TIME_USER_DATA,
+    type: CommonAction.LOAD_INDIVIDUAL_SEARCH_DATA,
     payload: data,
   };
 }
 
-class RealTimeUserChartContent extends React.Component {
+class IndividualSearchChartContent extends React.Component {
   constructor(props) {
     super(props);
   }
@@ -22,8 +22,8 @@ class RealTimeUserChartContent extends React.Component {
   }
 
   getChartData = () => {
-    dataService.getRealTimeUserData().then(data => {
-      this.props.onLoadReaTimeUserData(data);
+    dataService.getIndividualSearchData().then(data => {
+      this.props.onLoadIndividualSearchData(data);
     });
   };
 
@@ -34,7 +34,7 @@ class RealTimeUserChartContent extends React.Component {
         height: '200'
       },
       title: {
-        text: '实时搜索数',
+        text: '独立搜索数',
         style: {
           color: '#cc6633',
         }
@@ -82,13 +82,13 @@ class RealTimeUserChartContent extends React.Component {
 
       series: [{
         type: 'area',
-        name: '实时搜索数',
+        name: '独立搜索数',
         data: this.props.data
       }]
     };
 
     return (
-      <div className="real-time-search-chart">
+      <div className="indi-search-chart">
         <HighchartsReact
           highcharts={Highcharts}
           options={chartConfig}
@@ -99,19 +99,19 @@ class RealTimeUserChartContent extends React.Component {
 }
 
 const mapStateToProps = (state) => {
-  return state.realTimeUserChartData;
+  return {data: state.individualSearchChartData};
 };
 
 const mapDispatchToProps = (dispatch) => (
   {
     dispatch: dispatch,
-    onLoadReaTimeUserData: (data) => (
-      dispatch(loadReaTimeUserDataAction(data))
+    onLoadIndividualSearchData: (data) => (
+      dispatch(loadIndividualSearchDataAction(data))
     ),
   }
 );
 
-export const RealTimeUserChart = connect(
+export const IndividualSearchChart = connect(
   mapStateToProps,
   mapDispatchToProps
-)(RealTimeUserChartContent);
+)(IndividualSearchChartContent);

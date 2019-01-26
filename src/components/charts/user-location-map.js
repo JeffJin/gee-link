@@ -101,7 +101,6 @@ class UserLocationMapContent extends React.Component {
 }
 
 const mapStateToProps = (state) => {
-
   return {
     data: state.userLocationMapData
   };

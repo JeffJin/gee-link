@@ -1,7 +1,7 @@
 import React from "react";
 import IndividualSearchChart from "../presentation/individual-search-chart";
 import RealTimeUserChart from "../presentation/realtime-user-chart";
-import {RealTimeSearchChart} from "../common/real-time-search-chart";
+import {RealTimeSearchChart} from "../charts/real-time-search-chart";
 
 export const MainChartList = (props) => {
   let isChartHelpShown = false;

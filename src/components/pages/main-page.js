@@ -4,7 +4,7 @@ import {dataService} from "../../services/data.service";
 import {MainRankingLists} from "../containers/main-ranking-list";
 import {MainStatBoxes} from "../containers/main-stat-boxes";
 import {MainChartList} from "../containers/main-chart-list";
-import {UserLocationMap} from "../common/user-location-map";
+import {UserLocationMap} from "../charts/user-location-map";
 import {CommonAction, StatsAction} from "../../store/reducers/actions";
 
 function loadTotalStatsAction(stats) {

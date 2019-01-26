@@ -2,7 +2,7 @@ import connect from "react-redux/es/connect/connect";
 import React from "react";
 import {CommonAction} from "../../store/reducers/actions";
 import {rankingService} from "../../services/ranking.service";
-import Ranking from "../presentation/ranking";
+import Ranking from "./ranking";
 
 function loadMissedKeywordsRankingAction(data) {
   return {

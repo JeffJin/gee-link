@@ -5,14 +5,14 @@ import HighchartsReact from "highcharts-react-official";
 import {dataService} from "../../services/data.service";
 import {CommonAction} from "../../store/reducers/actions";
 
-function loadIndividualSearchDataAction(data) {
+function loadReaTimeSearchDataAction(data) {
   return {
-    type: CommonAction.LOAD_INDIVIDUAL_SEARCH_DATA,
+    type: CommonAction.LOAD_REAL_TIME_SEARCH_DATA,
     payload: data,
   };
 }
 
-class IndividualSearchChartContent extends React.Component {
+class RealTimeSearchChartContent extends React.Component {
   constructor(props) {
     super(props);
   }
@@ -22,8 +22,8 @@ class IndividualSearchChartContent extends React.Component {
   }
 
   getChartData = () => {
-    dataService.getIndividualSearchData().then(data => {
-      this.props.onLoadIndividualSearchData(data);
+    dataService.getRealTimeSearchData().then(data => {
+      this.props.onLoadReaTimeSearchData(data);
     });
   };
 
@@ -99,19 +99,19 @@ class IndividualSearchChartContent extends React.Component {
 }
 
 const mapStateToProps = (state) => {
-  return state.individualSearchChartData;
+  return {data: state.realTimeSearchChartData};
 };
 
 const mapDispatchToProps = (dispatch) => (
   {
     dispatch: dispatch,
-    onLoadIndividualSearchData: (data) => (
-      dispatch(loadIndividualSearchDataAction(data))
+    onLoadReaTimeSearchData: (data) => (
+      dispatch(loadReaTimeSearchDataAction(data))
     ),
   }
 );
 
-export const IndividualSearchChart = connect(
+export const RealTimeSearchChart = connect(
   mapStateToProps,
   mapDispatchToProps
-)(IndividualSearchChartContent);
+)(RealTimeSearchChartContent);

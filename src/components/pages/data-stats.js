@@ -172,25 +172,7 @@ class DataStatsContent extends React.Component {
             <DataSearchRatioChart data={this.props.dataSearchRatio}/>
           </div>
           <div className={'data-stats-col-3'}>
-            <div className={'title'}>数据使用情况</div>
-            <div className={'stats'}>
-              <div className={'stat'}>
-                <div className={'title'}>阅读数</div>
-                <div className={'value'}>{this.props.read || 0}</div>
-              </div>
-              <div className={'stat'}>
-                <div className={'title'}>点赞数</div>
-                <div className={'value'}>{this.props.liked || 0}</div>
-              </div>
-              <div className={'stat'}>
-                <div className={'title'}>转发数</div>
-                <div className={'value'}>{this.props.forwarded || 0}</div>
-              </div>
-              <div className={'stat'}>
-                <div className={'title'}>评论数</div>
-                <div className={'value'}>{this.props.commented || 0}</div>
-              </div>
-            </div>
+
           </div>
         </div>
         <div className={'data-stats-row-2'}>

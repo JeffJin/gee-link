@@ -1,6 +1,6 @@
 import connect from "react-redux/es/connect/connect";
 import React from "react";
-import StateBox from "../common/stat-box";
+import StateBox from "../charts/stat-box";
 
 const labelDictionary = {
   totalSearch: '总搜索数',

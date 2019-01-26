@@ -10,10 +10,11 @@ const reducer = combineReducers({
   individualSearchChartData: chartDataReducer,
   realTimeUserChartData: chartDataReducer,
   realTimeSearchChartData: chartDataReducer,
+  userLocationMapData: chartDataReducer,
+
   keywordSearchConversion: chartDataReducer,
   keywordSearchTrend: chartDataReducer,
   userSearchTrend: chartDataReducer,
-  userLocationMapData: chartDataReducer,
   dataUsageRatio: chartDataReducer,
   dataSearchRatio: chartDataReducer,
   dataUsageTrend: chartDataReducer,

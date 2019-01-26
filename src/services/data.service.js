@@ -9,7 +9,7 @@ class DataService extends BaseService {
 
   getTotalSearchStats() {
     const result = {
-      totalSearch: 479,
+      value: 479,
     };
     return new Promise(function(resolve, reject) {
       setTimeout(function () {
@@ -20,7 +20,29 @@ class DataService extends BaseService {
 
   getTotalDataStats() {
     const result = {
-      totalData: 111126,
+      value: 111126,
+    };
+    return new Promise(function(resolve, reject) {
+      setTimeout(function () {
+        resolve(result);
+      }, 500);
+    });
+  }
+
+  getTodaySearchStats() {
+    const result = {
+      value: 479,
+    };
+    return new Promise(function(resolve, reject) {
+      setTimeout(function () {
+        resolve(result);
+      }, 500);
+    });
+  }
+
+  getTodayBrowsedStats() {
+    const result = {
+      value: 111126,
     };
     return new Promise(function(resolve, reject) {
       setTimeout(function () {
@@ -31,7 +53,7 @@ class DataService extends BaseService {
 
   getIndividualSearchStats() {
     const result = {
-      individualSearch: 267,
+      value: 267,
     };
     return new Promise(function(resolve, reject) {
       setTimeout(function () {
@@ -42,7 +64,7 @@ class DataService extends BaseService {
 
   getIndividualUserStats() {
     const result = {
-      individualUsers: 432,
+      value: 432,
     };
     return new Promise(function(resolve, reject) {
       setTimeout(function () {
@@ -53,7 +75,7 @@ class DataService extends BaseService {
 
   getIndividuallyBrowsedStats() {
     const result = {
-      individuallyBrowsed: 4232,
+      value: 4232,
     };
     return new Promise(function(resolve, reject) {
       setTimeout(function () {
@@ -62,9 +84,9 @@ class DataService extends BaseService {
     });
   }
 
-  getIndividuallyBrowsedStats() {
+  getAverageSearchStats() {
     const result = {
-      todayBrowsed: 422,
+      value: 422,
     };
     return new Promise(function(resolve, reject) {
       setTimeout(function () {
@@ -187,15 +209,15 @@ class DataService extends BaseService {
     });
   }
   //搜索点击转化率
-  getKeywordConversion() {
+  getKeywordSearchConversion() {
     const data = [
-      ['周一', 0.22],
-      ['周二', 0.20],
-      ['周三', 0.14],
-      ['周四', 0.13],
-      ['周五', 0.13],
-      ['周六', 0.12],
-      ['周日', 0.12]
+      ['周一', 22],
+      ['周二', 20],
+      ['周三', 14],
+      ['周四', 13],
+      ['周五', 13],
+      ['周六', 12],
+      ['周日', 12]
     ];
 
     return new Promise(function(resolve, reject) {
@@ -219,6 +241,34 @@ class DataService extends BaseService {
     return new Promise(function(resolve, reject) {
       setTimeout(function () {
         resolve(data);
+      }, 500);
+    });
+  }
+
+  //用户搜索/使用趋势图
+  getUserSearchTrend() {
+    const times = [
+      '周一',
+      '周二',
+      '周三',
+      '周四',
+      '周五',
+      '周六',
+      '周日'
+    ];
+    const data = [{
+      name: '搜索关键词',
+      data: [49.9, 71.5, 106.4, 129.2, 144.0, 176.0, 135.6]
+
+    }, {
+      name: '使用数据',
+      data: [83.6, 78.8, 98.5, 93.4, 106.0, 84.5, 105.0]
+
+    }];
+
+    return new Promise(function(resolve, reject) {
+      setTimeout(function () {
+        resolve({times, data});
       }, 500);
     });
   }

@@ -78,15 +78,7 @@ function UserStats(props) {
       text: ''
     },
     xAxis: {
-      categories: [
-        '周一',
-        '周二',
-        '周三',
-        '周四',
-        '周五',
-        '周六',
-        '周日'
-      ],
+      categories: this.props.data.times,
       crosshair: true
     },
     yAxis: {
@@ -109,15 +101,7 @@ function UserStats(props) {
         borderWidth: 0
       }
     },
-    series: [{
-      name: '搜索关键词',
-      data: [49.9, 71.5, 106.4, 129.2, 144.0, 176.0, 135.6]
-
-    }, {
-      name: '使用数据',
-      data: [83.6, 78.8, 98.5, 93.4, 106.0, 84.5, 105.0]
-
-    }]
+    series: this.props.data.data
   };
 
   const searchUserRanking = {

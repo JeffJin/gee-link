@@ -5,14 +5,14 @@ import HighchartsReact from "highcharts-react-official";
 import {dataService} from "../../services/data.service";
 import {CommonAction} from "../../store/reducers/actions";
 
-function loadReaTimeSearchDataAction(data) {
+function loadReaTimeUserDataAction(data) {
   return {
-    type: CommonAction.LOAD_REAL_TIME_SEARCH_DATA,
+    type: CommonAction.LOAD_REAL_TIME_USER_DATA,
     payload: data,
   };
 }
 
-class RealTimeSearchChartContent extends React.Component {
+class RealTimeUserChartContent extends React.Component {
   constructor(props) {
     super(props);
   }
@@ -22,8 +22,8 @@ class RealTimeSearchChartContent extends React.Component {
   }
 
   getChartData = () => {
-    dataService.getRealTimeSearchData().then(data => {
-      this.props.onLoadReaTimeSearchData(data);
+    dataService.getRealTimeUserData().then(data => {
+      this.props.onLoadReaTimeUserData(data);
     });
   };
 
@@ -34,7 +34,7 @@ class RealTimeSearchChartContent extends React.Component {
         height: '200'
       },
       title: {
-        text: '实时搜索数',
+        text: '实时用户数',
         style: {
           color: '#cc6633',
         }
@@ -82,7 +82,7 @@ class RealTimeSearchChartContent extends React.Component {
 
       series: [{
         type: 'area',
-        name: '实时搜索数',
+        name: '实时用户数',
         data: this.props.data
       }]
     };
@@ -99,19 +99,19 @@ class RealTimeSearchChartContent extends React.Component {
 }
 
 const mapStateToProps = (state) => {
-  return state.realTimeSearchChartData;
+  return {data: state.realTimeUserChartData};
 };
 
 const mapDispatchToProps = (dispatch) => (
   {
     dispatch: dispatch,
-    onLoadReaTimeSearchData: (data) => (
-      dispatch(loadReaTimeSearchDataAction(data))
+    onLoadReaTimeUserData: (data) => (
+      dispatch(loadReaTimeUserDataAction(data))
     ),
   }
 );
 
-export const RealTimeSearchChart = connect(
+export const RealTimeUserChart = connect(
   mapStateToProps,
   mapDispatchToProps
-)(RealTimeSearchChartContent);
+)(RealTimeUserChartContent);
