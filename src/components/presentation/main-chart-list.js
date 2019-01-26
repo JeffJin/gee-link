@@ -1,6 +1,6 @@
 import React from "react";
-import IndividualSearchChart from "../presentation/individual-search-chart";
-import RealTimeUserChart from "../presentation/realtime-user-chart";
+import {RealTimeUserChart} from "../charts/real-time-user-chart";
+import {IndividualSearchChart} from "../charts/individual-search-chart";
 import {RealTimeSearchChart} from "../charts/real-time-search-chart";
 
 export const MainChartList = (props) => {
@@ -35,7 +35,7 @@ export const MainChartList = (props) => {
       <IndividualSearchChart/>
       <RealTimeUserChart/>
     </div>
-  </div>  ;
+  </div>;
 };
 
 
