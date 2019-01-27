@@ -99,7 +99,7 @@ class RealTimeSearchChartContent extends React.Component {
 }
 
 const mapStateToProps = (state) => {
-  return {data: state.realTimeSearchChartData};
+  return {data: state.chartData.realTimeSearchChartData};
 };
 
 const mapDispatchToProps = (dispatch) => (

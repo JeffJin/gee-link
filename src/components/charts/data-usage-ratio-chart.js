@@ -22,7 +22,7 @@ class DataUsageRatioContent extends React.Component {
   }
 
   getChartData = () => {
-    dataService.getDataUsageTrend().then(data => {
+    dataService.getDataUsageRatio().then(data => {
       this.props.onLoadData(data);
     });
   };
@@ -72,7 +72,7 @@ class DataUsageRatioContent extends React.Component {
 }
 
 const mapStateToProps = (state) => {
-  return {data: state.dataUsageRatio};
+  return {data: state.chartData.dataUsageRatio};
 };
 
 const mapDispatchToProps = (dispatch) => (

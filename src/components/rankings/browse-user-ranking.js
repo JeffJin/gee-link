@@ -28,13 +28,19 @@ class BrowseUserRankingContent extends React.Component {
 
   render() {
     return (
-      <Ranking data={this.props.data}/>
+      <Ranking title={'浏览用户 TOP 10'} data={this.props}/>
     );
   }
 }
 
 const mapStateToProps = (state) => {
-  return {data: state.browseUserRanking};
+
+  return {
+    rankingItems: state.ranking.browseUserRanking,
+    headers: ['排名', 'UID', '搜索次数'],
+    title: '搜索用户 TOP 10',
+    route: '/missed-keyword'
+  };
 };
 
 const mapDispatchToProps = (dispatch) => (

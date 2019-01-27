@@ -1,11 +1,11 @@
 import connect from "react-redux/es/connect/connect";
 import React from "react";
-import {StatsAction} from "../../store/reducers/actions";
+import {DataAction} from "../../store/reducers/actions";
 import {dataService} from "../../services/data.service";
 
 function loadDataAction(data) {
   return {
-    type: StatsAction.LOAD_AVERAGE_SEARCH,
+    type: DataAction.LOAD_DATA_USAGE_RECORD,
     payload: data,
   };
 }

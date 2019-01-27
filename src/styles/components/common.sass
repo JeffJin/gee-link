@@ -22,3 +22,44 @@
   flex-direction: column
 .flex-horizontal
   flex-direction: row
+
+
+.map
+  flex: 1
+  height: 652px
+  border: 2px solid #1194e9
+  border-radius: 3px
+
+  .chart-header
+    .chart-header-block
+      display: inline-block
+      width: 12px
+      height: 20px
+      margin: 12px
+      background: linear-gradient(180deg, rgba(51, 102, 204, 1) 0%, rgba(51, 102, 204, 1) 0%, rgba(0, 153, 153, 1) 100%, rgba(0, 153, 153, 1) 100%)
+
+    .title
+      display: inline-block
+      vertical-align: top
+      padding-top: 13px
+
+    .help
+      display: inline-block
+
+      .icon
+
+      .content
+        display: none
+
+      &.active
+        border: 1px solid grey
+        position: absolute
+        z-index: 100
+        top: 250px
+        left: 260px
+        background: white
+        .content
+          display: block
+          width: 220px
+          height: 200px
+

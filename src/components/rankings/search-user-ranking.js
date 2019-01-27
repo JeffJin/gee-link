@@ -28,13 +28,18 @@ class SearchUserRankingContent extends React.Component {
 
   render() {
     return (
-      <Ranking data={this.props.data}/>
+      <Ranking title={'搜索用户 TOP 10'} data={this.props}/>
     );
   }
 }
 
 const mapStateToProps = (state) => {
-  return {data: state.searchUserRanking};
+  return {
+    rankingItems: state.ranking.searchUserRanking,
+    headers: ['排名', '用户ID', '搜索次数'],
+    title: '搜索用户 TOP 10',
+    route: '/user'
+  };
 };
 
 const mapDispatchToProps = (dispatch) => (

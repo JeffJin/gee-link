@@ -28,13 +28,18 @@ class SearchedKeywordsRankingContent extends React.Component {
 
   render() {
     return (
-      <Ranking data={this.props.data}/>
+      <Ranking title={'关键词搜索 TOP 10'} data={this.props}/>
     );
   }
 }
 
 const mapStateToProps = (state) => {
-  return {data: state.searchedKeywordsRanking};
+    return {
+      rankingItems: state.ranking.searchedKeywordsRanking,
+      headers: ['排名', '关键词', '被搜索次数'],
+      title: '关键词搜索 TOP 10',
+      route: '/keyword'
+    };
 };
 
 const mapDispatchToProps = (dispatch) => (

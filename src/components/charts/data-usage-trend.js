@@ -105,7 +105,7 @@ class DataUsageTrendContent extends React.Component {
 }
 
 const mapStateToProps = (state) => {
-  return {data: state.userSearchTrend};
+  return {data: state.chartData.dataUsageTrend};
 };
 
 const mapDispatchToProps = (dispatch) => (

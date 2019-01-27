@@ -73,7 +73,7 @@ class DataSearchRatioContent extends React.Component {
 }
 
 const mapStateToProps = (state) => {
-  return {data: state.dataSearchRatio};
+  return {data: state.chartData.dataSearchRatio};
 };
 
 const mapDispatchToProps = (dispatch) => (

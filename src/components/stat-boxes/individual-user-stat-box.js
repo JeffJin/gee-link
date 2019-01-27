@@ -22,19 +22,19 @@ class IndividualUserStatContent extends React.Component {
 
   getData = () => {
     dataService.getIndividualUserStats().then(data => {
-      this.props.onLoadStats(data);
+      this.props.onLoadStats(data.value);
     });
   };
 
   render() {
     return (
-      <StateBox data={this.props.data}/>
+      <StateBox data={this.props}/>
     );
   }
 }
 
 const mapStateToProps = (state) => {
-  return {data: state.individualUserStats};
+  return {value: state.stats.individualUserStats, label: '独立用户数'};
 };
 
 const mapDispatchToProps = (dispatch) => (

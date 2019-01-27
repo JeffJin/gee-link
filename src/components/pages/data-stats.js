@@ -1,6 +1,4 @@
 import React from 'react';
-import {dataService} from "../../services/data.service";
-import connect from "react-redux/es/connect/connect";
 import {DataUsageRecord} from "../stat-boxes/data-usage-record";
 import {DataSearchRatio} from "../charts/data-search-ratio-chart";
 import {DataUsageRatio} from "../charts/data-usage-ratio-chart";
@@ -22,11 +20,9 @@ class DataStats extends React.Component {
       <div className="data-stats">
         <div className={'data-stats-row-1'}>
           <div className={'data-stats-col-1'}>
-            <div className={'stat-box-container flex-box flex-vertical'}>
-              <TotalDataStat />
-              <TodayBrowsedStat />
-              <IndividuallyBrowsedStat />
-            </div>
+            <TotalDataStat />
+            <TodayBrowsedStat />
+            <IndividuallyBrowsedStat />
           </div>
           <div className={'data-stats-col-2'}>
             <DataUsageRatio />

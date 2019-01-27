@@ -22,7 +22,7 @@ class KeywordSearchTrendContent extends React.Component {
   }
 
   getChartData = () => {
-    dataService.getIndividualSearchData().then(data => {
+    dataService.getKeywordSearchTrend().then(data => {
       this.props.onLoadData(data);
     });
   };
@@ -104,7 +104,7 @@ class KeywordSearchTrendContent extends React.Component {
 }
 
 const mapStateToProps = (state) => {
-  return {data: state.keywordSearchTrend};
+  return {data: state.chartData.keywordSearchTrend};
 };
 
 const mapDispatchToProps = (dispatch) => (

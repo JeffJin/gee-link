@@ -22,19 +22,19 @@ class IndividualSearchStatContent extends React.Component {
 
   getData = () => {
     dataService.getIndividualSearchStats().then(data => {
-      this.props.onLoadStats(data);
+      this.props.onLoadStats(data.value);
     });
   };
 
   render() {
     return (
-      <StateBox data={this.props.data}/>
+      <StateBox data={this.props}/>
     );
   }
 }
 
 const mapStateToProps = (state) => {
-  return {data: state.individualSearchStats};
+  return {value: state.stats.individualSearchStats, label: '独立搜索数'};
 };
 
 const mapDispatchToProps = (dispatch) => (

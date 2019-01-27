@@ -22,26 +22,26 @@ class TotalSearchStatContent extends React.Component {
 
   getData = () => {
     dataService.getTotalSearchStats().then(data => {
-      this.props.onLoadStats(data);
+      this.props.onLoadStats(data.value);
     });
   };
 
   render() {
     return (
-      <StateBox data={this.props.data}/>
+      <StateBox data={this.props}/>
     );
   }
 }
 
 const mapStateToProps = (state) => {
-  return {data: state.totalSearchStats};
+  return {value: state.stats.totalSearchStats, label: '总搜索数'};
 };
 
 const mapDispatchToProps = (dispatch) => (
   {
     dispatch: dispatch,
     onLoadStats: (data) => (
-      dispatch(loadStatsAction(data.value))
+      dispatch(loadStatsAction(data))
     ),
   }
 );

@@ -28,13 +28,18 @@ class MissedKeywordsRankingContent extends React.Component {
 
   render() {
     return (
-      <Ranking data={this.props.data}/>
+      <Ranking title={'搜索未命中排行榜 TOP 10'} data={this.props}/>
     );
   }
 }
 
 const mapStateToProps = (state) => {
-  return {data: state.missedKeywordRanking};
+  return {
+    rankingItems: state.ranking.missedKeywordRanking,
+    headers: ['排名', '关键词', '搜索次数'],
+    title: '搜索未命中排行榜 TOP 10',
+    route: '/missed-keyword'
+  };
 };
 
 const mapDispatchToProps = (dispatch) => (

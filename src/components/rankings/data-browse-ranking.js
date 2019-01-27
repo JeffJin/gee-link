@@ -28,13 +28,18 @@ class DataBrowseRankingContent extends React.Component {
 
   render() {
     return (
-      <Ranking data={this.props.data}/>
+      <Ranking title={'数据浏览 TOP 10'} data={this.props}/>
     );
   }
 }
 
 const mapStateToProps = (state) => {
-  return {data: state.dataBrowseRanking};
+  return {
+    rankingItems: state.ranking.dataBrowseRanking,
+    headers: ['排名', '数据内容', '被使用次数'],
+    title: '使用排行榜 TOP 10',
+    route: '/user'
+  };
 };
 
 const mapDispatchToProps = (dispatch) => (

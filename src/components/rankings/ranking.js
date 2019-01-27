@@ -7,7 +7,7 @@ function Ranking(props) {
     <div className="ranking">
       <div className={'ranking-header'}>
         <div className={'ranking-header-block'}></div>
-        <div className={'title'}>{props.data.title}</div>
+        <div className={'title'}>{props.title}</div>
         <div className={'tooltip'}></div>
         <div className={'select'}>
           <select>

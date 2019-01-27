@@ -22,19 +22,19 @@ class TodaySearchStatContent extends React.Component {
 
   getData = () => {
     dataService.getTodaySearchStats().then(data => {
-      this.props.onLoadStats(data);
+      this.props.onLoadStats(data.value);
     });
   };
 
   render() {
     return (
-      <StateBox data={this.props.data}/>
+      <StateBox data={this.props}/>
     );
   }
 }
 
 const mapStateToProps = (state) => {
-  return {data: state.todaySearchStats};
+  return {value: state.stats.todaySearchStats, label: '今日被浏览次数'};
 };
 
 const mapDispatchToProps = (dispatch) => (

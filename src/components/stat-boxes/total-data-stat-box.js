@@ -28,13 +28,13 @@ class TotalDataStatContent extends React.Component {
 
   render() {
     return (
-      <StateBox data={this.props.data}/>
+      <StateBox data={this.props}/>
     );
   }
 }
 
 const mapStateToProps = (state) => {
-  return {data: state.totalDataStats};
+  return {value: state.stats.totalDataStats, label: '总数据条数'};
 };
 
 const mapDispatchToProps = (dispatch) => (

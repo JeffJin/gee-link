@@ -22,19 +22,19 @@ class IndividuallyBrowsedStatContent extends React.Component {
 
   getData = () => {
     dataService.getIndividuallyBrowsedStats().then(data => {
-      this.props.onLoadStats(data);
+      this.props.onLoadStats(data.value);
     });
   };
 
   render() {
     return (
-      <StateBox data={this.props.data}/>
+      <StateBox data={this.props}/>
     );
   }
 }
 
 const mapStateToProps = (state) => {
-  return {data: state.individuallyBrowsedStats};
+  return {value: state.stats.individuallyBrowsedStats, label: '独立浏览次数'};
 };
 
 const mapDispatchToProps = (dispatch) => (

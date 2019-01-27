@@ -99,7 +99,7 @@ class RealTimeUserChartContent extends React.Component {
 }
 
 const mapStateToProps = (state) => {
-  return {data: state.realTimeUserChartData};
+  return {data: state.chartData.realTimeUserChartData};
 };
 
 const mapDispatchToProps = (dispatch) => (

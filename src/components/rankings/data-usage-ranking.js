@@ -28,13 +28,18 @@ class DataUsageRankingContent extends React.Component {
 
   render() {
     return (
-      <Ranking data={this.props.data}/>
+      <Ranking title={'使用排行榜 TOP 10'} data={this.props}/>
     );
   }
 }
 
 const mapStateToProps = (state) => {
-  return {data: state.dataUsageRanking};
+  return {
+    rankingItems: state.ranking.dataUsageRanking,
+    headers: ['排名', '标题内容', '被浏览次数'],
+    title: '数据浏览 TOP 10',
+    route: '/data'
+  };
 };
 
 const mapDispatchToProps = (dispatch) => (

@@ -104,7 +104,7 @@ class SearchConversionContent extends React.Component {
 }
 
 const mapStateToProps = (state) => {
-  return {data: state.keywordSearchTrend};
+  return {data: state.chartData.keywordSearchConversion};
 };
 
 const mapDispatchToProps = (dispatch) => (

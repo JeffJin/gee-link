@@ -22,19 +22,19 @@ class TodayBrowsedStatContent extends React.Component {
 
   getData = () => {
     dataService.getTodayBrowsedStats().then(data => {
-      this.props.onLoadStats(data);
+      this.props.onLoadStats(data.value);
     });
   };
 
   render() {
     return (
-      <StateBox data={this.props.data}/>
+      <StateBox data={this.props}/>
     );
   }
 }
 
 const mapStateToProps = (state) => {
-  return {data: state.todayBrowsedStats};
+  return {value: state.stats.todayBrowsedStats, label: '今日被浏览次数'};
 };
 
 const mapDispatchToProps = (dispatch) => (

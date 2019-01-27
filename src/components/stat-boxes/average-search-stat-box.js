@@ -22,19 +22,19 @@ class AverageSearchStatContent extends React.Component {
 
   getData = () => {
     dataService.getAverageSearchStats().then(data => {
-      this.props.onLoadStats(data);
+      this.props.onLoadStats(data.value);
     });
   };
 
   render() {
     return (
-      <StateBox data={this.props.data}/>
+      <StateBox data={this.props}/>
     );
   }
 }
 
 const mapStateToProps = (state) => {
-  return {data: state.averageSearchStats};
+  return {value: state.stats.averageSearchStats, label: '人均搜索数'};
 };
 
 const mapDispatchToProps = (dispatch) => (

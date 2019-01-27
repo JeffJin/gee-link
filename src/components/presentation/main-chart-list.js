@@ -14,7 +14,7 @@ export const MainChartList = (props) => {
 
   };
 
-  return <div className={'map'}>
+  return <div className={'chart'}>
     <div className={'chart-header'}>
       <div className={'chart-header-block'}></div>
       <div className={'title'}>实时搜索</div>
