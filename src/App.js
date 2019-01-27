@@ -19,6 +19,7 @@ import {store} from "./store/store";
 import KeywordDetails from "./components/containers/keyword-details";
 import UserDetails from "./components/containers/user-details";
 import DataDetails from "./components/containers/data-search-details";
+import {SearchResult} from "./components/pages/search-result";
 
 class App extends React.Component {
   state = {
@@ -74,6 +75,26 @@ class App extends React.Component {
                 return (
                   <DataDetails
                     dataId={match.params.id}
+                  />
+                );
+              }}
+            />
+            <Route
+              path={'/search/:keyword'}
+              render={({ match }) => {
+                return (
+                  <SearchResult
+                    keyword={match.params.keyword}
+                  />
+                );
+              }}
+            />
+            <Route
+              path={'/search/'}
+              render={() => {
+                return (
+                  <SearchResult
+                    keyword={''}
                   />
                 );
               }}

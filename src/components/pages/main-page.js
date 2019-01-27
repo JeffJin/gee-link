@@ -35,7 +35,7 @@ class MainPage extends React.Component {
         </div>
         <div className={'ranking-container'}>
           <SearchedKeywordsRanking/>
-          <DataBrowseRanking/>
+          <DataBrowseRanking />
           <SearchUserRanking />
         </div>;
       </div>

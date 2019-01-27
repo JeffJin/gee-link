@@ -1,5 +1,5 @@
 import {combineReducers, createStore} from "redux";
-import {searchReducer, searchResultsReducer} from "./reducers/search-reducers";
+import {searchKeywordReducer} from "./reducers/search-reducers";
 import {statsReducer} from "./reducers/stats-reducers";
 import {dataUsageRecordReducer} from "./reducers/data-reducers";
 import {chartDataReducer } from "./reducers/chart-reducers";
@@ -22,8 +22,7 @@ const reducer = combineReducers({
   dataUsageRecord: dataUsageRecordReducer,
 
   // search reducers
-  search: searchReducer,
-  searchResults: searchResultsReducer,
+  searchKeyword: searchKeywordReducer
 });
 
 const initialStates = {
@@ -58,7 +57,8 @@ const initialStates = {
     dataSearchRatio: [],
     dataUsageTrend: [],
   },
-  dataUsageRecord: {}
+  dataUsageRecord: {},
+  searchKeyword: ''
 };
 
 export const store = createStore(reducer, initialStates);
