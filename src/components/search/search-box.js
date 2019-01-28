@@ -4,11 +4,27 @@ import InputBase from '@material-ui/core/InputBase';
 import IconButton from '@material-ui/core/IconButton';
 import SearchIcon from '@material-ui/icons/Search';
 import {NavLink} from "react-router-dom";
+import queryString from "query-string";
 
 export class SearchBox extends React.Component {
   state = {
     keyword: ''
   };
+
+  componentDidMount() {
+    const keyword = this.getKeyword();
+    this.setState({keyword});
+  }
+
+  getKeyword() {
+    if (this.props.location && this.props.location.search) {
+      const query = queryString.parse(this.props.location.search);
+      return query['keyword'];
+    }
+    return '';
+  }
+
+
 
   handleChange = event => {
     this.setState({
