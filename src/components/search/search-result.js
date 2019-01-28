@@ -133,7 +133,7 @@ export class SearchResult extends React.Component {
         {
           progress
         }
-        <SearchBox/>
+        <SearchBox {...this.props}/>
         <div className="search-result">
           {
             summary

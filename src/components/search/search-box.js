@@ -17,7 +17,7 @@ export class SearchBox extends React.Component {
   };
 
   handleSearch = event => {
-    console.log('search for ', this.state.keyword);
+    console.log('search for ', this.state.keyword, this.props);
   };
 
   render(){
@@ -28,7 +28,13 @@ export class SearchBox extends React.Component {
           placeholder="Search For"
           value={this.state.keyword}
           onChange={this.handleChange}
-          onSubmit={this.handleChange}
+          onKeyPress={(ev) => {
+            if (ev.key === 'Enter') {
+              // Do code here
+              ev.preventDefault();
+              this.props.history.push('/search?keyword=' + this.state.keyword);
+            }
+          }}
         />
         <IconButton
           className={'icon-button'}

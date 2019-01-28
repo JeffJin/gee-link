@@ -78,7 +78,7 @@ class App extends React.Component {
                 );
               }}
             />
-            <Route path={'/search'} component={SearchResult}/>
+            <Route path={'/search'}  render={(props) => <SearchResult {...props}/>} />
             <Route exact path='/' render={() => (
               <Redirect
                 to='/main'
