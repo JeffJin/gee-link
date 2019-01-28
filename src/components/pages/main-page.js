@@ -8,6 +8,8 @@ import {TotalSearchStat} from "../stat-boxes/total-search-stat-box";
 import {SearchUserRanking} from "../rankings/search-user-ranking";
 import {DataBrowseRanking} from "../rankings/data-browse-ranking";
 import {SearchedKeywordsRanking} from "../rankings/searched-keywords-ranking";
+import LinearProgress from "@material-ui/core/es/LinearProgress";
+import {SearchBox} from "../search/search-box";
 
 class MainPage extends React.Component {
   state = {
@@ -22,23 +24,34 @@ class MainPage extends React.Component {
   }
 
   render() {
+    let progress = '';
+    if(this.state.isInProgress) {
+      progress = <LinearProgress/>
+    }
+
     return (
-      <div className="main-page">
-        <div className={'stat-box-container flex-box'}>
-          <TotalDataStat/>
-          <TotalSearchStat/>
-          <IndividualSearchStat/>
-          <IndividualUserStat/>
+      <div>
+        {
+          progress
+        }
+        <SearchBox/>
+        <div className="main-page">
+          <div className={'stat-box-container flex-box'}>
+            <TotalDataStat/>
+            <TotalSearchStat/>
+            <IndividualSearchStat/>
+            <IndividualUserStat/>
+          </div>
+          <div className={'chart-container'}>
+            <MainChartList />
+            <UserLocationMap />
+          </div>
+          <div className={'ranking-container'}>
+            <SearchedKeywordsRanking/>
+            <DataBrowseRanking />
+            <SearchUserRanking />
+          </div>;
         </div>
-        <div className={'chart-container'}>
-          <MainChartList />
-          <UserLocationMap />
-        </div>
-        <div className={'ranking-container'}>
-          <SearchedKeywordsRanking/>
-          <DataBrowseRanking />
-          <SearchUserRanking />
-        </div>;
       </div>
     );
   }

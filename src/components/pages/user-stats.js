@@ -40,6 +40,7 @@ class UserStats extends React.Component {
             <BrowseUserRanking />
           </div>
         </div>
+
       </div>
     );
   }

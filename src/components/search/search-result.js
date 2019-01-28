@@ -5,6 +5,7 @@ import queryString from 'query-string'
 import renderHTML from 'react-render-html';
 import {SearchBox} from "./search-box";
 import LinearProgress from "@material-ui/core/es/LinearProgress";
+import Pagination from "material-ui-flat-pagination";
 
 function ResultItem(props) {
 
@@ -19,6 +20,7 @@ function ResultItem(props) {
         <div className={'flex-1'}>作者： {props.data.author}</div>
         <div className={'flex-1'}>时间： {props.data.year}</div>
         <div className={'flex-1'}>score： {props.data.score}</div>
+        <div className={'flex-3'}></div>
       </div>
       <div className={'row summary'}>
         <p>{renderHTML(props.data.summary)}</p>
@@ -29,8 +31,10 @@ function ResultItem(props) {
 export class SearchResult extends React.Component {
   state = {
     result: {},
-    keyword: '',
-    isInProgress: false
+    isInProgress: false,
+    pageIndex: 0,
+    pageSize: 20,
+    offset: 0
   };
 
   constructor(props) {
@@ -38,21 +42,24 @@ export class SearchResult extends React.Component {
   }
 
   componentDidMount() {
-    this.getSearchResult();
+    const keyword = this.getKeyword();
+    this.getSearchResult(keyword, this.state.pageIndex, this.state.pageSize);
   }
 
-  componentWillReceiveProps(nextProps) {
-
-    if (nextProps.location !== this.props.location) {
-      this.getSearchResult();
-    }
-  }
   getKeyword() {
     if (this.props.location && this.props.location.search) {
       const query = queryString.parse(this.props.location.search);
       return query['keyword'];
     }
     return '';
+  }
+
+  componentWillReceiveProps(nextProps, nextContext) {
+    if (nextProps.location !== this.props.location) {
+      const query = queryString.parse(nextProps.location.search);
+      const keyword = query['keyword'];
+      this.getSearchResult(keyword, this.state.pageIndex, this.state.pageSize);
+    }
   }
 
   formatResults(results) {
@@ -79,16 +86,16 @@ export class SearchResult extends React.Component {
     return result.replace(/<(?:.|\n)*?>/gm, '');
   }
 
-  getSearchResult = () => {
-    const keyword = this.getKeyword();
+  getSearchResult = (keyword, pageIndex, pageSize) => {
+    console.log('getSearchResult', pageIndex, pageSize);
     this.setState({
-      result: {},
-      keyword: keyword,
-      isInProgress: true
+      isInProgress: true,
+      pageIndex: pageIndex,
+      pageSize: pageSize,
+      offset: pageSize * pageIndex
     });
-    searchService.search(keyword).then((result) => {
+    searchService.search(keyword, pageIndex, pageSize).then((result) => {
       this.setState({
-        keyword: keyword,
         result: {
           items: this.formatResults(result.resultList),
           metadata: result.facetResult,
@@ -96,8 +103,14 @@ export class SearchResult extends React.Component {
         },
         isInProgress: false
       });
+      this.forceUpdate();
     });
   };
+
+  handlePageSelection(offset) {
+    const pageIndex = parseInt(offset / this.state.pageSize);
+    this.getSearchResult(this.getKeyword(), pageIndex, this.state.pageSize);
+  }
 
   render(){
     let results = [];
@@ -112,7 +125,7 @@ export class SearchResult extends React.Component {
     }
     let progress = '';
     if(this.state.isInProgress) {
-      progress = <LinearProgress/>
+      progress = <LinearProgress className={'progress'}/>
     }
 
     return (
@@ -129,6 +142,12 @@ export class SearchResult extends React.Component {
             results
           }
         </div>
+        <Pagination
+          limit={20}
+          offset={this.state.offset}
+          total={this.state.result.total}
+          onClick={(e, offset) => this.handlePageSelection(offset)}
+        />
       </div>
     );
   }

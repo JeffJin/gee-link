@@ -10,6 +10,7 @@
     "highcharts-react-official": "^2.0.0",
     "history": "^4.7.2",
     "isomorphic-fetch": "^2.2.1",
+    "material-ui-flat-pagination": "^3.2.0",
     "node-sass": "^4.11.0",
     "prop-types": "^15.6.2",
     "query-string": "^6.2.0",

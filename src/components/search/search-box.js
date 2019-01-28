@@ -10,9 +10,9 @@ export class SearchBox extends React.Component {
     keyword: ''
   };
 
-  handleChange = name => event => {
+  handleChange = event => {
     this.setState({
-      [name]: event.target.value,
+      keyword: event.target.value,
     });
   };
 
@@ -27,8 +27,8 @@ export class SearchBox extends React.Component {
           className={'input'}
           placeholder="Search For"
           value={this.state.keyword}
-          onChange={this.handleChange('keyword')}
-          onSubmit={this.handleChange('keyword')}
+          onChange={this.handleChange}
+          onSubmit={this.handleChange}
         />
         <IconButton
           className={'icon-button'}
