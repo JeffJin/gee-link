@@ -18,7 +18,6 @@ export class SearchBox extends React.Component {
 
   handleSearch = event => {
     console.log('search for ', this.state.keyword);
-
   };
 
   render(){
@@ -29,13 +28,14 @@ export class SearchBox extends React.Component {
           placeholder="Search For"
           value={this.state.keyword}
           onChange={this.handleChange('keyword')}
+          onSubmit={this.handleChange('keyword')}
         />
         <IconButton
           className={'icon-button'}
           aria-label="Search"
           onClick={this.handleSearch}
         >
-          <NavLink to={`/search/${this.state.keyword}`} className='nav'>
+          <NavLink to={`/search?keyword=${this.state.keyword}`} className='nav'>
             <SearchIcon />
           </NavLink>
         </IconButton>

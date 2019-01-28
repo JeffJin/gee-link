@@ -1,11 +1,13 @@
 import {combineReducers, createStore} from "redux";
-import {searchKeywordReducer} from "./reducers/search-reducers";
+import {searchKeywordReducer, searchResultReducer} from "./reducers/search-reducers";
 import {statsReducer} from "./reducers/stats-reducers";
 import {dataUsageRecordReducer} from "./reducers/data-reducers";
 import {chartDataReducer } from "./reducers/chart-reducers";
 import {rankingDataReducer} from "./reducers/ranking-reducers";
+import {progressReducer} from "./reducers/progress-reducer";
 
 const reducer = combineReducers({
+  isInProgress: progressReducer,
 
   // chart data reducers
   chartData: chartDataReducer,
@@ -22,10 +24,11 @@ const reducer = combineReducers({
   dataUsageRecord: dataUsageRecordReducer,
 
   // search reducers
-  searchKeyword: searchKeywordReducer
+  searchResult: searchResultReducer
 });
 
 const initialStates = {
+  isInProgress: false,
   // stats
   ranking: {
     searchedKeywordsRanking: [],
@@ -58,7 +61,11 @@ const initialStates = {
     dataUsageTrend: [],
   },
   dataUsageRecord: {},
-  searchKeyword: ''
+  searchResult: {
+    resultList: [],
+    facetResult: {},
+    numFound: 0
+  }
 };
 
 export const store = createStore(reducer, initialStates);

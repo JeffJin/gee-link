@@ -10,11 +10,12 @@ import {DataBrowseRanking} from "../rankings/data-browse-ranking";
 import {SearchedKeywordsRanking} from "../rankings/searched-keywords-ranking";
 
 class MainPage extends React.Component {
+  state = {
+    isInProgress: false
+  };
+
   constructor(props) {
     super(props);
-    this.state = {
-      isChartHelpShown: false
-    };
   }
 
   componentDidMount() {

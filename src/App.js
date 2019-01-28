@@ -1,15 +1,12 @@
 import React from 'react';
 import {Redirect, Switch, Route} from "react-router-dom";
 import {Provider} from "react-redux";
-import PropTypes from 'prop-types';
 import classNames from 'classnames';
-import {withStyles} from '@material-ui/core/styles';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import Drawer from '@material-ui/core/Drawer';
 import List from '@material-ui/core/List';
 import Divider from '@material-ui/core/Divider';
 import {leftMenuItems} from './components/presentation/menu-items';
-import {SearchBox} from './components/presentation/search-box';
 import './styles/App.sass';
 import MainPage from "./components/pages/main-page";
 import UserStats from "./components/pages/user-stats";
@@ -19,11 +16,14 @@ import {store} from "./store/store";
 import KeywordDetails from "./components/containers/keyword-details";
 import UserDetails from "./components/containers/user-details";
 import DataDetails from "./components/containers/data-search-details";
-import {SearchResult} from "./components/pages/search-result";
+import {SearchBox} from './components/search/search-box';
+import {SearchResult} from "./components/search/search-result";
+import LinearProgress from "@material-ui/core/es/LinearProgress/LinearProgress";
 
 class App extends React.Component {
   state = {
     open: true,
+
   };
 
   render() {
@@ -43,7 +43,6 @@ class App extends React.Component {
           <List>{leftMenuItems}</List>
         </Drawer>
         <main className={'content'}>
-          <SearchBox />
           <Switch>
             <Route exact path='/keyword' component={KeywordStats}/>
             <Route exact path='/data' component={DataStats}/>
@@ -79,26 +78,7 @@ class App extends React.Component {
                 );
               }}
             />
-            <Route
-              path={'/search/:keyword'}
-              render={({ match }) => {
-                return (
-                  <SearchResult
-                    keyword={match.params.keyword}
-                  />
-                );
-              }}
-            />
-            <Route
-              path={'/search/'}
-              render={() => {
-                return (
-                  <SearchResult
-                    keyword={''}
-                  />
-                );
-              }}
-            />
+            <Route path={'/search'} component={SearchResult}/>
             <Route exact path='/' render={() => (
               <Redirect
                 to='/main'
@@ -111,6 +91,24 @@ class App extends React.Component {
     );
   }
 }
+
+//
+// const mapStateToProps = (state) => {
+//   return {
+//     isInProgress: state.isInProgress
+//   };
+// };
+//
+// const mapDispatchToProps = (dispatch) => (
+//   {
+//     dispatch: dispatch
+//   }
+// );
+//
+// export const App = connect(
+//   mapStateToProps,
+//   mapDispatchToProps
+// )(AppContent);
 
 const WrappedApp = () => (
   <Provider store={store}>
