@@ -34,7 +34,7 @@ class MainPage extends React.Component {
         {
           progress
         }
-        <SearchBox/>
+        <SearchBox {...this.props}/>
         <div className="main-page">
           <div className={'stat-box-container flex-box'}>
             <TotalDataStat/>

@@ -44,10 +44,10 @@ class App extends React.Component {
         </Drawer>
         <main className={'content'}>
           <Switch>
-            <Route exact path='/keyword' component={KeywordStats}/>
-            <Route exact path='/data' component={DataStats}/>
-            <Route exact path='/user' component={UserStats}/>
-            <Route path='/main' component={MainPage}/>
+            <Route exact path='/keyword' render={(props) => <KeywordStats {...props}/>}/>
+            <Route exact path='/data' render={(props) => <DataStats {...props}/>}/>
+            <Route exact path='/user' render={(props) => <UserStats {...props}/>}/>
+            <Route path='/main' render={(props) => <MainPage {...props}/>}/>
             <Route
               path={'/keyword/:id'}
               render={({ match }) => {

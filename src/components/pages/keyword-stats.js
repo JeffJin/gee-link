@@ -26,7 +26,7 @@ class KeywordStats extends React.Component {
         {
           progress
         }
-        <SearchBox/>
+        <SearchBox {...this.props}/>
         <div className="keyword-stats flex-box">
           <div className={'left flex-5'}>
             <div className={'stat-box-container flex-box'}>
