@@ -9,17 +9,17 @@ class RankingService extends BaseService {
   //数据浏览
   getDataBrowseRanking() {
     const result = [
-      {id: 1, rank: 1, desc: '那些年的自然语言', value: 544},
-      {id: 2, rank: 2, desc: '人工智能的前世与今生', value: 444},
-      {id: 3, rank: 3, desc: '自然语言能否识别文字', value: 322},
-      {id: 4, rank: 4, desc: '算法的运用', value: 311},
-      {id: 5, rank: 5, desc: '机器学习的模型建立', value: 222},
-      {id: 6, rank: 6, desc: 'python入门教程', value: 221},
-      {id: 7, rank: 7, desc: '云计算的概念', value: 190},
-      {id: 8, rank: 8, desc: '服务器的维护', value: 188},
-      {id: 9, rank: 9, desc: '服务器', value: 111},
-      {id: 10, rank: 10, desc: 'AI和BI有什么区别', value: 22},
-      {id: 11, rank: 11, desc: 'BI', value: 11}
+      {keyword: '那些年的自然语言', count:  544},
+      {keyword: '人工智能的前世与今生', count:  444},
+      {keyword: '自然语言能否识别文字', count:  322},
+      {keyword: '算法的运用', count:  311},
+      {keyword: '机器学习的模型建立', count:  222},
+      {keyword: 'python入门教程', count:  221},
+      {keyword: '云计算的概念', count:  190},
+      {keyword: '服务器的维护', count:  188},
+      {keyword: '服务器', count:  111},
+      {keyword: 'AI和BI有什么区别', count:  22},
+      {keyword: 'BI', count:  11}
     ];
     return new Promise(function(resolve, reject) {
       setTimeout(function () {
