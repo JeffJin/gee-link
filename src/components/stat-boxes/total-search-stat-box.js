@@ -22,7 +22,7 @@ class TotalSearchStatContent extends React.Component {
 
   getData = () => {
     dataService.getTotalSearchStats().then(data => {
-      this.props.onLoadStats(data.value);
+      this.props.onLoadStats(data.count);
     });
   };
 

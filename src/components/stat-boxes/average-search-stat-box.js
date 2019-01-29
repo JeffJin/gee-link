@@ -21,8 +21,11 @@ class AverageSearchStatContent extends React.Component {
   }
 
   getData = () => {
-    dataService.getAverageSearchStats().then(data => {
-      this.props.onLoadStats(data.value);
+    const p1 = dataService.getTotalSearchStats(),
+      p2 =dataService.getIndividualUserStats();
+    Promise.all([p1, p2]).then(([total, users]) => {
+      console.log(total, users);
+      this.props.onLoadStats(Math.ceil(total.count / users.count));
     });
   };
 

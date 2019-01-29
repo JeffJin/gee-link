@@ -20,6 +20,12 @@ class BaseService {
     }
   }
 
+  header = {
+    'accept': 'application/json',
+    'Content-Type': 'application/json',
+    't': '8D839EB9C4765ACEEB1EDCBAF8D44031',
+    'Authorization': 'Bearer dd17f76e-c564-4b46-bf89-81294743d023'
+  };
   isLoggedIn() {
     return !!this.token;
   }
@@ -68,12 +74,17 @@ class BaseService {
       const error = new Error(`HTTP Error ${response.statusText}`);
       error.status = response.statusText;
       error.response = response;
-      console.log(error);
+      console.error(error);
       throw error;
     }
   }
 
   parseJson(response) {
+    try{
+
+    } catch {
+
+    }
     return response.json();
   }
 }

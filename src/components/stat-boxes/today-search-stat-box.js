@@ -22,7 +22,7 @@ class TodaySearchStatContent extends React.Component {
 
   getData = () => {
     dataService.getTodaySearchStats().then(data => {
-      this.props.onLoadStats(data.value);
+      this.props.onLoadStats(data.count);
     });
   };
 

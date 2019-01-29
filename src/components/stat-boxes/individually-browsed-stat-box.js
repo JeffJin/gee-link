@@ -22,7 +22,7 @@ class IndividuallyBrowsedStatContent extends React.Component {
 
   getData = () => {
     dataService.getIndividuallyBrowsedStats().then(data => {
-      this.props.onLoadStats(data.value);
+      this.props.onLoadStats(data.count);
     });
   };
 

@@ -22,7 +22,7 @@ class TodayBrowsedStatContent extends React.Component {
 
   getData = () => {
     dataService.getTodayBrowsedStats().then(data => {
-      this.props.onLoadStats(data.value);
+      this.props.onLoadStats(data.count);
     });
   };
 

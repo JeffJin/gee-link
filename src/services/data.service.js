@@ -8,92 +8,91 @@ class DataService extends BaseService {
   }
 
   getTotalSearchStats() {
-    const result = {
-      value: 479,
-    };
-    return new Promise(function(resolve, reject) {
-      setTimeout(function () {
-        resolve(result);
-      }, 500);
-    });
+    const url = 'http://47.93.226.51:9012/v1/api/ume/statistics/count/search';
+    return fetch(url, {
+      method: 'get',
+      headers: this.header,
+    }).then(this.checkStatus)
+      .then(this.parseJson)
+      .then((result) => {
+        return result;
+      });
   }
 
   getTotalDataStats() {
-    const result = {
-      value: 111126,
-    };
-    return new Promise(function(resolve, reject) {
-      setTimeout(function () {
-        resolve(result);
-      }, 500);
-    });
+    const url = 'http://47.93.226.51:9012/v1/api/ume/statistics/count/doc';
+    return fetch(url, {
+      method: 'get',
+      headers: this.header,
+    }).then(this.checkStatus)
+      .then(this.parseJson)
+      .then((result) => {
+        return result;
+      });
   }
 
   getTodaySearchStats() {
-    const result = {
-      value: 479,
-    };
-    return new Promise(function(resolve, reject) {
-      setTimeout(function () {
-        resolve(result);
-      }, 500);
-    });
+    const url = 'http://47.93.226.51:9012/v1/api/ume/statistics/count/search';
+    return fetch(url, {
+      method: 'get',
+      headers: this.header,
+    }).then(this.checkStatus)
+      .then(this.parseJson)
+      .then((result) => {
+        return result;
+      });
   }
 
   getTodayBrowsedStats() {
-    const result = {
-      value: 111126,
-    };
-    return new Promise(function(resolve, reject) {
-      setTimeout(function () {
-        resolve(result);
-      }, 500);
-    });
+    const startTime = '20190127-000001';
+    const endTime = '20190127-235959';
+    const url = `http://47.93.226.51:9012/v1/api/ume/statistics/count/read?startTime=${startTime}&endTime=${endTime}`;
+    return fetch(url, {
+      method: 'get',
+      headers: this.header,
+    }).then(this.checkStatus)
+      .then(this.parseJson)
+      .then((result) => {
+        return result;
+      });
   }
 
   getIndividualSearchStats() {
-    const result = {
-      value: 267,
-    };
-    return new Promise(function(resolve, reject) {
-      setTimeout(function () {
-        resolve(result);
-      }, 500);
-    });
+    const url = 'http://47.93.226.51:9012/v1/api/ume/statistics/count/search/unique';
+    return fetch(url, {
+      method: 'get',
+      headers: this.header,
+    }).then(this.checkStatus)
+      .then(this.parseJson)
+      .then((result) => {
+        return result;
+      });
   }
 
   getIndividualUserStats() {
-    const result = {
-      value: 432,
-    };
-    return new Promise(function(resolve, reject) {
-      setTimeout(function () {
-        resolve(result);
-      }, 500);
-    });
+    const url = 'http://47.93.226.51:9012/v1/api/ume/statistics/count/ip';
+    return fetch(url, {
+      method: 'get',
+      headers: this.header,
+    }).then(this.checkStatus)
+      .then(this.parseJson)
+      .then((result) => {
+        return result;
+      });
   }
 
   getIndividuallyBrowsedStats() {
-    const result = {
-      value: 4232,
-    };
-    return new Promise(function(resolve, reject) {
-      setTimeout(function () {
-        resolve(result);
-      }, 500);
-    });
+    const url = 'http://47.93.226.51:9012/v1/api/ume/statistics/count/read/unique';
+    return fetch(url, {
+      method: 'get',
+      headers: this.header,
+    }).then(this.checkStatus)
+      .then(this.parseJson)
+      .then((result) => {
+        return result;
+      });
   }
 
-  getAverageSearchStats() {
-    const result = {
-      value: 422,
-    };
-    return new Promise(function(resolve, reject) {
-      setTimeout(function () {
-        resolve(result);
-      }, 500);
-    });
-  }
   //实时搜索数
   async getRealTimeSearchData() {
     const url = 'https://cdn.rawgit.com/highcharts/highcharts/' +
@@ -115,9 +114,7 @@ class DataService extends BaseService {
       '057b672172ccc6c08fe7dbb27fc17ebca3f5b770/samples/data/usdeur.json';
     return await fetch(url, {
       method: 'get',
-      headers: {
-        accept: 'application/json',
-      },
+      headers: this.header,
     }).then(this.checkStatus)
       .then(this.parseJson)
       .then((result) => {
@@ -130,9 +127,7 @@ class DataService extends BaseService {
       '057b672172ccc6c08fe7dbb27fc17ebca3f5b770/samples/data/usdeur.json';
     return await fetch(url, {
       method: 'get',
-      headers: {
-        accept: 'application/json',
-      },
+      headers: this.header,
     }).then(this.checkStatus)
       .then(this.parseJson)
       .then((result) => {
