@@ -35,7 +35,14 @@ class SearchedKeywordsRankingContent extends React.Component {
 
 const mapStateToProps = (state) => {
     return {
-      rankingItems: state.ranking.searchedKeywordsRanking,
+      rankingItems: state.ranking.searchedKeywordsRanking.map((r, i) => {
+        return {
+          id: r.keyword,
+          rank: i + 1,
+          desc: r.keyword,
+          value: r.count
+        }
+      }),
       headers: ['排名', '关键词', '被搜索次数'],
       title: '关键词搜索 TOP 10',
       route: '/keyword'

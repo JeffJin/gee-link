@@ -90,24 +90,15 @@ class RankingService extends BaseService {
   }
   //热搜排行榜， 关键词搜索
   getSearchedKeywordsRanking() {
-    const data = [
-      {id: 1, rank: 1, desc: '大数据', value: 123},
-      {id: 2, rank: 2, desc: '人工智能', value: 111},
-      {id: 3, rank: 3, desc: '自然语言', value: 110},
-      {id: 4, rank: 4, desc: '算法', value: 99},
-      {id: 5, rank: 5, desc: '机器学习', value: 88},
-      {id: 6, rank: 6, desc: 'Angular', value: 77},
-      {id: 7, rank: 7, desc: '云计算', value: 76},
-      {id: 8, rank: 8, desc: 'Python', value: 44},
-      {id: 9, rank: 9, desc: '服务器', value: 33},
-      {id: 10, rank: 10, desc: 'AI', value: 32},
-    ];
-
-    return new Promise(function(resolve, reject) {
-      setTimeout(function () {
-        resolve(data);
-      }, 500);
-    });
+    const url = 'http://47.93.226.51:9012/v1/api/ume/statistics/list/keywords?top=10';
+    return fetch(url, {
+      method: 'get',
+      headers: this.header,
+    }).then(this.checkStatus)
+      .then(this.parseJson)
+      .then((result) => {
+        return result;
+      });
   }
   //热搜未命中排行榜
   getMissedKeywordsRanking() {
