@@ -35,7 +35,14 @@ class DataUsageRankingContent extends React.Component {
 
 const mapStateToProps = (state) => {
   return {
-    rankingItems: state.ranking.dataUsageRanking,
+    rankingItems: state.ranking.dataUsageRanking.map((r, i) => {
+      return {
+        id: r.keyword,
+        rank: i + 1,
+        desc: r.keyword,
+        value: r.count
+      }
+    }),
     headers: ['排名', '标题内容', '被浏览次数'],
     title: '数据浏览 TOP 10',
     route: '/data'

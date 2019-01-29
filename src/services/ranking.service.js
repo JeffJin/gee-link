@@ -29,39 +29,31 @@ class RankingService extends BaseService {
   }
   //搜索用户
   getSearchUserRanking() {
-    const result = [
-      {id: 1, rank: 1, desc: '223345746745', value: 999},
-      {id: 2, rank: 2, desc: '666645746745', value: 777},
-      {id: 3, rank: 3, desc: '845645746745', value: 666},
-      {id: 4, rank: 4, desc: '905645746745', value: 664},
-      {id: 5, rank: 5, desc: '115645746745', value: 444},
-      {id: 6, rank: 6, desc: '225645746745', value: 77},
-      {id: 7, rank: 7, desc: '335645746745', value: 76},
-      {id: 8, rank: 8, desc: '345645746745', value: 44},
-      {id: 9, rank: 9, desc: '665645746745', value: 33},
-      {id: 10, rank: 10, desc: '885645746745', value: 32},
-      {id: 11, rank: 11, desc: '9945645746745I', value: 22}
-    ];
-    return new Promise(function(resolve, reject) {
-      setTimeout(function () {
-        resolve(result);
-      }, 500);
-    });
+    // /list/topcountbyip
+    const url = 'http://47.93.226.51:9012/v1/api/ume/statistics/list/topcountbyip?top=10';
+    return fetch(url, {
+      method: 'get',
+      headers: this.header,
+    }).then(this.checkStatus)
+      .then(this.parseJson)
+      .then((result) => {
+        return result;
+      });
   }
   //浏览用户
   getBrowseUserRanking() {
     const result = [
-      {id: 1, rank: 1, desc: '223345746745', value: 999},
-      {id: 2, rank: 2, desc: '666645746745', value: 777},
-      {id: 3, rank: 3, desc: '845645746745', value: 666},
-      {id: 4, rank: 4, desc: '905645746745', value: 664},
-      {id: 5, rank: 5, desc: '115645746745', value: 444},
-      {id: 6, rank: 6, desc: '225645746745', value: 77},
-      {id: 7, rank: 7, desc: '335645746745', value: 76},
-      {id: 8, rank: 8, desc: '345645746745', value: 44},
-      {id: 9, rank: 9, desc: '665645746745', value: 33},
-      {id: 10, rank: 10, desc: '885645746745', value: 32},
-      {id: 11, rank: 11, desc: '9945645746745I', value: 22}
+      {keyword: '223345746745', count: 999},
+      {keyword: '666645746745', count: 777},
+      {keyword: '845645746745', count: 666},
+      {keyword: '905645746745', count: 664},
+      {keyword: '115645746745', count: 444},
+      {keyword: '225645746745', count: 77},
+      {keyword: '335645746745', count: 76},
+      {keyword: '345645746745', count: 44},
+      {keyword: '665645746745', count: 33},
+      {keyword: '885645746745', count: 32},
+      {keyword: '994564574674', count: 22}
     ];
     return new Promise(function(resolve, reject) {
       setTimeout(function () {

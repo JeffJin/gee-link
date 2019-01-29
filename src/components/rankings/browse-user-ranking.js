@@ -36,7 +36,14 @@ class BrowseUserRankingContent extends React.Component {
 const mapStateToProps = (state) => {
 
   return {
-    rankingItems: state.ranking.browseUserRanking,
+    rankingItems: state.ranking.browseUserRanking.map((r, i) => {
+      return {
+        id: r.keyword,
+        rank: i + 1,
+        desc: r.keyword,
+        value: r.count
+      }
+    }),
     headers: ['排名', 'UID', '搜索次数'],
     title: '搜索用户 TOP 10',
     route: '/missed-keyword'

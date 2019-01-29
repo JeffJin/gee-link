@@ -35,7 +35,14 @@ class MissedKeywordsRankingContent extends React.Component {
 
 const mapStateToProps = (state) => {
   return {
-    rankingItems: state.ranking.missedKeywordRanking,
+    rankingItems: state.ranking.missedKeywordRanking.map((r, i) => {
+      return {
+        id: r.keyword,
+        rank: i + 1,
+        desc: r.keyword,
+        value: r.count
+      }
+    }),
     headers: ['排名', '关键词', '搜索次数'],
     title: '搜索未命中排行榜 TOP 10',
     route: '/missed-keyword'
