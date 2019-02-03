@@ -222,7 +222,8 @@ class DataService extends BaseService {
     });
   }
   //关键词搜索趋势图
-  getKeywordSearchTrend() {
+  getKeywordSearchTrend(keyword) {
+    console.log('getKeywordSearchTrend', keyword);
     const data = [
       ['周一', 2222],
       ['周二', 2028],
@@ -264,6 +265,19 @@ class DataService extends BaseService {
     return new Promise(function(resolve, reject) {
       setTimeout(function () {
         resolve({times, data});
+      }, 500);
+    });
+  }
+
+  getKeywordStats(keyword) {
+    return new Promise(function(resolve, reject) {
+      setTimeout(function () {
+        resolve({
+          searched: 321,
+          searchedUsers: 432,
+          targeted: 543,
+          average: 431
+        });
       }, 500);
     });
   }

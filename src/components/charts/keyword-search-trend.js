@@ -18,11 +18,11 @@ class KeywordSearchTrendContent extends React.Component {
   }
 
   componentDidMount() {
-    this.getChartData();
+    this.getChartData(this.props.keyword);
   }
 
-  getChartData = () => {
-    dataService.getKeywordSearchTrend().then(data => {
+  getChartData = (keyword) => {
+    dataService.getKeywordSearchTrend(keyword).then(data => {
       this.props.onLoadData(data);
     });
   };

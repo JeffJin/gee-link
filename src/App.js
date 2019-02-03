@@ -50,10 +50,11 @@ class App extends React.Component {
             <Route path='/main' render={(props) => <MainPage {...props}/>}/>
             <Route
               path={'/keyword/:id'}
-              render={({ match }) => {
+              render={(props) => {
                 return (
                   <KeywordDetails
-                    keywordId={match.params.id}
+                    {...props}
+                    keywordId={props.match.params.id}
                   />
                 );
               }}

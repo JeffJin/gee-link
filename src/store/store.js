@@ -37,6 +37,9 @@ const initialStates = {
     searchUserRanking: [],
     browseUserRanking: [],
     missedKeywordRanking: [],
+    categorizedRanking: [],
+    relatedDataRanking: [],
+    recentSearchUserRanking: [],
   },
   stats: {
     totalDataStats: 0,
