@@ -62,6 +62,7 @@ const initialStates = {
     dataUsageRatio: [],
     dataSearchRatio: [],
     dataUsageTrend: [],
+    userActivityHistory: [],
   },
   dataUsageRecord: {},
   searchResult: {

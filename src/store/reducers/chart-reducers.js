@@ -62,6 +62,12 @@ export function chartDataReducer(state = {}, action) {
         dataUsageTrend: action.payload,
       };
     }
+    case CommonAction.LOAD_USER_ACTIVITY_HISTORY: {
+      return {
+        ...state,
+        userActivityHistory: action.payload,
+      };
+    }
     default: {
       return state;
     }

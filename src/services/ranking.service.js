@@ -85,7 +85,7 @@ class RankingService extends BaseService {
   }
 
   //热搜排行榜， 关键词搜索
-  getSearchedKeywordsRanking() {
+  getSearchedKeywordsRanking(uid = '') {
     const url = 'http://47.93.226.51:9012/v1/api/ume/statistics/list/keywords?top=10';
     return fetch(url, {
       method: 'get',

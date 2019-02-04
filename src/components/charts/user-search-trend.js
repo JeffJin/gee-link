@@ -19,11 +19,11 @@ class UserSearchTrendContent extends React.Component {
   }
 
   componentDidMount() {
-    this.getChartData();
+    this.getChartData(this.props.uid);
   }
 
-  getChartData = () => {
-    dataService.getUserSearchTrend().then(data => {
+  getChartData = (uid) => {
+    dataService.getUserSearchTrend(uid).then(data => {
       this.props.onLoadData(data);
     });
   };
