@@ -29,18 +29,20 @@ class CategorizedRankingContent extends React.Component {
 
   render() {
     return (
-      <div className="flex-vertical">
-        <div className={'header'}>
-          所属分类排行
+      <div className={'categorized-ranking'}>
+        <div className="flex-vertical">
+          <div className={'header'}>
+            所属分类排行
+          </div>
+          {
+            this.props.data.map((r, index) => (
+              <div key={index} className={'flex-1 row'}>
+                <span className={'key'}>{r.keyword}</span>
+                <span className={'value'}>{r.count}</span>
+              </div>
+            ))
+          }
         </div>
-        {
-          this.props.data.map((r, index) => (
-            <div key={index} className={'flex-1 row'}>
-              <span>{r.keyword}</span>
-              <span>{r.count}</span>
-            </div>
-          ))
-        }
       </div>
     );
   }

@@ -14,10 +14,10 @@ class KeywordDetails extends React.Component {
   state = {
     isInProgress: false,
     stats: {
-      searched: {label: '被搜索次数', value: 0},
-      searchedUsers: {label: '搜索用户数', value: 0},
-      targeted: {label: '命中记录数', value: 0},
-      average: {label: '人均搜索次数', value: 0}
+      searched: {value: 0},
+      searchedUsers: {value: 0},
+      targeted: {value: 0},
+      average: {value: 0}
     }
   };
 
@@ -28,10 +28,10 @@ class KeywordDetails extends React.Component {
   componentDidMount() {
     dataService.getKeywordStats(this.props.keywordId).then((result) => {
       const newStats = Object.assign(this.state.stats,
-        {searched: {value: result.searched}},
-        {searchedUsers: {value: result.searched}},
-        {targeted: {value: result.targeted}},
-        {average: {value: result.average}},
+        {searched: {label: '被搜索次数', value: result.searched}},
+        {searchedUsers: {label: '搜索用户数', value: result.searched}},
+        {targeted: {label: '命中记录数', value: result.targeted}},
+        {average: {label: '人均搜索次数', value: result.average}},
       );
       this.setState({stats: newStats})
     })
@@ -53,7 +53,7 @@ class KeywordDetails extends React.Component {
         </div>
         <div className={'row flex-box'}>
           <div className={'flex-2'}>
-            <div className={'row stat-box-container'}>
+            <div className={'flex-box stat-box-container'}>
               <StateBox data={this.state.stats.searched}/>
               <StateBox data={this.state.stats.searchedUsers}/>
               <StateBox data={this.state.stats.targeted}/>
@@ -68,10 +68,16 @@ class KeywordDetails extends React.Component {
           </div>
         </div>
         <div className={'row'}>
-          <div className={'ranking-container'}>
-            <DataBrowseRanking/>
-            <RelatedDataRanking/>
-            <RecentSearchUserRanking/>
+          <div className={'ranking-container flex-box'}>
+            <div className={'flex-1'}>
+              <DataBrowseRanking/>
+            </div>
+            <div className={'flex-1'}>
+              <RelatedDataRanking/>
+            </div>
+            <div className={'flex-1'}>
+              <RecentSearchUserRanking/>
+            </div>
           </div>
           ;
         </div>
