@@ -41,7 +41,7 @@ class UserLocationMapContent extends React.Component {
   };
 
   getChartData = () => {
-    userService.getUserLocationMapData().then(data => {
+    userService.getUserLocationMapData('20190101-010101', '20190201-010101', 'day').then(data => {
       this.props.onLoadUserLocationMapData(data);
     });
   };

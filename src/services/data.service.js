@@ -42,7 +42,7 @@ class DataService extends BaseService {
         return result;
       });
   }
-
+  // 今日被浏览次数
   getTodayBrowsedStats() {
     const startTime = '20190127-000001';
     const endTime = '20190127-235959';
@@ -56,7 +56,7 @@ class DataService extends BaseService {
         return result;
       });
   }
-
+  // 独立搜索数
   getIndividualSearchStats() {
     const url = 'http://47.93.226.51:9012/v1/api/ume/statistics/count/search/unique';
     return fetch(url, {
@@ -68,7 +68,7 @@ class DataService extends BaseService {
         return result;
       });
   }
-
+  // 人均搜索数
   getIndividualUserStats() {
     const url = 'http://47.93.226.51:9012/v1/api/ume/statistics/count/ip';
     return fetch(url, {
@@ -95,8 +95,7 @@ class DataService extends BaseService {
 
   //实时搜索数
   async getRealTimeSearchData() {
-    const url = 'https://cdn.rawgit.com/highcharts/highcharts/' +
-      '057b672172ccc6c08fe7dbb27fc17ebca3f5b770/samples/data/usdeur.json';
+    const url = 'http://47.93.226.51:9012/v1/api/ume/statistics/count/timely/search';
     return await fetch(url, {
       method: 'get',
       headers: {
@@ -110,8 +109,7 @@ class DataService extends BaseService {
   }
   //独立搜索数
   async getIndividualSearchData() {
-    const url = 'https://cdn.rawgit.com/highcharts/highcharts/' +
-      '057b672172ccc6c08fe7dbb27fc17ebca3f5b770/samples/data/usdeur.json';
+    const url = 'http://47.93.226.51:9012/v1/api/ume/statistics/count/timely/usearch';
     return await fetch(url, {
       method: 'get',
       headers: this.header,
@@ -123,8 +121,7 @@ class DataService extends BaseService {
   }
   //实时用户数
   async getRealTimeUserData() {
-    const url = 'https://cdn.rawgit.com/highcharts/highcharts/' +
-      '057b672172ccc6c08fe7dbb27fc17ebca3f5b770/samples/data/usdeur.json';
+    const url = 'http://47.93.226.51:9012/v1/api/ume/statistics/count/timely/ip';
     return await fetch(url, {
       method: 'get',
       headers: this.header,

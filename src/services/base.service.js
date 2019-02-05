@@ -75,17 +75,16 @@ class BaseService {
       error.status = response.statusText;
       error.response = response;
       console.error(error);
-      throw error;
+      // throw error;
     }
   }
 
   parseJson(response) {
     try{
-
+      return response.json();
     } catch {
-
+      return null;
     }
-    return response.json();
   }
 }
 
