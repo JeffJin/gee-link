@@ -22,7 +22,7 @@ class RealTimeSearchChartContent extends React.Component {
   }
 
   getChartData = () => {
-    dataService.getRealTimeSearchData().then(data => {
+    dataService.getRealTimeSearchData(this.props.startTime, this.props.endTime, this.props.unitType).then(data => {
       this.props.onLoadReaTimeSearchData(data);
     });
   };
@@ -99,7 +99,12 @@ class RealTimeSearchChartContent extends React.Component {
 }
 
 const mapStateToProps = (state) => {
-  return {data: state.chartData.realTimeSearchChartData};
+  return {
+    data: state.chartData.realTimeSearchChartData,
+    startTime: state.chartConfig.realTimeSearchConfig &&  state.chartConfig.realTimeSearchConfig.startTime,
+    endTime: state.chartConfig.realTimeSearchConfig &&  state.chartConfig.realTimeSearchConfig.endTime,
+    unitType: state.chartConfig.realTimeSearchConfig &&  state.chartConfig.realTimeSearchConfig.unitType,
+  };
 };
 
 const mapDispatchToProps = (dispatch) => (

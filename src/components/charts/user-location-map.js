@@ -6,6 +6,7 @@ import HighchartsReact from 'highcharts-react-official';
 import {chinaMap} from "../../data/china-map";
 import {CommonAction} from "../../store/reducers/actions";
 import {userService} from "../../services/user.service";
+import moment from "moment";
 
 HC_map(Highcharts);
 
@@ -41,7 +42,9 @@ class UserLocationMapContent extends React.Component {
   };
 
   getChartData = () => {
-    userService.getUserLocationMapData('20190101-010101', '20190201-010101', 'day').then(data => {
+    const start = moment().subtract(1, 'years').format('YYYYMMDD') + '-000001';
+    const endTime = moment().format('YYYYMMDD') + '-235959';
+    userService.getUserLocationMapData(start, endTime, 'day').then(data => {
       this.props.onLoadUserLocationMapData(data);
     });
   };
@@ -102,7 +105,10 @@ class UserLocationMapContent extends React.Component {
 
 const mapStateToProps = (state) => {
   return {
-    data: state.chartData.userLocationMapData
+    data: state.chartData.userLocationMapData,
+    startTime: state.chartConfig.userLocationMapConfig && state.chartConfig.userLocationMapConfig.startTime,
+    endTime: state.chartConfig.userLocationMapConfig && state.chartConfig.userLocationMapConfig.endTime,
+    unitType: state.chartConfig.userLocationMapConfig && state.chartConfig.userLocationMapConfig.unitType,
   };
 };
 

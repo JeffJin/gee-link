@@ -1,8 +1,8 @@
 import {combineReducers, createStore} from "redux";
-import {searchKeywordReducer, searchResultReducer} from "./reducers/search-reducers";
+import {searchResultReducer} from "./reducers/search-reducers";
 import {statsReducer} from "./reducers/stats-reducers";
-import {dataUsageRecordReducer} from "./reducers/data-reducers";
-import {chartDataReducer } from "./reducers/chart-reducers";
+import {dataUsageRecordReducer } from "./reducers/data-reducers";
+import {chartConfigReducer, chartDataReducer} from "./reducers/chart-reducers";
 import {rankingDataReducer} from "./reducers/ranking-reducers";
 import {progressReducer} from "./reducers/progress-reducer";
 
@@ -24,7 +24,9 @@ const reducer = combineReducers({
   dataUsageRecord: dataUsageRecordReducer,
 
   // search reducers
-  searchResult: searchResultReducer
+  searchResult: searchResultReducer,
+
+  chartConfig: chartConfigReducer
 });
 
 const initialStates = {
@@ -69,7 +71,8 @@ const initialStates = {
     resultList: [],
     facetResult: {},
     numFound: 0
-  }
+  },
+  chartConfig: {}
 };
 
 export const store = createStore(reducer, initialStates);

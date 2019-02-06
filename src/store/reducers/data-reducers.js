@@ -1,4 +1,4 @@
-import {DataAction} from "./actions";
+import {CommonAction, DataAction} from "./actions";
 
 export function dataUsageRecordReducer(state = [], action) {
   switch (action.type) {

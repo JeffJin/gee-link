@@ -42,17 +42,16 @@ class UserService extends BaseService {
     //   ['cn-jl', 30],
     //   ['cn-nx', 31]
     // ];
-    // return new Promise(function(resolve, reject) {
-    //   setTimeout(function () {
-    //     resolve(data);
-    //   }, 500);
-    // });
 
-    const url = `http://47.93.226.51:9012/v1/api/ume/statistics/count/timely/ip?collection=6671A13AB54710D932C8F2E51FFE8CC3_huluarticle
-&startTime=${startTime}&endTime=${endTime}&unitType=${unitType}`;
+    const url = `http://47.93.226.51:9012/v1/api/ume/statistics/count/timely/ipinfo`;
     return await fetch(url, {
       method: 'get',
-      headers: this.header,
+      headers: {
+        ...this.header,
+        startTime,
+        endTime,
+        unitType
+      },
     }).then(this.checkStatus)
       .then(this.parseJson)
       .then((result) => {

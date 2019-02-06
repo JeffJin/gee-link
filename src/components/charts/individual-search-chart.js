@@ -22,7 +22,7 @@ class IndividualSearchChartContent extends React.Component {
   }
 
   getChartData = () => {
-    dataService.getIndividualSearchData().then(data => {
+    dataService.getIndividualSearchData(this.props.startTime, this.props.endTime, this.props.unitType).then(data => {
       this.props.onLoadIndividualSearchData(data);
     });
   };
@@ -99,7 +99,12 @@ class IndividualSearchChartContent extends React.Component {
 }
 
 const mapStateToProps = (state) => {
-  return {data: state.chartData.individualSearchChartData};
+  return {
+    data: state.chartData.individualSearchChartData,
+    startTime: state.chartConfig.individualSearchConfig && state.chartConfig.individualSearchConfig.startTime,
+    endTime: state.chartConfig.individualSearchConfig && state.chartConfig.individualSearchConfig.endTime,
+    unitType: state.chartConfig.individualSearchConfig && state.chartConfig.individualSearchConfig.unitType,
+  };
 };
 
 const mapDispatchToProps = (dispatch) => (

@@ -1,4 +1,4 @@
-import {SearchAction} from "./actions";
+import {CommonAction, SearchAction} from "./actions";
 
 export function searchKeywordReducer(state = null, action) {
 
@@ -15,7 +15,6 @@ export function searchKeywordReducer(state = null, action) {
     }
   }
 }
-
 
 export function searchResultReducer(state = null, action) {
 

@@ -1,5 +1,6 @@
 import fetch from 'isomorphic-fetch';
 import BaseService from "./base.service";
+import moment from "moment";
 
 class DataService extends BaseService {
 
@@ -44,12 +45,16 @@ class DataService extends BaseService {
   }
   // 今日被浏览次数
   getTodayBrowsedStats() {
-    const startTime = '20190127-000001';
-    const endTime = '20190127-235959';
-    const url = `http://47.93.226.51:9012/v1/api/ume/statistics/count/read?startTime=${startTime}&endTime=${endTime}`;
+    const endTime = moment().format('YYYYMMDD') + '-235959';
+    const startTime = moment().subtract(1, 'days').format('YYYYMMDD') + '-000001';
+    const url = `http://47.93.226.51:9012/v1/api/ume/statistics/count/read`;
     return fetch(url, {
       method: 'get',
-      headers: this.header,
+      headers: {
+        ...this.header,
+        startTime,
+        endTime
+      }
     }).then(this.checkStatus)
       .then(this.parseJson)
       .then((result) => {
@@ -94,12 +99,15 @@ class DataService extends BaseService {
   }
 
   //实时搜索数
-  async getRealTimeSearchData() {
+  async getRealTimeSearchData(startTime, endTime, unitType) {
     const url = 'http://47.93.226.51:9012/v1/api/ume/statistics/count/timely/search';
     return await fetch(url, {
       method: 'get',
       headers: {
-        accept: 'application/json',
+        ...this.header,
+        startTime,
+        endTime,
+        unitType
       },
     }).then(this.checkStatus)
       .then(this.parseJson)
@@ -108,11 +116,16 @@ class DataService extends BaseService {
       });
   }
   //独立搜索数
-  async getIndividualSearchData() {
+  async getIndividualSearchData(startTime, endTime, unitType) {
     const url = 'http://47.93.226.51:9012/v1/api/ume/statistics/count/timely/usearch';
     return await fetch(url, {
       method: 'get',
-      headers: this.header,
+      headers: {
+        ...this.header,
+        startTime,
+        endTime,
+        unitType
+      }
     }).then(this.checkStatus)
       .then(this.parseJson)
       .then((result) => {
@@ -120,11 +133,16 @@ class DataService extends BaseService {
       });
   }
   //实时用户数
-  async getRealTimeUserData() {
-    const url = 'http://47.93.226.51:9012/v1/api/ume/statistics/count/timely/ip';
+  async getRealTimeUserData(startTime, endTime, unitType) {
+    const url = 'http://47.93.226.51:9012/v1/api/ume/statistics/count/timely/ipcount';
     return await fetch(url, {
       method: 'get',
-      headers: this.header,
+      headers: {
+        ...this.header,
+        startTime,
+        endTime,
+        unitType
+      }
     }).then(this.checkStatus)
       .then(this.parseJson)
       .then((result) => {

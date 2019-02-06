@@ -22,7 +22,7 @@ class RealTimeUserChartContent extends React.Component {
   }
 
   getChartData = () => {
-    dataService.getRealTimeUserData().then(data => {
+    dataService.getRealTimeUserData(this.props.startTime, this.props.endTime, this.props.unitType).then(data => {
       this.props.onLoadReaTimeUserData(data);
     });
   };
@@ -86,7 +86,6 @@ class RealTimeUserChartContent extends React.Component {
         data: this.props.data
       }]
     };
-
     return (
       <div className="real-time-search-chart">
         <HighchartsReact
@@ -99,7 +98,12 @@ class RealTimeUserChartContent extends React.Component {
 }
 
 const mapStateToProps = (state) => {
-  return {data: state.chartData.realTimeUserChartData};
+  return {
+    data: state.chartData.realTimeUserChartData,
+    startTime: state.chartConfig.realTimeUserConfig && state.chartConfig.realTimeUserConfig.startTime,
+    endTime: state.chartConfig.realTimeUserConfig && state.chartConfig.realTimeUserConfig.endTime,
+    unitType: state.chartConfig.realTimeUserConfig && state.chartConfig.realTimeUserConfig.unitType,
+  };
 };
 
 const mapDispatchToProps = (dispatch) => (
