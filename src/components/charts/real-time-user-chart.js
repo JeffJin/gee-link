@@ -2,15 +2,6 @@ import connect from "react-redux/es/connect/connect";
 import React from "react";
 import Highcharts from "highcharts";
 import HighchartsReact from "highcharts-react-official";
-import {dataService} from "../../services/data.service";
-import {CommonAction} from "../../store/reducers/actions";
-
-function loadReaTimeUserDataAction(data) {
-  return {
-    type: CommonAction.LOAD_REAL_TIME_USER_DATA,
-    payload: data,
-  };
-}
 
 class RealTimeUserChartContent extends React.Component {
   constructor(props) {
@@ -18,14 +9,7 @@ class RealTimeUserChartContent extends React.Component {
   }
 
   componentDidMount() {
-    this.getChartData();
   }
-
-  getChartData = () => {
-    dataService.getRealTimeUserData(this.props.startTime, this.props.endTime, this.props.unitType).then(data => {
-      this.props.onLoadReaTimeUserData(data);
-    });
-  };
 
   render() {
     const chartConfig = {
@@ -108,10 +92,7 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => (
   {
-    dispatch: dispatch,
-    onLoadReaTimeUserData: (data) => (
-      dispatch(loadReaTimeUserDataAction(data))
-    ),
+    dispatch: dispatch
   }
 );
 

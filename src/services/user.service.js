@@ -43,21 +43,26 @@ class UserService extends BaseService {
     //   ['cn-nx', 31]
     // ];
 
-    const url = `http://47.93.226.51:9012/v1/api/ume/statistics/count/timely/ipinfo`;
+    const url = `http://47.93.226.51:9012/v1/api/ume/statistics/list/ipinfo?`;
     return await fetch(url, {
       method: 'get',
       headers: {
         ...this.header,
-        startTime,
-        endTime,
-        unitType
+        // startTime,
+        // endTime,
+        // unitType,
+        countrycode: 'cn'
       },
     }).then(this.checkStatus)
       .then(this.parseJson)
-      .then((result) => {
-        return result;
-      });
+      .then(this.parseMapData);
   }
+
+  parseMapData = (result) => {
+    return result.map(r => {
+      return [`${r.country}-${r.province}`, r.count];
+    });
+  };
 }
 
 export const userService = new UserService();

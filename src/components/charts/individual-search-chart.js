@@ -5,27 +5,13 @@ import HighchartsReact from "highcharts-react-official";
 import {dataService} from "../../services/data.service";
 import {CommonAction} from "../../store/reducers/actions";
 
-function loadIndividualSearchDataAction(data) {
-  return {
-    type: CommonAction.LOAD_INDIVIDUAL_SEARCH_DATA,
-    payload: data,
-  };
-}
-
 class IndividualSearchChartContent extends React.Component {
   constructor(props) {
     super(props);
   }
 
   componentDidMount() {
-    this.getChartData();
   }
-
-  getChartData = () => {
-    dataService.getIndividualSearchData(this.props.startTime, this.props.endTime, this.props.unitType).then(data => {
-      this.props.onLoadIndividualSearchData(data);
-    });
-  };
 
   render() {
     const chartConfig = {
@@ -109,10 +95,7 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => (
   {
-    dispatch: dispatch,
-    onLoadIndividualSearchData: (data) => (
-      dispatch(loadIndividualSearchDataAction(data))
-    ),
+    dispatch: dispatch
   }
 );
 

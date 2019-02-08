@@ -6,6 +6,7 @@ import LinearProgress from "@material-ui/core/es/LinearProgress";
 import moment from "moment";
 import {CommonAction} from "../../store/reducers/actions";
 import connect from "react-redux/es/connect/connect";
+import {dataService} from "../../services/data.service";
 
 export class MainChartListContent extends React.Component {
   state = {
@@ -22,7 +23,7 @@ export class MainChartListContent extends React.Component {
   }
 
   componentDidMount() {
-    this.updateConfigs();
+    this.updateCharts();
   }
 
   showChartHelp() {
@@ -59,22 +60,29 @@ export class MainChartListContent extends React.Component {
         return '';
     }
 
-    this.updateConfigs();
+    this.updateCharts();
   };
 
-  updateConfigs() {
-    const payload = {startTime: this.state.startTime, endTime: this.state.endTime, unitType: this.state.unitType};
-    this.props.dispatch({
-      type: CommonAction.LOAD_REAL_TIME_SEARCH_CONFIG,
-      payload: payload
+  updateCharts() {
+    dataService.getRealTimeSearchData(this.state.startTime, this.state.endTime, this.state.unitType).then(data => {
+      this.props.dispatch({
+        type: CommonAction.LOAD_REAL_TIME_SEARCH_DATA,
+        payload: data
+      });
     });
-    this.props.dispatch({
-      type: CommonAction.LOAD_INDIVIDUAL_SEARCH_CONFIG,
-      payload: payload
+
+    dataService.getIndividualSearchData(this.state.startTime, this.state.endTime, this.state.unitType).then(data => {
+      this.props.dispatch({
+        type: CommonAction.LOAD_INDIVIDUAL_SEARCH_DATA,
+        payload: data
+      });
     });
-    this.props.dispatch({
-      type: CommonAction.LOAD_REAL_TIME_USER_CONFIG,
-      payload: payload
+
+    dataService.getRealTimeUserData(this.state.startTime, this.state.endTime, this.state.unitType).then(data => {
+      this.props.dispatch({
+        type: CommonAction.LOAD_REAL_TIME_USER_DATA,
+        payload: data
+      });
     });
   }
 

@@ -98,10 +98,18 @@ class DataService extends BaseService {
       });
   }
 
+  parseTimeChartData(results) {
+    return results.map( result => {
+      const dateStr = `${result.year}-${result.month}-${result.day} ${result.hour}`;
+      const datTime = moment(dateStr, 'YYYY-MM-DD HH').format('x');
+      return [datTime, result.count];
+    });
+  }
+  // https://cdn.rawgit.com/highcharts/highcharts/057b672172ccc6c08fe7dbb27fc17ebca3f5b770/samples/data/usdeur.json
   //实时搜索数
-  async getRealTimeSearchData(startTime, endTime, unitType) {
+  getRealTimeSearchData(startTime, endTime, unitType) {
     const url = 'http://47.93.226.51:9012/v1/api/ume/statistics/count/timely/search';
-    return await fetch(url, {
+    return fetch(url, {
       method: 'get',
       headers: {
         ...this.header,
@@ -111,9 +119,7 @@ class DataService extends BaseService {
       },
     }).then(this.checkStatus)
       .then(this.parseJson)
-      .then((result) => {
-        return result;
-      });
+      .then(this.parseTimeChartData);
   }
   //独立搜索数
   async getIndividualSearchData(startTime, endTime, unitType) {
@@ -128,9 +134,7 @@ class DataService extends BaseService {
       }
     }).then(this.checkStatus)
       .then(this.parseJson)
-      .then((result) => {
-        return result;
-      });
+      .then(this.parseTimeChartData);
   }
   //实时用户数
   async getRealTimeUserData(startTime, endTime, unitType) {
@@ -145,9 +149,7 @@ class DataService extends BaseService {
       }
     }).then(this.checkStatus)
       .then(this.parseJson)
-      .then((result) => {
-        return result;
-      });
+      .then(this.parseTimeChartData);
   }
 
   //数据使用情况

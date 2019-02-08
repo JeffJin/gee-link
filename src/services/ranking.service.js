@@ -20,7 +20,6 @@ class RankingService extends BaseService {
       {keyword: '服务器的维护', count: 188},
       {keyword: '服务器', count: 111},
       {keyword: 'AI和BI有什么区别', count: 22},
-      {keyword: 'BI', count: 11}
     ];
     return new Promise(function (resolve, reject) {
       setTimeout(function () {
@@ -30,16 +29,22 @@ class RankingService extends BaseService {
   }
 
   //搜索用户
-  getSearchUserRanking() {
+  getSearchUserRanking(top, startTime, endTime) {
     // /list/topcountbyip
-    const url = 'http://47.93.226.51:9012/v1/api/ume/statistics/list/topcountbyip?top=10';
+    const url = 'http://47.93.226.51:9012/v1/api/ume/statistics/list/topcountbyip';
+
     return fetch(url, {
       method: 'get',
-      headers: this.header,
+      headers: {
+        ...this.header,
+        top: top || 10,
+        // startTime: startTime,
+        // endTime: endTime
+      },
     }).then(this.checkStatus)
       .then(this.parseJson)
       .then((result) => {
-        return result;
+        return result.slice(0, top || 10);
       });
   }
 
@@ -85,11 +90,14 @@ class RankingService extends BaseService {
   }
 
   //热搜排行榜， 关键词搜索
-  getSearchedKeywordsRanking(uid = '') {
-    const url = 'http://47.93.226.51:9012/v1/api/ume/statistics/list/keywords?top=10';
+  getSearchedKeywordsRanking() {
+    const url = 'http://47.93.226.51:9012/v1/api/ume/statistics/list/keywords';
     return fetch(url, {
       method: 'get',
-      headers: this.header,
+      headers: {
+        ...this.header,
+        top: 10
+      },
     }).then(this.checkStatus)
       .then(this.parseJson)
       .then((result) => {

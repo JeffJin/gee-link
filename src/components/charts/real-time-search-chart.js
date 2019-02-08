@@ -2,15 +2,6 @@ import connect from "react-redux/es/connect/connect";
 import React from "react";
 import Highcharts from "highcharts";
 import HighchartsReact from "highcharts-react-official";
-import {dataService} from "../../services/data.service";
-import {CommonAction} from "../../store/reducers/actions";
-
-function loadReaTimeSearchDataAction(data) {
-  return {
-    type: CommonAction.LOAD_REAL_TIME_SEARCH_DATA,
-    payload: data,
-  };
-}
 
 class RealTimeSearchChartContent extends React.Component {
   constructor(props) {
@@ -18,14 +9,7 @@ class RealTimeSearchChartContent extends React.Component {
   }
 
   componentDidMount() {
-    this.getChartData();
   }
-
-  getChartData = () => {
-    dataService.getRealTimeSearchData(this.props.startTime, this.props.endTime, this.props.unitType).then(data => {
-      this.props.onLoadReaTimeSearchData(data);
-    });
-  };
 
   render() {
     const chartConfig = {
@@ -101,20 +85,17 @@ class RealTimeSearchChartContent extends React.Component {
 const mapStateToProps = (state) => {
   return {
     data: state.chartData.realTimeSearchChartData,
-    startTime: state.chartConfig.realTimeSearchConfig &&  state.chartConfig.realTimeSearchConfig.startTime,
-    endTime: state.chartConfig.realTimeSearchConfig &&  state.chartConfig.realTimeSearchConfig.endTime,
-    unitType: state.chartConfig.realTimeSearchConfig &&  state.chartConfig.realTimeSearchConfig.unitType,
+    startTime: state.chartConfig.realTimeSearchConfig && state.chartConfig.realTimeSearchConfig.startTime,
+    endTime: state.chartConfig.realTimeSearchConfig && state.chartConfig.realTimeSearchConfig.endTime,
+    unitType: state.chartConfig.realTimeSearchConfig && state.chartConfig.realTimeSearchConfig.unitType,
   };
 };
 
-const mapDispatchToProps = (dispatch) => (
-  {
-    dispatch: dispatch,
-    onLoadReaTimeSearchData: (data) => (
-      dispatch(loadReaTimeSearchDataAction(data))
-    ),
+const mapDispatchToProps = (dispatch) => {
+  return {
+    dispatch: dispatch
   }
-);
+};
 
 export const RealTimeSearchChart = connect(
   mapStateToProps,
