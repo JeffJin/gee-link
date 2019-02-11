@@ -20,7 +20,7 @@ class DataUsageRecordContent extends React.Component {
   }
 
   getData = () => {
-    dataService.getDataUsageRecord().then(results => {
+    dataService.getDataUsageRecords().then(results => {
       this.props.onLoadDataUsageRecord(results);
     });
   };

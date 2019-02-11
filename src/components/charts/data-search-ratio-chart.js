@@ -42,7 +42,7 @@ class DataSearchRatioContent extends React.Component {
         }
       },
       tooltip: {
-        pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
+        pointFormat: '{series.name}: <b>{point.percentage:.5f}%</b>'
       },
       plotOptions: {
         pie: {

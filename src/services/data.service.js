@@ -152,73 +152,115 @@ class DataService extends BaseService {
       .then(this.parseTimeChartData);
   }
 
-  //数据使用情况
+  //数据使用情况 /count/read/
   // data page services
-  getDataUsageRecord() {
-    return new Promise(function(resolve, reject) {
-      setTimeout(function () {
-        resolve({
-          read: 768,
-          liked: 432,
-          forwarded: 987,
-          commented: 1234
-        });
-      }, 500);
+  getDataUsageRecord(action) {
+    const url = 'http://47.93.226.51:9012/v1/api/ume/statistics/count/read/' + action;
+    return fetch(url, {
+      method: 'get',
+      headers: this.header
+    }).then(this.checkStatus)
+      .then(this.parseJson);
+  }
+
+  // {
+  //   read: 768,
+  //   liked: 432,
+  //   forwarded: 987,
+  //   commented: 1234
+  // }
+  getDataUsageRecords() {
+    const p1 = dataService.getDataUsageRecord('搜索'),
+      p2 = dataService.getDataUsageRecord('点赞'),
+      p3 = dataService.getDataUsageRecord('转发'),
+      p4 = dataService.getDataUsageRecord('举报');
+    return Promise.all([p1, p2, p3, p4]).then(([r1, r2, r3, r4]) => {
+      return {
+        read: r1.count,
+        liked: r2.count,
+        forwarded: r3.count,
+        commented: r4.count
+      };
     });
   }
 
-  //数据使用占比
+  getUniqueDataStats() {
+    const url = 'http://47.93.226.51:9012/v1/api/ume/statistics/count/read/utitle';
+    return fetch(url, {
+      method: 'get',
+      headers: this.header,
+    }).then(this.checkStatus)
+      .then(this.parseJson)
+      .then((result) => {
+        return result;
+      });
+  }
+
+  //数据使用占比 /count/read/utitle， /count/doc
   getDataUsageRatio() {
-    return new Promise(function(resolve, reject) {
-      setTimeout(function () {
-        resolve([{
-          name: '使用',
-          y: 61.41,
-          sliced: true,
-          selected: true
-        }, {
-          name: '未使用',
-          color: '#ed7d31',
-          y: 38.59
-        }]);
-      }, 500);
+    const totalPromise = dataService.getTotalSearchStats(),
+      uniquePromise =dataService.getUniqueDataStats();
+    return Promise.all([totalPromise, uniquePromise]).then(([total, unique]) => {
+      return [{
+        name: '使用',
+        y: (unique.count / total.count) * 100,
+        sliced: true,
+        selected: true
+      }, {
+        name: '未使用',
+        color: '#ed7d31',
+        y: ((1 - unique.count / total.count) * 100)
+      }];
     });
   }
 
   //数据搜索占比
   getDataSearchRatio() {
-    return new Promise(function(resolve, reject) {
-      setTimeout(function () {
-        resolve([{
-          name: '被搜出来',
-          y: 31.41,
-          sliced: true,
-          selected: true
-        }, {
-          name: '未被搜出',
-          color: '#ed7d31',
-          y: 68.59
-        }]);
-      }, 500);
+    const totalPromise = dataService.getTotalSearchStats(),
+      uniquePromise =dataService.getUniqueDataStats();
+    return Promise.all([totalPromise, uniquePromise]).then(([total, unique]) => {
+      return [{
+        name: '使用',
+        y: ((total.count - unique.count) /total.count) * 100,
+        sliced: true,
+        selected: true
+      }, {
+        name: '未使用',
+        color: '#ed7d31',
+        y: (1 - (total.count - unique.count) /total.count) * 100
+      }];
     });
   }
 
-  //数据使用趋势图
-  async getDataUsageTrend() {
-    const data = [
-      ['周一', 242],
-      ['周二', 208],
-      ['周三', 149],
-      ['周四', 137],
-      ['周五', 131],
-      ['周六', 127],
-      ['周日', 124]
-    ];
-    return new Promise(function(resolve, reject) {
-      setTimeout(function () {
-        resolve(data);
-      }, 500);
-    });
+  //数据使用趋势图 /count/timely/read
+  //[
+  //  ['周一', 242],
+  //  ['周二', 208],
+  //  ['周三', 149],
+  //  ['周四', 137],
+  //  ['周五', 131],
+  //  ['周六', 127],
+  //  ['周日', 124]
+  //]
+  async getDataUsageTrend(startTime, endTime, unitType) {
+    const url = 'http://47.93.226.51:9012/v1/api/ume/statistics/count/timely/read';
+    return fetch(url, {
+      method: 'get',
+      headers: {
+      ...this.header,
+          startTime,
+          endTime,
+          unitType
+      },
+    }).then(this.checkStatus)
+      .then(this.parseJson)
+      .then(results => {
+        return results.map( result => {
+          const dateStr = `${result.year}-${result.month}-${result.day} ${result.hour}`;
+          const datTime = moment(dateStr, 'YYYY-MM-DD HH').format('YY-MM-DD');
+          return [datTime, result.count];
+        });
+      });
   }
   //搜索点击转化率
   getKeywordSearchConversion() {
@@ -258,8 +300,26 @@ class DataService extends BaseService {
     });
   }
 
+  //     const times = [
+  //       '周一',
+  //       '周二',
+  //       '周三',
+  //       '周四',
+  //       '周五',
+  //       '周六',
+  //       '周日'
+  //     ];
+  //     const data = [{
+  //       name: '搜索关键词',
+  //       data: [49.9, 71.5, 106.4, 129.2, 144.0, 176.0, 135.6]
+  //
+  //     }, {
+  //       name: '使用数据',
+  //       data: [83.6, 78.8, 98.5, 93.4, 106.0, 84.5, 105.0]
+  //     }];
+  //     const result = {times, data};
   //用户搜索/使用趋势图
-  getUserSearchTrend(uid) {
+  getUserSearchTrend(startTime, endTime, unitType) {
     const times = [
       '周一',
       '周二',
@@ -276,14 +336,20 @@ class DataService extends BaseService {
     }, {
       name: '使用数据',
       data: [83.6, 78.8, 98.5, 93.4, 106.0, 84.5, 105.0]
-
     }];
-
-    return new Promise(function(resolve, reject) {
-      setTimeout(function () {
-        resolve({times, data});
-      }, 500);
-    });
+    const result = {times, data};
+    const url = `http://47.93.226.51:9012/v1/api/ume/statistics/count/read`;
+    return fetch(url, {
+      method: 'get',
+      headers: {
+        ...this.header,
+        startTime,
+        endTime,
+        unitType
+      }
+    }).then(this.checkStatus)
+      .then(this.parseJson)
+      .then(() => result);
   }
 
   getKeywordStats(keyword) {

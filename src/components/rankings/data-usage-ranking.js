@@ -3,6 +3,7 @@ import React from "react";
 import {CommonAction} from "../../store/reducers/actions";
 import {rankingService} from "../../services/ranking.service";
 import Ranking from "./ranking";
+import moment from "moment";
 
 function loadDataUsageRankingAction(data) {
   return {
@@ -12,6 +13,13 @@ function loadDataUsageRankingAction(data) {
 }
 
 class DataUsageRankingContent extends React.Component {
+  state = {
+    selectedTimeRange: 'day',
+    startTime: moment().subtract(1, 'days').format('YYYYMMDD') + '-000001',
+    endTime: moment().format('YYYYMMDD-hhmmss'),
+    unitType: 'hour',
+  };
+
   constructor(props) {
     super(props);
   }
@@ -21,7 +29,7 @@ class DataUsageRankingContent extends React.Component {
   }
 
   getData = () => {
-    rankingService.getDataUsageRankings().then(data => {
+    rankingService.getDataBrowseRanking().then(data => {
       this.props.onLoadDataUsageRanking(data);
     });
   };

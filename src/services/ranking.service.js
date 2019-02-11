@@ -68,25 +68,6 @@ class RankingService extends BaseService {
     });
   }
 
-  //使用排行榜
-  async getDataUsageRankings() {
-    const data = [
-      {keyword: '大数据', count: 123},
-      {keyword: '人工智能', count: 111},
-      {keyword: '自然语言', count: 110},
-      {keyword: '算法', count: 99},
-      {keyword: '机器学习', count: 88},
-      {keyword: 'Angular', count: 77},
-      {keyword: '云计算', count: 76},
-      {keyword: 'Python', count: 44},
-      {keyword: '服务器', count: 33}];
-    return new Promise(function (resolve, reject) {
-      setTimeout(function () {
-        resolve(data);
-      }, 500);
-    });
-  }
-
   //热搜排行榜， 关键词搜索
   getSearchedKeywordsRanking() {
     const url = 'http://47.93.226.51:9012/v1/api/ume/statistics/list/keywords';
@@ -119,7 +100,7 @@ class RankingService extends BaseService {
       });
   }
 
-  //热搜未命中排行榜
+  //排行榜
   getRelatedDataRanking(keyword) {
     const data = [
       {keyword: '那些年的自然语言', count: 544},

@@ -46,7 +46,7 @@ const mapStateToProps = (state) => {
     }),
     headers: ['排名', 'UID', '搜索次数'],
     title: '搜索用户 TOP 10',
-    route: '/missed-keyword'
+    route: '/user'
   };
 };
 
