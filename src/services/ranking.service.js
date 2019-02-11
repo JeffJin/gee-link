@@ -7,25 +7,23 @@ class RankingService extends BaseService {
     super();
   }
 
-  //数据浏览
+  //数据浏览 /list/read/title
   getDataBrowseRanking() {
-    const result = [
-      {keyword: '那些年的自然语言', count: 544},
-      {keyword: '人工智能的前世与今生', count: 444},
-      {keyword: '自然语言能否识别文字', count: 322},
-      {keyword: '算法的运用', count: 311},
-      {keyword: '机器学习的模型建立', count: 222},
-      {keyword: 'python入门教程', count: 221},
-      {keyword: '云计算的概念', count: 190},
-      {keyword: '服务器的维护', count: 188},
-      {keyword: '服务器', count: 111},
-      {keyword: 'AI和BI有什么区别', count: 22},
-    ];
-    return new Promise(function (resolve, reject) {
-      setTimeout(function () {
-        resolve(result);
-      }, 500);
-    });
+    const url = 'http://47.93.226.51:9012/v1/api/ume/statistics/list/read/title';
+
+    return fetch(url, {
+      method: 'get',
+      headers: {
+        ...this.header,
+        top: 10,
+        // startTime: startTime,
+        // endTime: endTime
+      },
+    }).then(this.checkStatus)
+      .then(this.parseJson)
+      .then((result) => {
+        return result.slice(0, 10);
+      });
   }
 
   //搜索用户
@@ -105,25 +103,20 @@ class RankingService extends BaseService {
       });
   }
 
-  //热搜未命中排行榜
+  //热搜未命中排行榜 /list/keywords/fewresult
   getMissedKeywordsRanking() {
-    const data = [
-      {keyword: '那些年的自然语言', count: 544},
-      {keyword: '人工智能的前世与今生', count: 444},
-      {keyword: '自然语言能否识别文字', count: 322},
-      {keyword: '算法的运用', count: 311},
-      {keyword: '机器学习的模型建立', count: 222},
-      {keyword: 'python入门教程', count: 221},
-      {keyword: '云计算的概念', count: 190},
-      {keyword: '服务器的维护', count: 188},
-      {keyword: '服务器', count: 111},
-      {keyword: 'AI和BI有什么区别', count: 22},
-    ];
-    return new Promise(function (resolve, reject) {
-      setTimeout(function () {
-        resolve(data);
-      }, 500);
-    });
+    const url = 'http://47.93.226.51:9012/v1/api/ume/statistics/list/keywords/fewresult';
+    return fetch(url, {
+      method: 'get',
+      headers: {
+        ...this.header,
+        top: 10
+      },
+    }).then(this.checkStatus)
+      .then(this.parseJson)
+      .then((result) => {
+        return result;
+      });
   }
 
   //热搜未命中排行榜
