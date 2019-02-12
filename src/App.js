@@ -64,7 +64,7 @@ class App extends React.Component {
               render={({ match }) => {
                 return (
                   <UserDetails
-                    userId={match.params.id}
+                    userIp={match.params.id}
                   />
                 );
               }}

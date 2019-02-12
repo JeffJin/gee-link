@@ -1,8 +1,8 @@
 import React from "react";
 import {CommonAction} from "../../store/reducers/actions";
-import {dataService} from "../../services/data.service";
 import connect from "react-redux/es/connect/connect";
 import { StrGraph } from 'calendar-graph';
+import {userService} from "../../services/user.service";
 
 function loadDataAction(data) {
   return {
@@ -21,7 +21,7 @@ class UserActivityHistoryContent extends React.Component {
   }
 
   getChartData = (uid) => {
-    dataService.getUserActivityHistory(uid).then(data => {
+    userService.getUserActivityHistory(uid).then(data => {
       this.props.onLoadData(data);
     });
   };

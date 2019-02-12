@@ -46,26 +46,23 @@ class RankingService extends BaseService {
       });
   }
 
-  //浏览用户
-  getBrowseUserRanking() {
-    const result = [
-      {keyword: '223345746745', count: 999},
-      {keyword: '666645746745', count: 777},
-      {keyword: '845645746745', count: 666},
-      {keyword: '905645746745', count: 664},
-      {keyword: '115645746745', count: 444},
-      {keyword: '225645746745', count: 77},
-      {keyword: '335645746745', count: 76},
-      {keyword: '345645746745', count: 44},
-      {keyword: '665645746745', count: 33},
-      {keyword: '885645746745', count: 32},
-      {keyword: '994564574674', count: 22}
-    ];
-    return new Promise(function (resolve, reject) {
-      setTimeout(function () {
-        resolve(result);
-      }, 500);
-    });
+  //浏览用户 /list/read/topcountbyip
+  getBrowseUserRanking(top = 10) {
+    const url = 'http://47.93.226.51:9012/v1/api/ume/statistics/list/topcountbyip';
+
+    return fetch(url, {
+      method: 'get',
+      headers: {
+        ...this.header,
+        top: top,
+        // startTime: startTime,
+        // endTime: endTime
+      },
+    }).then(this.checkStatus)
+      .then(this.parseJson)
+      .then((result) => {
+        return result.slice(0, top);
+      });
   }
 
   //热搜排行榜， 关键词搜索

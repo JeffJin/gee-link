@@ -1,5 +1,6 @@
 import fetch from 'isomorphic-fetch';
 import BaseService from "./base.service";
+import moment from "moment";
 
 class UserService extends BaseService {
   constructor() {
@@ -63,6 +64,115 @@ class UserService extends BaseService {
       return [`${r.country}-${r.province}`, r.count];
     });
   };
+
+  //{
+  //   searched: 321,
+  //   read: 432,
+  //   liked: 543,
+  //   forwarded: 431,
+  //   reviewed: 431,
+  //   complained: 431,
+  //   lastUpdated: new Date(),
+  //   userIp: '123.221.21.1',
+  // }
+  getUserDetailedStats(ip) {
+    const lastUpdatedUrl = `http://47.93.226.51:9012/v1/api/ume/statistics/user/${ip}/recentact`;
+    const p1 = fetch(lastUpdatedUrl, {
+      method: 'get',
+      headers: {
+        ...this.header
+      },
+    }).then(this.checkStatus)
+      .then(this.parseJson);
+    const searchedUrl = `http://47.93.226.51:9012/v1/api/ume/statistics/count/search`;
+    const p2 = fetch(searchedUrl, {
+      method: 'get',
+      headers: {
+        ...this.header,
+        ip
+      },
+    }).then(this.checkStatus)
+      .then(this.parseJson);
+    const readUrl = `http://47.93.226.51:9012/v1/api/ume/statistics/count/read`;
+    const p3 = fetch(readUrl, {
+      method: 'get',
+      headers: {
+        ...this.header,
+        ip
+      },
+    }).then(this.checkStatus)
+      .then(this.parseJson);
+
+    return Promise.all([p1, p2, p3]).then(([r1, r2, r3]) => {
+      return {
+        lastUpdated: r1.time,
+        searched: r2.count,
+        read: r3.count,
+        liked: 543,
+        forwarded: 431,
+        reviewed: 431,
+        complained: 431
+      };
+    });
+
+
+  }
+
+  parseUserData = (result) => {
+    return result;
+  };
+
+
+  //最近浏览 /user/{ip}/recentread
+  // [
+  //           '朝韩半岛正在起变化',
+  //           '谁在暗杀金正恩',
+  //           '美朝暗战首脑峰会',
+  //           '金正恩邀文在演访问朝鲜，能成吗',
+  //           '这架飞机将载着金正恩抵达新加坡',
+  //           '关于韩朝领导人峰会',
+  //           '金正恩访华后半岛局势走向及中国应对',
+  //         ]
+  getRecentBrowsed(ip) {
+    const url = `http://47.93.226.51:9012/v1/api/ume/statistics/user/${ip}/recentread`;
+    return fetch(url, {
+      method: 'get',
+      headers: {
+        ...this.header
+      },
+    }).then(this.checkStatus)
+      .then(this.parseJson)
+      .then(results => {
+        return   [
+          '朝韩半岛正在起变化',
+          '谁在暗杀金正恩',
+          '美朝暗战首脑峰会',
+          '金正恩邀文在演访问朝鲜，能成吗',
+          '这架飞机将载着金正恩抵达新加坡',
+          '关于韩朝领导人峰会',
+          '金正恩访华后半岛局势走向及中国应对',
+        ];
+      });
+  }
+
+  getUserActivityHistory(uid) {
+    return new Promise(function(resolve, reject) {
+      setTimeout(function () {
+        resolve([
+          { date: '2016-01-01', count: 1 },
+          { date: '2016-01-03', count: 4 },
+          { date: '2016-01-06', count: 2 },
+          { date: '2016-01-07', count: 12 },
+          { date: '2016-01-08', count: 23 },
+          { date: '2016-02-11', count: 32 },
+          { date: '2016-02-12', count: 2 },
+          { date: '2016-02-22', count: 12 },
+          { date: '2016-03-23', count: 62 },
+          { date: '2016-03-24', count: 26 },
+        ]);
+      }, 500);
+    });
+  }
 }
 
 export const userService = new UserService();

@@ -38,9 +38,9 @@ const mapStateToProps = (state) => {
   return {
     rankingItems: state.ranking.browseUserRanking.map((r, i) => {
       return {
-        id: r.keyword,
+        id: r.ip,
         rank: i + 1,
-        desc: r.keyword,
+        desc: r.ip,
         value: r.count
       }
     }),

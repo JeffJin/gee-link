@@ -365,57 +365,6 @@ class DataService extends BaseService {
     });
   }
 
-  getUserDetailedStats(userId) {
-    return new Promise(function(resolve, reject) {
-      setTimeout(function () {
-        resolve({
-          searched: 321,
-          read: 432,
-          liked: 543,
-          forwarded: 431,
-          reviewed: 431,
-          complained: 431,
-          lastUpdated: new Date(),
-          userIp: '123.221.21.1',
-        });
-      }, 500);
-    });
-  }
-
-  getRecentBrowsed(userId) {
-    return new Promise(function(resolve, reject) {
-      setTimeout(function () {
-        resolve([
-          '朝韩半岛正在起变化',
-          '谁在暗杀金正恩',
-          '美朝暗战首脑峰会',
-          '金正恩邀文在演访问朝鲜，能成吗',
-          '这架飞机将载着金正恩抵达新加坡',
-          '关于韩朝领导人峰会',
-          '金正恩访华后半岛局势走向及中国应对',
-        ]);
-      }, 500);
-    });
-  }
-
-  getUserActivityHistory(uid) {
-    return new Promise(function(resolve, reject) {
-      setTimeout(function () {
-        resolve([
-          { date: '2016-01-01', count: 1 },
-          { date: '2016-01-03', count: 4 },
-          { date: '2016-01-06', count: 2 },
-          { date: '2016-01-07', count: 12 },
-          { date: '2016-01-08', count: 23 },
-          { date: '2016-02-11', count: 32 },
-          { date: '2016-02-12', count: 2 },
-          { date: '2016-02-22', count: 12 },
-          { date: '2016-03-23', count: 62 },
-          { date: '2016-03-24', count: 26 },
-        ]);
-      }, 500);
-    });
-  }
 }
 
 export const dataService = new DataService();

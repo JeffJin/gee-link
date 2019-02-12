@@ -1,23 +1,17 @@
 import React from 'react';
-import {SearchUserRanking} from "../rankings/search-user-ranking";
-import {DataBrowseRanking} from "../rankings/data-browse-ranking";
 import {SearchedKeywordsRanking} from "../rankings/searched-keywords-ranking";
 import LinearProgress from "@material-ui/core/es/LinearProgress";
-import {CategorizedRanking} from "../rankings/categorized-ranking";
 import StateBox from "../stat-boxes/stat-box";
-import {KeywordSearchTrend} from "../charts/keyword-search-trend";
 import {dataService} from "../../services/data.service";
-import {RelatedDataRanking} from "../rankings/related-data-ranking";
-import {RecentSearchUserRanking} from "../rankings/recent-search-user-ranking";
 import {UserSearchTrend} from "../charts/user-search-trend";
 import {NavLink} from "react-router-dom";
 import moment from "moment";
 import {UserActivityHistory} from "../charts/user-activity-history";
+import {userService} from "../../services/user.service";
 
 class UserDetails extends React.Component {
   state = {
     isInProgress: false,
-    userIp: '',
     lastUpdated: '',
     stats: {
       searched: {value: 0},
@@ -35,7 +29,7 @@ class UserDetails extends React.Component {
   }
 
   componentDidMount() {
-    dataService.getUserDetailedStats(this.props.userId).then((result) => {
+    userService.getUserDetailedStats(this.props.userIp).then((result) => {
       const newStats = Object.assign(this.state.stats,
         {searched: {label: '搜索次数', value: result.searched}},
         {read: {label: '阅读次数', value: result.read}},
@@ -46,10 +40,9 @@ class UserDetails extends React.Component {
       );
       this.setState({stats: newStats});
       this.setState({lastUpdated: moment(result.lastUpdated).toString()});
-      this.setState({userIp: result.userIp});
     });
 
-    dataService.getRecentBrowsed(this.props.userId).then((result) => {
+    userService.getRecentBrowsed(this.props.userIp).then((result) => {
       this.setState({recentBrowsed: result})
     });
   }
@@ -70,8 +63,8 @@ class UserDetails extends React.Component {
             <div className={'row'}>
               <div className={'flex-1 stats'}>
                 <div className={'row flex-box'}>
-                  <div className={'uid flex-1'}>用户 ID： {this.props.userId}</div>
-                  <div className={'uip flex-1'}>用户 IP： {this.state.userIp}</div>
+                  <div className={'uid flex-1'}>用户 IP： {this.props.userIp}</div>
+                  {/*<div className={'uip flex-1'}>用户 IP： {this.state.userIp}</div>*/}
                 </div>
                 <div className={'row time'}>最近操作时间：{this.state.lastUpdated}</div>
                 <div className={'row state-box-container flex-box'}>
@@ -85,10 +78,10 @@ class UserDetails extends React.Component {
               </div>
             </div>
             <div className={'row'}>
-              <UserSearchTrend uid={this.props.userId}/>
+              <UserSearchTrend uid={this.props.userIp}/>
             </div>
             <div className={'row'}>
-              <UserActivityHistory uid={this.props.userId}/>
+              <UserActivityHistory uid={this.props.userIp}/>
             </div>
           </div>
           <div className={'flex-1'}>
@@ -109,7 +102,7 @@ class UserDetails extends React.Component {
               </div>
             </div>
             <div className={'row recent-searched'}>
-              <SearchedKeywordsRanking uid={this.props.userId} />
+              <SearchedKeywordsRanking uid={this.props.userIp} />
             </div>
           </div>
         </div>
