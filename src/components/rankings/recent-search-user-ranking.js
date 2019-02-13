@@ -17,11 +17,11 @@ class RecentSearchUserRankingContent extends React.Component {
   }
 
   componentDidMount() {
-    this.getData();
+    this.getData(this.props.keyword);
   }
 
-  getData = () => {
-    rankingService.getRecentSearchUserRanking().then(data => {
+  getData = (keyword) => {
+    rankingService.getRecentSearchUserRanking(keyword).then(data => {
       this.props.onLoadRecentSearchUserRanking(data);
     });
   };

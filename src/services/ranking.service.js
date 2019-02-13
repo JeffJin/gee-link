@@ -97,7 +97,7 @@ class RankingService extends BaseService {
       });
   }
 
-  //排行榜
+  //相关数据排行榜
   getRelatedDataRanking(keyword) {
     const data = [
       {keyword: '那些年的自然语言', count: 544},
@@ -134,25 +134,46 @@ class RankingService extends BaseService {
     });
   }
 
-  getRecentSearchUserRanking() {
-    const data = [
-      {ip: '223.345746745', count: 999},
-      {ip: '666.645746745', count: 777},
-      {ip: '845.645746745', count: 666},
-      {ip: '905.645746745', count: 664},
-      {ip: '115.645746745', count: 444},
-      {ip: '225.645746745', count: 77},
-      {ip: '335.645746745', count: 76},
-      {ip: '345.645746745', count: 44},
-      {ip: '665.645746745', count: 33},
-      {ip: '885.645746745', count: 32},
-      {ip: '994.564574674', count: 22}
-    ];
-    return new Promise(function (resolve, reject) {
-      setTimeout(function () {
-        resolve(data);
-      }, 500);
-    });
+  //最近搜索用户 /list/keyword/{keyword}/ip
+  // data = [
+  //   {ip: '223.345746745', count: 999},
+  //   {ip: '666.645746745', count: 777},
+  //   {ip: '845.645746745', count: 666},
+  //   {ip: '905.645746745', count: 664},
+  //   {ip: '115.645746745', count: 444},
+  //   {ip: '225.645746745', count: 77},
+  //   {ip: '335.645746745', count: 76},
+  //   {ip: '345.645746745', count: 44},
+  //   {ip: '665.645746745', count: 33},
+  //   {ip: '885.645746745', count: 32},
+  //   {ip: '994.564574674', count: 22}
+  // ];
+  getRecentSearchUserRanking(keyword, top = 10) {
+    const url = `http://47.93.226.51:9012/v1/api/ume/statistics/list/keywords/${keyword}/ip`;
+    return fetch(url, {
+      method: 'get',
+      headers: {
+        ...this.header,
+        top: top
+      },
+    }).then(this.checkStatus)
+      .then(this.parseJson)
+      .then((result) => {
+        const data = [
+          {ip: '223.345746745', count: 999},
+          {ip: '666.645746745', count: 777},
+          {ip: '845.645746745', count: 666},
+          {ip: '905.645746745', count: 664},
+          {ip: '115.645746745', count: 444},
+          {ip: '225.645746745', count: 77},
+          {ip: '335.645746745', count: 76},
+          {ip: '345.645746745', count: 44},
+          {ip: '665.645746745', count: 33},
+          {ip: '885.645746745', count: 32},
+          {ip: '994.564574674', count: 22}
+        ];
+        return data;
+      });
   }
 }
 

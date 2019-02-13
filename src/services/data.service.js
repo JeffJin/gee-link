@@ -43,6 +43,7 @@ class DataService extends BaseService {
         return result;
       });
   }
+
   // 今日被浏览次数
   getTodayBrowsedStats() {
     const endTime = moment().format('YYYYMMDD') + '-235959';
@@ -61,6 +62,7 @@ class DataService extends BaseService {
         return result;
       });
   }
+
   // 独立搜索数
   getIndividualSearchStats() {
     const url = 'http://47.93.226.51:9012/v1/api/ume/statistics/count/search/unique';
@@ -73,6 +75,7 @@ class DataService extends BaseService {
         return result;
       });
   }
+
   // 人均搜索数
   getIndividualUserStats() {
     const url = 'http://47.93.226.51:9012/v1/api/ume/statistics/count/ip';
@@ -99,12 +102,13 @@ class DataService extends BaseService {
   }
 
   parseTimeChartData(results) {
-    return results.map( result => {
+    return results.map(result => {
       const dateStr = `${result.year}-${result.month}-${result.day} ${result.hour}`;
       const datTime = moment(dateStr, 'YYYY-MM-DD HH').format('x');
       return [datTime, result.count];
     });
   }
+
   // https://cdn.rawgit.com/highcharts/highcharts/057b672172ccc6c08fe7dbb27fc17ebca3f5b770/samples/data/usdeur.json
   //实时搜索数
   getRealTimeSearchData(startTime, endTime, unitType) {
@@ -121,6 +125,7 @@ class DataService extends BaseService {
       .then(this.parseJson)
       .then(this.parseTimeChartData);
   }
+
   //独立搜索数
   async getIndividualSearchData(startTime, endTime, unitType) {
     const url = 'http://47.93.226.51:9012/v1/api/ume/statistics/count/timely/usearch';
@@ -136,6 +141,7 @@ class DataService extends BaseService {
       .then(this.parseJson)
       .then(this.parseTimeChartData);
   }
+
   //实时用户数
   async getRealTimeUserData(startTime, endTime, unitType) {
     const url = 'http://47.93.226.51:9012/v1/api/ume/statistics/count/timely/ipcount';
@@ -199,7 +205,7 @@ class DataService extends BaseService {
   //数据使用占比 /count/read/utitle， /count/doc
   getDataUsageRatio() {
     const totalPromise = dataService.getTotalSearchStats(),
-      uniquePromise =dataService.getUniqueDataStats();
+      uniquePromise = dataService.getUniqueDataStats();
     return Promise.all([totalPromise, uniquePromise]).then(([total, unique]) => {
       return [{
         name: '使用',
@@ -217,17 +223,17 @@ class DataService extends BaseService {
   //数据搜索占比
   getDataSearchRatio() {
     const totalPromise = dataService.getTotalSearchStats(),
-      uniquePromise =dataService.getUniqueDataStats();
+      uniquePromise = dataService.getUniqueDataStats();
     return Promise.all([totalPromise, uniquePromise]).then(([total, unique]) => {
       return [{
         name: '使用',
-        y: ((total.count - unique.count) /total.count) * 100,
+        y: ((total.count - unique.count) / total.count) * 100,
         sliced: true,
         selected: true
       }, {
         name: '未使用',
         color: '#ed7d31',
-        y: (1 - (total.count - unique.count) /total.count) * 100
+        y: (1 - (total.count - unique.count) / total.count) * 100
       }];
     });
   }
@@ -247,21 +253,22 @@ class DataService extends BaseService {
     return fetch(url, {
       method: 'get',
       headers: {
-      ...this.header,
-          startTime,
-          endTime,
-          unitType
+        ...this.header,
+        startTime,
+        endTime,
+        unitType
       },
     }).then(this.checkStatus)
       .then(this.parseJson)
       .then(results => {
-        return results.map( result => {
+        return results.map(result => {
           const dateStr = `${result.year}-${result.month}-${result.day} ${result.hour}`;
           const datTime = moment(dateStr, 'YYYY-MM-DD HH').format('YY-MM-DD');
           return [datTime, result.count];
         });
       });
   }
+
   //搜索点击转化率
   getKeywordSearchConversion() {
     const data = [
@@ -274,12 +281,13 @@ class DataService extends BaseService {
       ['周日', 12]
     ];
 
-    return new Promise(function(resolve, reject) {
+    return new Promise(function (resolve, reject) {
       setTimeout(function () {
         resolve(data);
       }, 500);
     });
   }
+
   //关键词搜索趋势图
   getKeywordSearchTrend(keyword) {
     console.log('getKeywordSearchTrend', keyword);
@@ -293,7 +301,7 @@ class DataService extends BaseService {
       ['周日', 1224]
     ];
 
-    return new Promise(function(resolve, reject) {
+    return new Promise(function (resolve, reject) {
       setTimeout(function () {
         resolve(data);
       }, 500);
@@ -352,19 +360,63 @@ class DataService extends BaseService {
       .then(() => result);
   }
 
+  //{
+  //           searched: 321,
+  //           searchedUsers: 432,
+  //           targeted: 543,
+  //           average: 431
+  //         }
   getKeywordStats(keyword) {
-    return new Promise(function(resolve, reject) {
-      setTimeout(function () {
-        resolve({
-          searched: 321,
-          searchedUsers: 432,
-          targeted: 543,
-          average: 431
-        });
-      }, 500);
+    const p1 = this.getKeywordSearchedNumber(keyword);
+    const p2 = this.getSearchedUserNumber(keyword);
+    const p3 = this.getKeywordFoundNumber(keyword);
+    return Promise.all([p1, p2, p3]).then(([v1, v2, v3]) => {
+      return {
+        searched: v1.count,
+        searchedUsers: v2.count,
+        targeted: v3.count,
+        average: v1.count / v2.count
+      };
     });
   }
 
+  getKeywordSearchedNumber(keyword) {
+    const url = 'http://47.93.226.51:9012/v1/api/ume/statistics/count/keyword/' + keyword;
+    return fetch(url, {
+      method: 'get',
+      headers: this.header,
+    }).then(this.checkStatus)
+      .then(this.parseJson)
+      .then((result) => {
+        return result;
+      });
+  }
+
+  //keyword 搜索用户数
+  getSearchedUserNumber(keyword) {
+    const url = 'http://47.93.226.51:9012/v1/api/ume/statistics/count/keyword/' + keyword + '/unique';
+    return fetch(url, {
+      method: 'get',
+      headers: this.header,
+    }).then(this.checkStatus)
+      .then(this.parseJson)
+      .then((result) => {
+        return result;
+      });
+  }
+
+  //命中数 /count/keyword/{keyword}/found
+  getKeywordFoundNumber(keyword) {
+    const url = 'http://47.93.226.51:9012/v1/api/ume/statistics/count/keyword/' + keyword + '/found';
+    return fetch(url, {
+      method: 'get',
+      headers: this.header,
+    }).then(this.checkStatus)
+      .then(this.parseJson)
+      .then((result) => {
+        return result;
+      });
+  }
 }
 
 export const dataService = new DataService();

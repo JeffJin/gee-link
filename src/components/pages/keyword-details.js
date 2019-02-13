@@ -29,7 +29,7 @@ class KeywordDetails extends React.Component {
     dataService.getKeywordStats(this.props.keywordId).then((result) => {
       const newStats = Object.assign(this.state.stats,
         {searched: {label: '被搜索次数', value: result.searched}},
-        {searchedUsers: {label: '搜索用户数', value: result.searched}},
+        {searchedUsers: {label: '搜索用户数', value: result.searchedUsers}},
         {targeted: {label: '命中记录数', value: result.targeted}},
         {average: {label: '人均搜索次数', value: result.average}},
       );
@@ -48,7 +48,7 @@ class KeywordDetails extends React.Component {
         {
           progress
         }
-        <div className={'row'}>
+        <div className={'row title'}>
           <div>关键词： {this.props.keywordId}</div>
         </div>
         <div className={'row flex-box'}>
@@ -76,7 +76,7 @@ class KeywordDetails extends React.Component {
               <RelatedDataRanking/>
             </div>
             <div className={'flex-1'}>
-              <RecentSearchUserRanking/>
+              <RecentSearchUserRanking keyword={this.props.keywordId}/>
             </div>
           </div>
           ;
