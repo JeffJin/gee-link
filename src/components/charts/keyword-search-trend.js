@@ -13,6 +13,10 @@ function loadDataAction(data) {
 }
 
 class KeywordSearchTrendContent extends React.Component {
+  state = {
+    selectedTimeRange: 'month'
+  };
+
   constructor(props) {
     super(props);
   }
@@ -22,7 +26,7 @@ class KeywordSearchTrendContent extends React.Component {
   }
 
   getChartData = (keyword) => {
-    dataService.getKeywordSearchTrend(keyword).then(data => {
+    dataService.getKeywordSearchTrend(keyword, this.state.selectedTimeRange).then(data => {
       this.props.onLoadData(data);
     });
   };
@@ -85,10 +89,10 @@ class KeywordSearchTrendContent extends React.Component {
           <div className={'title'}>关键词搜索趋势图</div>
           <div className={'tooltip'}></div>
           <div className={'select'}>
-            <select disabled>
+            <select disabled defaultValue={'month'}>
               <option value="day">近24小时</option>
               <option value="week">近一周</option>
-              <option value="month" defaultValue>近一个月</option>
+              <option value="month">近一个月</option>
               <option value="year">近一年</option>
             </select>
           </div>
