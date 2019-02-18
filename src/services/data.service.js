@@ -105,7 +105,17 @@ class DataService extends BaseService {
     return results.map(result => {
       const dateStr = `${result.year}-${result.month}-${result.day} ${result.hour}`;
       const datTime = moment(dateStr, 'YYYY-MM-DD HH').format('x');
-      return [datTime, result.count];
+      return [parseInt(datTime), result.count];
+    }).sort((a, b) => {
+      if (a[0] > b[0]) {
+        return 1;
+      }
+      else if (a[0] === b[0]) {
+        return 0;
+      }
+      else {
+        return -1;
+      }
     });
   }
 

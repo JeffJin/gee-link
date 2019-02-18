@@ -12,10 +12,7 @@ export class MainChartListContent extends React.Component {
   state = {
     isInProgress: false,
     isChartHelpShown: false,
-    selectedTimeRange: 'day',
-    startTime: moment().subtract(1, 'days').format('YYYYMMDD') + '-000001',
-    endTime: moment().format('YYYYMMDD-hhmmss'),
-    unitType: 'hour',
+    selectedTimeRange: 'day'
   };
 
   constructor(props) {
@@ -23,7 +20,10 @@ export class MainChartListContent extends React.Component {
   }
 
   componentDidMount() {
-    this.updateCharts();
+    const today = moment();
+    const endTime = today.format('YYYYMMDD-hhmmss');
+    let startTime = moment().subtract(1, 'days').format('YYYYMMDD') + '-000001';
+    this.updateCharts(startTime, endTime, 'hour');
   }
 
   showChartHelp() {
@@ -33,52 +33,59 @@ export class MainChartListContent extends React.Component {
   changeTime = (evt) => {
     const today = moment();
     this.setState({selectedTimeRange: evt.target.value});
-    this.setState({selectedEndTime: today.format('YYYYMMDD-hhmmss')});
-
+    const endTime = today.format('YYYYMMDD-hhmmss');
+    let startTime = moment().subtract(1, 'days').format('YYYYMMDD') + '-000001';
+    let unitType = 'hour';
     switch(evt.target.value) {
       case 'day':
         const yesterday = today.subtract(1, 'days');
-        this.setState({selectedStartTime: moment(yesterday).format('YYYYMMDD-hhmmss')});
-        this.setState({unitType: 'hour'});
+        startTime = moment(yesterday).format('YYYYMMDD-hhmmss');
+        unitType = 'hour';
         break;
       case 'week':
         const weekAgo = today.subtract(1, 'weeks');
-        this.setState({selectedStartTime: moment(weekAgo).format('YYYYMMDD-hhmmss')});
-        this.setState({unitType: 'day'});
+        startTime = moment(weekAgo).format('YYYYMMDD-hhmmss');
+        unitType = 'day';
         break;
       case 'month':
         const monthAgo = today.subtract(1, 'months');
-        this.setState({selectedStartTime: moment(monthAgo).format('YYYYMMDD-hhmmss')});
-        this.setState({unitType: 'day'});
+        startTime = moment(monthAgo).format('YYYYMMDD-hhmmss');
+        unitType = 'day';
         break;
       case 'year':
         const yearAgo = today.subtract(1, 'years');
-        this.setState({selectedStartTime: moment(yearAgo).format('YYYYMMDD-hhmmss')});
-        this.setState({unitType: 'month'});
+        startTime = moment(yearAgo).format('YYYYMMDD-hhmmss');
+        unitType = 'month';
         break;
       default:
-        return '';
+        break;
     }
 
-    this.updateCharts();
+    this.props.dispatch({
+      type: CommonAction.LOAD_REAL_TIME_SEARCH_CONFIG,
+      payload: {startTime, endTime, unitType}
+    });
+
+    this.updateCharts(startTime, endTime, unitType);
   };
 
-  updateCharts() {
-    dataService.getRealTimeSearchData(this.state.startTime, this.state.endTime, this.state.unitType).then(data => {
+  updateCharts(startTime, endTime, unitType) {
+    dataService.getRealTimeSearchData(startTime, endTime, unitType).then(data => {
+      console.log('real time search data', data);
       this.props.dispatch({
         type: CommonAction.LOAD_REAL_TIME_SEARCH_DATA,
         payload: data
       });
     });
 
-    dataService.getIndividualSearchData(this.state.startTime, this.state.endTime, this.state.unitType).then(data => {
+    dataService.getIndividualSearchData(startTime, endTime, unitType).then(data => {
       this.props.dispatch({
         type: CommonAction.LOAD_INDIVIDUAL_SEARCH_DATA,
         payload: data
       });
     });
 
-    dataService.getRealTimeUserData(this.state.startTime, this.state.endTime, this.state.unitType).then(data => {
+    dataService.getRealTimeUserData(startTime, endTime, unitType).then(data => {
       this.props.dispatch({
         type: CommonAction.LOAD_REAL_TIME_USER_DATA,
         payload: data

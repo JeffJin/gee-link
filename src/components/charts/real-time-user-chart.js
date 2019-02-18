@@ -30,6 +30,8 @@ class RealTimeUserChartContent extends React.Component {
         type: 'datetime'
       },
       yAxis: {
+        min: 0,
+        startOnTick: false,
         title: {
           text: '搜索数'
         }
