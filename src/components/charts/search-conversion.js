@@ -85,11 +85,11 @@ class SearchConversionContent extends React.Component {
           <div className={'title'}>搜索-点击转化率</div>
           <div className={'tooltip'}></div>
           <div className={'select'}>
-            <select>
-              <option>近24小时</option>
-              <option>近一周</option>
-              <option>近一个月</option>
-              <option>近一年</option>
+            <select disabled defaultValue={'month'}>
+              <option value="day">近24小时</option>
+              <option value="week">近一周</option>
+              <option value="month">近一个月</option>
+              <option value="year">近一年</option>
             </select>
           </div>
         </div>

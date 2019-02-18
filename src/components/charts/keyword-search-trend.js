@@ -85,11 +85,11 @@ class KeywordSearchTrendContent extends React.Component {
           <div className={'title'}>关键词搜索趋势图</div>
           <div className={'tooltip'}></div>
           <div className={'select'}>
-            <select>
-              <option>近24小时</option>
-              <option>近一周</option>
-              <option>近一个月</option>
-              <option>近一年</option>
+            <select disabled>
+              <option value="day">近24小时</option>
+              <option value="week">近一周</option>
+              <option value="month" defaultValue>近一个月</option>
+              <option value="year">近一年</option>
             </select>
           </div>
         </div>

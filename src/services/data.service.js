@@ -280,22 +280,46 @@ class DataService extends BaseService {
   }
 
   //搜索点击转化率
-  getKeywordSearchConversion() {
-    const data = [
-      ['周一', 22],
-      ['周二', 20],
-      ['周三', 14],
-      ['周四', 13],
-      ['周五', 13],
-      ['周六', 12],
-      ['周日', 12]
-    ];
+  //    const data = [
+  //       ['周一', 22],
+  //       ['周二', 20],
+  //       ['周三', 14],
+  //       ['周四', 13],
+  //       ['周五', 13],
+  //       ['周六', 12],
+  //       ['周日', 12]
+  //     ];
+  getKeywordSearchConversion(unit = 'month') {
+    const url = 'http://47.93.226.51:9012/v1/api/ume/keyword/search.view.rate?unit=' + unit;
+    return fetch(url, {
+      method: 'get',
+      headers: {
+        ...this.header
+      },
+    }).then(this.checkStatus)
+      .then(this.parseJson)
+      .then(data => {
+        let results = [];
+        for (let key in data) {
+          if(data.hasOwnProperty(key)){
+            results.push([key, data[key]]);
+          }
+        }
+        return results.sort((a, b) => {
+          const timeA = moment(a[0], 'YYYY-MM-DD').toDate().getTime();
+          const timeB = moment(b[0], 'YYYY-MM-DD').toDate().getTime();
 
-    return new Promise(function (resolve, reject) {
-      setTimeout(function () {
-        resolve(data);
-      }, 500);
-    });
+          if (timeA > timeB) {
+            return 1;
+          }
+          else if (timeA < timeB) {
+            return -1;
+          }
+          else {
+            return 0;
+          }
+        });
+      });
   }
 
   //关键词搜索趋势图
