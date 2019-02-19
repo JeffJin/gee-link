@@ -17,11 +17,11 @@ class BrowseUserRankingContent extends React.Component {
   }
 
   componentDidMount() {
-    this.getData();
+    this.getData('month');
   }
 
-  getData = () => {
-    rankingService.getBrowseUserRanking().then(data => {
+  getData = (unit) => {
+    rankingService.getBrowseUserRanking(unit).then(data => {
       this.props.onLoadBrowseUserRanking(data);
     });
   };

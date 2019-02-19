@@ -12,19 +12,17 @@ export class SearchBox extends React.Component {
   };
 
   componentDidMount() {
-    const keyword = this.getKeyword();
+    const keyword = this.getFieldValue('keyword');
     this.setState({keyword});
   }
 
-  getKeyword() {
+  getFieldValue(key) {
     if (this.props.location && this.props.location.search) {
       const query = queryString.parse(this.props.location.search);
-      return query['keyword'];
+      return query[key];
     }
     return '';
   }
-
-
 
   handleChange = event => {
     this.setState({
@@ -48,7 +46,11 @@ export class SearchBox extends React.Component {
             if (ev.key === 'Enter') {
               // Do code here
               ev.preventDefault();
-              this.props.history.push('/search?keyword=' + this.state.keyword);
+              let url = '/search?keyword=' + this.state.keyword;
+              if (this.props.searchField) {
+                url += '&field=' + this.props.searchField;
+              }
+              this.props.history.push(url);
             }
           }}
         />
@@ -57,7 +59,7 @@ export class SearchBox extends React.Component {
           aria-label="Search"
           onClick={this.handleSearch}
         >
-          <NavLink to={`/search?keyword=${this.state.keyword}`} className='nav'>
+          <NavLink to={`/search?keyword=${this.state.keyword}&field=${this.props.searchField}`} className='nav'>
             <SearchIcon />
           </NavLink>
         </IconButton>

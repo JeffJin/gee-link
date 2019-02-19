@@ -8,8 +8,8 @@ class RankingService extends BaseService {
   }
 
   //数据浏览 /list/read/title
-  getDataBrowseRanking() {
-    const url = 'http://47.93.226.51:9012/v1/api/ume/statistics/list/read/title';
+  getDataBrowseRanking(unit) {
+    const url = 'http://47.93.226.51:9012/v1/api/ume/datamap/data/usage?unit=' + unit;
 
     return fetch(url, {
       method: 'get',
@@ -27,41 +27,46 @@ class RankingService extends BaseService {
   }
 
   //搜索用户
-  getSearchUserRanking(top, startTime, endTime) {
-    // /list/topcountbyip
-    const url = 'http://47.93.226.51:9012/v1/api/ume/statistics/list/topcountbyip';
+  getSearchUserRanking(unit) {
+    const url = 'http://47.93.226.51:9012/v1/api/ume/datamap/customer/statistics?action=search&unit=' + unit;
 
     return fetch(url, {
       method: 'get',
       headers: {
         ...this.header,
-        top: top || 10,
-        // startTime: startTime,
-        // endTime: endTime
       },
     }).then(this.checkStatus)
       .then(this.parseJson)
       .then((result) => {
-        return result.slice(0, top || 10);
+        const data = [];
+        for (let key in result) {
+          if (result.hasOwnProperty(key)) {
+            data.push({ip: key, count: result[key]});
+          }
+        }
+        return data.slice(0, 10);
       });
   }
 
-  //浏览用户 /list/read/topcountbyip
-  getBrowseUserRanking(top = 10) {
-    const url = 'http://47.93.226.51:9012/v1/api/ume/statistics/list/topcountbyip';
+  //浏览用户 artile
+  getBrowseUserRanking(unit) {
+    const url = 'http://47.93.226.51:9012/v1/api/ume/datamap/customer/statistics?action=search&unit=' + unit;
 
     return fetch(url, {
       method: 'get',
       headers: {
         ...this.header,
-        top: top,
-        // startTime: startTime,
-        // endTime: endTime
       },
     }).then(this.checkStatus)
       .then(this.parseJson)
       .then((result) => {
-        return result.slice(0, top);
+        const data = [];
+        for (let key in result) {
+          if (result.hasOwnProperty(key)) {
+            data.push({ip: key, count: result[key]});
+          }
+        }
+        return data.slice(0, 10);
       });
   }
 

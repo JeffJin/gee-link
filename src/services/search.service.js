@@ -7,9 +7,20 @@ class SearchService extends BaseService {
     super();
   }
 
-  async search(key, pageIndex = 0, pageSize = 20) {
-    const url = 'http://47.93.226.51:9090/v1/api/ume/searcher/search';
+  async search(key, field, pageIndex = 0, pageSize = 20) {
+    if (field === 'keyword') {
+      return this.searchKeyword(key, pageIndex, pageSize);
+    }
+    if (field === 'ip') {
+      return this.searchUser(key, pageIndex, pageSize);
+    }
+    if (!field || field === 'undefined') {
+      return this.searchGeneral(key, pageIndex, pageSize);
+    }
+  }
 
+  async searchGeneral(key, pageIndex = 0, pageSize = 20) {
+    const url = 'http://47.93.226.51:9090/v1/api/ume/searcher/search';
     const request = {
       collectionName: 'huluarticle',
       customerId: '6671A13AB54710D932C8F2E51FFE8CC3',
@@ -36,6 +47,53 @@ class SearchService extends BaseService {
         'Authorization': 'Bearer dd17f76e-c564-4b46-bf89-81294743d023'
       },
       body: JSON.stringify(request)
+    }).then(this.checkStatus)
+      .then(this.parseJson)
+      .then((result) => {
+        return result;
+      });
+  }
+
+  //numFound: 24
+  // results: [{collkey: "154976777851653", logType: "search", ip: "70.31.40.26",…},…]
+  //  0: {collkey: "154976777851653", logType: "search", ip: "70.31.40.26",…}
+  //    api: "http://47.93.226.51:9090/v1/api/ume/searcher/search"
+  //    collection: "huluarticle"
+  //    collkey: "154976777851653"
+  //    ip: "70.31.40.26"
+  //    keyword: "北京"
+  //    logType: "search"
+  //    time: "2019-02-10T11:02:55.741"
+  //    totalFound: "20"
+  async searchKeyword(key, pageIndex = 0, pageSize = 20) {
+    const url = `http://47.93.226.51:9012/v1/api/ume/datamap/data/search?field=keyword&keyword=${key}&rows=${pageSize}&start=${pageIndex}`;
+
+    return await fetch(url, {
+      method: 'get',
+      headers: {
+        'accept': 'application/json',
+        'Content-Type': 'application/json',
+        't': '8D839EB9C4765ACEEB1EDCBAF8D44031',
+        'Authorization': 'Bearer dd17f76e-c564-4b46-bf89-81294743d023'
+      }
+    }).then(this.checkStatus)
+      .then(this.parseJson)
+      .then((result) => {
+        return result;
+      });
+  }
+
+  async searchUser(key, pageIndex = 0, pageSize = 20) {
+    const url = `http://47.93.226.51:9012/v1/api/ume/datamap/data/search?field=ip&keyword=${key}&rows=${pageSize}&start=${pageIndex}`;
+
+    return await fetch(url, {
+      method: 'get',
+      headers: {
+        'accept': 'application/json',
+        'Content-Type': 'application/json',
+        't': '8D839EB9C4765ACEEB1EDCBAF8D44031',
+        'Authorization': 'Bearer dd17f76e-c564-4b46-bf89-81294743d023'
+      }
     }).then(this.checkStatus)
       .then(this.parseJson)
       .then((result) => {

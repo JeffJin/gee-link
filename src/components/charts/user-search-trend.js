@@ -5,6 +5,7 @@ import {CommonAction} from "../../store/reducers/actions";
 import {dataService} from "../../services/data.service";
 import connect from "react-redux/es/connect/connect";
 import moment from "moment";
+import {utils} from "../../services/utils";
 
 
 function loadDataAction(data) {
@@ -16,7 +17,7 @@ function loadDataAction(data) {
 
 class UserSearchTrendContent extends React.Component {
   state = {
-    selectedTimeRange: 'day',
+    selectedTimeRange: 'month',
     startTime: moment().subtract(1, 'days').format('YYYYMMDD') + '-000001',
     endTime: moment().format('YYYYMMDD-hhmmss'),
     unitType: 'hour',
@@ -27,46 +28,19 @@ class UserSearchTrendContent extends React.Component {
   }
 
   componentDidMount() {
-    this.getChartData(this.props.uid);
+    this.getChartData(this.state.selectedTimeRange);
   }
 
-  getChartData = (uid) => {
-    dataService.getUserSearchTrend(this.state.startTime, this.state.endTime, this.state.unitType).then(data => {
+  getChartData = (timeRange) => {
+    dataService.getUserSearchTrend(timeRange).then(data => {
       this.props.onLoadData(data);
     });
   };
 
   changeTime = (evt) => {
-    const today = moment();
     this.setState({selectedTimeRange: evt.target.value});
-    this.setState({selectedEndTime: today.format('YYYYMMDD-hhmmss')});
-
-    switch(evt.target.value) {
-      case 'day':
-        const yesterday = today.subtract(1, 'days');
-        this.setState({selectedStartTime: moment(yesterday).format('YYYYMMDD-hhmmss')});
-        this.setState({unitType: 'hour'});
-        break;
-      case 'week':
-        const weekAgo = today.subtract(1, 'weeks');
-        this.setState({selectedStartTime: moment(weekAgo).format('YYYYMMDD-hhmmss')});
-        this.setState({unitType: 'day'});
-        break;
-      case 'month':
-        const monthAgo = today.subtract(1, 'months');
-        this.setState({selectedStartTime: moment(monthAgo).format('YYYYMMDD-hhmmss')});
-        this.setState({unitType: 'day'});
-        break;
-      case 'year':
-        const yearAgo = today.subtract(1, 'years');
-        this.setState({selectedStartTime: moment(yearAgo).format('YYYYMMDD-hhmmss')});
-        this.setState({unitType: 'month'});
-        break;
-      default:
-        return '';
-    }
-
-    this.getChartData();
+    // const config = utils.getSelectedTimeRange(evt.target.value);
+    this.getChartData(evt.target.value);
   };
 
 
@@ -115,7 +89,7 @@ class UserSearchTrendContent extends React.Component {
           <div className={'title'}>用户搜索/使用趋势图</div>
           <div className={'tooltip'}></div>
           <div className={'select'}>
-            <select id={'timeSelect'} onChange={this.changeTime} value={this.state.selectedTimeRange}>
+            <select id={'timeSelect'} onChange={this.changeTime} value={this.state.selectedTimeRange} disabled>
               <option value="day">近24小时</option>
               <option value="week">近一周</option>
               <option value="month">近一个月</option>

@@ -258,23 +258,35 @@ class DataService extends BaseService {
   //  ['周六', 127],
   //  ['周日', 124]
   //]
-  async getDataUsageTrend(startTime, endTime, unitType) {
-    const url = 'http://47.93.226.51:9012/v1/api/ume/statistics/count/timely/read';
+  async getDataUsageTrend(unitType) {
+    const url = 'http://47.93.226.51:9012/v1/api/ume/datamap/data/trend?unit=' + unitType;
     return fetch(url, {
       method: 'get',
       headers: {
-        ...this.header,
-        startTime,
-        endTime,
-        unitType
+        ...this.header
       },
     }).then(this.checkStatus)
       .then(this.parseJson)
-      .then(results => {
-        return results.map(result => {
-          const dateStr = `${result.year}-${result.month}-${result.day} ${result.hour}`;
-          const datTime = moment(dateStr, 'YYYY-MM-DD HH').format('YY-MM-DD');
-          return [datTime, result.count];
+      .then(data => {
+        let results = [];
+        for (let key in data) {
+          if(data.hasOwnProperty(key)){
+            results.push([key, data[key]]);
+          }
+        }
+        return results.sort((a, b) => {
+          const timeA = moment(a[0], 'YYYY-MM-DD').toDate().getTime();
+          const timeB = moment(b[0], 'YYYY-MM-DD').toDate().getTime();
+
+          if (timeA > timeB) {
+            return 1;
+          }
+          else if (timeA < timeB) {
+            return -1;
+          }
+          else {
+            return 0;
+          }
         });
       });
   }
@@ -383,38 +395,56 @@ class DataService extends BaseService {
   //       data: [83.6, 78.8, 98.5, 93.4, 106.0, 84.5, 105.0]
   //     }];
   //     const result = {times, data};
-  //用户搜索/使用趋势图
-  getUserSearchTrend(startTime, endTime, unitType) {
-    const times = [
-      '周一',
-      '周二',
-      '周三',
-      '周四',
-      '周五',
-      '周六',
-      '周日'
-    ];
-    const data = [{
-      name: '搜索关键词',
-      data: [49.9, 71.5, 106.4, 129.2, 144.0, 176.0, 135.6]
 
-    }, {
-      name: '使用数据',
-      data: [83.6, 78.8, 98.5, 93.4, 106.0, 84.5, 105.0]
-    }];
-    const result = {times, data};
-    const url = `http://47.93.226.51:9012/v1/api/ume/statistics/count/read`;
+  //用户搜索/使用趋势图
+  //{
+  //   "2019-02-09": {
+  //     "search": 6,
+  //     "view": 0
+  //   },
+  //   "2019-02-08": {
+  //     "search": 1,
+  //     "view": 0
+  //   },
+  //   "2019-02-18": {
+  //     "search": 1,
+  //     "view": 2
+  //   },
+  //   "2019-02-07": {
+  //     "search": 3,
+  //     "view": 0
+  //   },
+  //   "2019-02-17": {
+  //     "search": 7,
+  //     "view": 7
+  //   },
+  //   "2019-02-06": {
+  //     "search": 12,
+  //     "view": 0
+  //   },
+  getUserSearchTrend(unitType) {
+    const url = `http://47.93.226.51:9012/v1/api/ume/datamap/customer/trend?unit=` + unitType;
     return fetch(url, {
       method: 'get',
       headers: {
-        ...this.header,
-        startTime,
-        endTime,
-        unitType
+        ...this.header
       }
     }).then(this.checkStatus)
       .then(this.parseJson)
-      .then(() => result);
+      .then((results) => {
+        const times = [];
+        const searchSet = {name: '搜索关键词', data: []};
+        const viewSet = {name: '使用数据', data: []};
+        for(let key in results) {
+          if (results.hasOwnProperty(key)) {
+            times.push(key);
+            searchSet.data.push(results[key].search);
+            viewSet.data.push(results[key].view);
+          }
+        }
+        const data = [searchSet, viewSet];
+        return {times, data};
+      });
   }
 
   //{

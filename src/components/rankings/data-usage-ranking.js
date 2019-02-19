@@ -14,7 +14,7 @@ function loadDataUsageRankingAction(data) {
 
 class DataUsageRankingContent extends React.Component {
   state = {
-    selectedTimeRange: 'day',
+    selectedTimeRange: 'year',
     startTime: moment().subtract(1, 'days').format('YYYYMMDD') + '-000001',
     endTime: moment().format('YYYYMMDD-hhmmss'),
     unitType: 'hour',
@@ -25,11 +25,11 @@ class DataUsageRankingContent extends React.Component {
   }
 
   componentDidMount() {
-    this.getData();
+    this.getData(this.state.selectedTimeRange);
   }
 
-  getData = () => {
-    rankingService.getDataBrowseRanking().then(data => {
+  getData = (timeRange) => {
+    rankingService.getDataBrowseRanking(timeRange).then(data => {
       this.props.onLoadDataUsageRanking(data);
     });
   };
@@ -45,9 +45,9 @@ const mapStateToProps = (state) => {
   return {
     rankingItems: state.ranking.dataUsageRanking.map((r, i) => {
       return {
-        id: r.keyword,
+        id: r.collkey,
         rank: i + 1,
-        desc: r.keyword,
+        desc: r.subject,
         value: r.count
       }
     }),

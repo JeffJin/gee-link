@@ -13,7 +13,7 @@ export class MainChartListContent extends React.Component {
   state = {
     isInProgress: false,
     isChartHelpShown: false,
-    selectedTimeRange: 'day'
+    selectedTimeRange: 'month'
   };
 
   constructor(props) {
@@ -39,7 +39,7 @@ export class MainChartListContent extends React.Component {
       payload: timeConfig
     });
 
-    this.updateCharts(timeConfig.startTime, timeConfig.endTime, timeConfig.unitType);
+    this.updateCharts(timeConfig.startTime, timeConfig.endTime, this.state.selectedTimeRange);
   };
 
   updateCharts(startTime, endTime, unitType) {

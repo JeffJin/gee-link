@@ -4,10 +4,10 @@ import moment from "moment";
 
 export default class Ranking extends React.Component {
   state = {
-    selectedTimeRange: 'day',
+    selectedTimeRange: 'month',
     startTime: moment().subtract(1, 'days').format('YYYYMMDD') + '-000001',
     endTime: moment().format('YYYYMMDD-hhmmss'),
-    unitType: 'hour',
+    unitType: 'day',
   };
 
   constructor(props) {
@@ -61,7 +61,7 @@ export default class Ranking extends React.Component {
         <div className={'title'}>{this.props.title}</div>
         <div className={'tooltip'}></div>
         <div className={'select'}>
-          <select id={'timeSelect'} onChange={this.changeTime} value={this.state.selectedTimeRange}>
+          <select id={'timeSelect'} onChange={this.changeTime} value={this.state.selectedTimeRange} disabled>
             <option value="day">近24小时</option>
             <option value="week">近一周</option>
             <option value="month">近一个月</option>

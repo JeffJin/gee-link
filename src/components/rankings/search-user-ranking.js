@@ -17,11 +17,11 @@ class SearchUserRankingContent extends React.Component {
   }
 
   componentDidMount() {
-    this.getData();
+    this.getData('month');
   }
 
-  getData = () => {
-    rankingService.getSearchUserRanking().then(data => {
+  getData = (unit) => {
+    rankingService.getSearchUserRanking(unit).then(data => {
       this.props.onLoadSearchUserRanking(data);
     });
   };

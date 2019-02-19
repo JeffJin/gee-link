@@ -34,7 +34,8 @@ export class SearchResult extends React.Component {
     isInProgress: false,
     pageIndex: 0,
     pageSize: 20,
-    offset: 0
+    offset: 0,
+    field: ''
   };
 
   constructor(props) {
@@ -42,14 +43,16 @@ export class SearchResult extends React.Component {
   }
 
   componentDidMount() {
-    const keyword = this.getKeyword();
-    this.getSearchResult(keyword, this.state.pageIndex, this.state.pageSize);
+    const keyword = this.getFieldValue('keyword');
+    const field = this.getFieldValue('field');
+    this.setState({field: field});
+    this.getSearchResult(keyword, field, this.state.pageIndex, this.state.pageSize);
   }
 
-  getKeyword() {
+  getFieldValue(key) {
     if (this.props.location && this.props.location.search) {
       const query = queryString.parse(this.props.location.search);
-      return query['keyword'];
+      return query[key];
     }
     return '';
   }
@@ -58,7 +61,8 @@ export class SearchResult extends React.Component {
     if (nextProps.location !== this.props.location) {
       const query = queryString.parse(nextProps.location.search);
       const keyword = query['keyword'];
-      this.getSearchResult(keyword, this.state.pageIndex, this.state.pageSize);
+      const field = query['field'];
+      this.getSearchResult(keyword, field, this.state.pageIndex, this.state.pageSize);
     }
   }
 
@@ -86,15 +90,14 @@ export class SearchResult extends React.Component {
     return result.replace(/<(?:.|\n)*?>/gm, '');
   }
 
-  getSearchResult = (keyword, pageIndex, pageSize) => {
-    console.log('getSearchResult', pageIndex, pageSize);
+  getSearchResult = (keyword, field, pageIndex, pageSize) => {
     this.setState({
       isInProgress: true,
       pageIndex: pageIndex,
       pageSize: pageSize,
       offset: pageSize * pageIndex
     });
-    searchService.search(keyword, pageIndex, pageSize).then((result) => {
+    searchService.search(keyword, field, pageIndex, pageSize).then((result) => {
       this.setState({
         result: {
           items: this.formatResults(result.resultList),
@@ -109,7 +112,9 @@ export class SearchResult extends React.Component {
 
   handlePageSelection(offset) {
     const pageIndex = parseInt(offset / this.state.pageSize);
-    this.getSearchResult(this.getKeyword(), pageIndex, this.state.pageSize);
+    const keyword = this.getFieldValue('keyword');
+    const field = this.getFieldValue('field');
+    this.getSearchResult(keyword, field, pageIndex, this.state.pageSize);
   }
 
   render(){
