@@ -11,7 +11,7 @@ class SearchService extends BaseService {
     if (field === 'keyword') {
       return this.searchKeyword(key, pageIndex, pageSize);
     }
-    if (field === 'ip') {
+    if (field === 'ipinfo' || field === 'ip') {
       return this.searchUser(key, pageIndex, pageSize);
     }
     if (!field || field === 'undefined') {
@@ -84,7 +84,7 @@ class SearchService extends BaseService {
   }
 
   async searchUser(key, pageIndex = 0, pageSize = 20) {
-    const url = `http://47.93.226.51:9012/v1/api/ume/datamap/data/search?field=ip&keyword=${key}&rows=${pageSize}&start=${pageIndex}`;
+    const url = `http://47.93.226.51:9012/v1/api/ume/datamap/data/search?field=ipinfo&keyword=${key}&rows=${pageSize}&start=${pageIndex}`;
 
     return await fetch(url, {
       method: 'get',

@@ -29,7 +29,7 @@ class UserStats extends React.Component {
         {
           progress
         }
-        <SearchBox {...this.props}/>
+        <SearchBox {...this.props} searchField={'ipinfo'}/>
         <div className="user-stats">
           <div className={'left'}>
             <UserSearchTrend />

@@ -1,0 +1,205 @@
+{
+  "numFound": 29274,
+  "results": [
+    {
+      "collkey": "15489029935941",
+      "logType": "search",
+      "ip": "101.254.112.67",
+      "collection": "6671A13AB54710D932C8F2E51FFE8CC3_huluarticle",
+      "totalFound": "1",
+      "api": "http://47.93.226.51:9090/v1/api/ume/searcher/search",
+      "time": "2019-01-31T10:49:51.312",
+      "ipinfo": "{country=中国, prv=北京, city=北京市, cityId=215}"
+    },
+    {
+      "collkey": "154890299697010",
+      "logType": "document",
+      "ip": "47.93.226.51",
+      "collection": "datamap",
+      "totalFound": "0",
+      "api": "http://47.93.226.51:9090/v1/api/ume/docs",
+      "time": "2019-01-31T10:49:54.841",
+      "ipinfo": "{country=中国, prv=北京, city=北京市, cityId=215}"
+    },
+    {
+      "collkey": "154890299748814",
+      "logType": "document",
+      "ip": "47.93.226.51",
+      "collection": "datamap",
+      "totalFound": "0",
+      "api": "http://47.93.226.51:9090/v1/api/ume/docs",
+      "time": "2019-01-31T10:49:56.863",
+      "ipinfo": "{country=中国, prv=北京, city=北京市, cityId=215}"
+    },
+    {
+      "collkey": "154890299806019",
+      "logType": "document",
+      "ip": "47.93.226.51",
+      "collection": "datamap",
+      "totalFound": "0",
+      "api": "http://47.93.226.51:9090/v1/api/ume/docs",
+      "time": "2019-01-31T10:49:57.504",
+      "ipinfo": "{country=中国, prv=北京, city=北京市, cityId=215}"
+    },
+    {
+      "collkey": "154890299815820",
+      "logType": "document",
+      "ip": "47.93.226.51",
+      "collection": "datamap",
+      "totalFound": "0",
+      "api": "http://47.93.226.51:9090/v1/api/ume/docs",
+      "time": "2019-01-31T10:49:57.619",
+      "ipinfo": "{country=中国, prv=北京, city=北京市, cityId=215}"
+    },
+    {
+      "collkey": "154890299852123",
+      "logType": "document",
+      "ip": "47.93.226.51",
+      "collection": "datamap",
+      "totalFound": "0",
+      "api": "http://47.93.226.51:9090/v1/api/ume/docs",
+      "time": "2019-01-31T10:49:57.959",
+      "ipinfo": "{country=中国, prv=北京, city=北京市, cityId=215}"
+    },
+    {
+      "collkey": "154890299978532",
+      "logType": "document",
+      "ip": "47.93.226.51",
+      "collection": "datamap",
+      "totalFound": "0",
+      "api": "http://47.93.226.51:9090/v1/api/ume/docs",
+      "time": "2019-01-31T10:49:59.038",
+      "ipinfo": "{country=中国, prv=北京, city=北京市, cityId=215}"
+    },
+    {
+      "collkey": "154890300004834",
+      "logType": "document",
+      "ip": "47.93.226.51",
+      "collection": "datamap",
+      "totalFound": "0",
+      "api": "http://47.93.226.51:9090/v1/api/ume/docs",
+      "time": "2019-01-31T10:49:59.440",
+      "ipinfo": "{country=中国, prv=北京, city=北京市, cityId=215}"
+    },
+    {
+      "collkey": "154890300027436",
+      "logType": "document",
+      "ip": "47.93.226.51",
+      "collection": "datamap",
+      "totalFound": "0",
+      "api": "http://47.93.226.51:9090/v1/api/ume/docs",
+      "time": "2019-01-31T10:49:59.680",
+      "ipinfo": "{country=中国, prv=北京, city=北京市, cityId=215}"
+    },
+    {
+      "collkey": "15489029955868",
+      "logType": "document",
+      "ip": "47.93.226.51",
+      "collection": "datamap",
+      "totalFound": "0",
+      "api": "http://47.93.226.51:9090/v1/api/ume/docs",
+      "time": "2019-01-31T10:49:54.475",
+      "ipinfo": "{country=中国, prv=北京, city=北京市, cityId=215}"
+    },
+    {
+      "collkey": "154890300061939",
+      "logType": "document",
+      "ip": "47.93.226.51",
+      "collection": "datamap",
+      "totalFound": "0",
+      "api": "http://47.93.226.51:9090/v1/api/ume/docs",
+      "time": "2019-01-31T10:50:00.059",
+      "ipinfo": "{country=中国, prv=北京, city=北京市, cityId=215}"
+    },
+    {
+      "collkey": "154890300093442",
+      "logType": "document",
+      "ip": "47.93.226.51",
+      "collection": "datamap",
+      "totalFound": "0",
+      "api": "http://47.93.226.51:9090/v1/api/ume/docs",
+      "time": "2019-01-31T10:50:00.388",
+      "ipinfo": "{country=中国, prv=北京, city=北京市, cityId=215}"
+    },
+    {
+      "collkey": "154890300114044",
+      "logType": "document",
+      "ip": "47.93.226.51",
+      "collection": "datamap",
+      "totalFound": "0",
+      "api": "http://47.93.226.51:9090/v1/api/ume/docs",
+      "time": "2019-01-31T10:50:00.635",
+      "ipinfo": "{country=中国, prv=北京, city=北京市, cityId=215}"
+    },
+    {
+      "collkey": "154890300123145",
+      "logType": "document",
+      "ip": "47.93.226.51",
+      "collection": "datamap",
+      "totalFound": "0",
+      "api": "http://47.93.226.51:9090/v1/api/ume/docs",
+      "time": "2019-01-31T10:50:00.727",
+      "ipinfo": "{country=中国, prv=北京, city=北京市, cityId=215}"
+    },
+    {
+      "collkey": "154890300037537",
+      "logType": "document",
+      "ip": "47.93.226.51",
+      "collection": "datamap",
+      "totalFound": "0",
+      "api": "http://47.93.226.51:9090/v1/api/ume/docs",
+      "time": "2019-01-31T10:49:59.797",
+      "ipinfo": "{country=中国, prv=北京, city=北京市, cityId=215}"
+    },
+    {
+      "collkey": "154890300298458",
+      "logType": "document",
+      "ip": "47.93.226.51",
+      "collection": "datamap",
+      "totalFound": "0",
+      "api": "http://47.93.226.51:9090/v1/api/ume/docs",
+      "time": "2019-01-31T10:50:02.146",
+      "ipinfo": "{country=中国, prv=北京, city=北京市, cityId=215}"
+    },
+    {
+      "collkey": "154890300307559",
+      "logType": "document",
+      "ip": "47.93.226.51",
+      "collection": "datamap",
+      "totalFound": "0",
+      "api": "http://47.93.226.51:9090/v1/api/ume/docs",
+      "time": "2019-01-31T10:50:02.234",
+      "ipinfo": "{country=中国, prv=北京, city=北京市, cityId=215}"
+    },
+    {
+      "collkey": "154890300170849",
+      "logType": "document",
+      "ip": "47.93.226.51",
+      "collection": "datamap",
+      "totalFound": "0",
+      "api": "http://47.93.226.51:9090/v1/api/ume/docs",
+      "time": "2019-01-31T10:50:01.151",
+      "ipinfo": "{country=中国, prv=北京, city=北京市, cityId=215}"
+    },
+    {
+      "collkey": "154890300213553",
+      "logType": "document",
+      "ip": "47.93.226.51",
+      "collection": "datamap",
+      "totalFound": "0",
+      "api": "http://47.93.226.51:9090/v1/api/ume/docs",
+      "time": "2019-01-31T10:50:01.608",
+      "ipinfo": "{country=中国, prv=北京, city=北京市, cityId=215}"
+    },
+    {
+      "collkey": "154890300320560",
+      "logType": "document",
+      "ip": "47.93.226.51",
+      "collection": "datamap",
+      "totalFound": "0",
+      "api": "http://47.93.226.51:9090/v1/api/ume/docs",
+      "time": "2019-01-31T10:50:02.365",
+      "ipinfo": "{country=中国, prv=北京, city=北京市, cityId=215}"
+    }
+  ]
+}

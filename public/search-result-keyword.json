@@ -1,0 +1,205 @@
+{
+  "numFound": 24,
+  "results": [
+    {
+      "collkey": "154976755304748",
+      "logType": "search",
+      "ip": "70.31.40.26",
+      "api": "http://47.93.226.51:9090/v1/api/ume/searcher/search",
+      "collection": "huluarticle",
+      "time": "2019-02-10T10:59:12.545",
+      "keyword": "北京",
+      "totalFound": "20"
+    },
+    {
+      "collkey": "154976872689254",
+      "logType": "search",
+      "ip": "70.31.40.26",
+      "api": "http://47.93.226.51:9090/v1/api/ume/searcher/search",
+      "collection": "huluarticle",
+      "time": "2019-02-10T11:18:45.295",
+      "keyword": "北京",
+      "totalFound": "1"
+    },
+    {
+      "collkey": "154976960447672",
+      "logType": "search",
+      "ip": "70.31.40.26",
+      "api": "http://47.93.226.51:9090/v1/api/ume/searcher/search",
+      "collection": "huluarticle",
+      "time": "2019-02-10T11:33:22.894",
+      "keyword": "北京",
+      "totalFound": "1"
+    },
+    {
+      "collkey": "1549943319155117",
+      "logType": "search",
+      "ip": "107.190.108.98",
+      "api": "http://47.93.226.51:9090/v1/api/ume/searcher/search",
+      "collection": "huluarticle",
+      "time": "2019-02-12T11:48:36.426",
+      "keyword": "北京",
+      "totalFound": "20"
+    },
+    {
+      "collkey": "1549875949243105",
+      "logType": "search",
+      "ip": "190.237.130.222",
+      "api": "http://47.93.226.51:9090/v1/api/ume/searcher/search",
+      "collection": "huluarticle",
+      "time": "2019-02-11T17:05:45.597",
+      "keyword": "北京",
+      "totalFound": "20"
+    },
+    {
+      "collkey": "1550291354164147",
+      "logType": "article",
+      "ip": "107.190.108.98",
+      "collection": "huluarticle",
+      "totalFound": "1",
+      "api": "http://47.93.226.51:9090/v1/api/ume/searcher/search",
+      "time": "2019-02-16T12:29:11.119",
+      "keyword": "北京"
+    },
+    {
+      "collkey": "1550285254434146",
+      "logType": "search",
+      "ip": "107.190.108.98",
+      "api": "http://47.93.226.51:9090/v1/api/ume/searcher/search",
+      "collection": "huluarticle",
+      "time": "2019-02-16T10:47:31.122",
+      "keyword": "北京",
+      "totalFound": "20"
+    },
+    {
+      "collkey": "154976953390167",
+      "logType": "search",
+      "ip": "107.190.108.98",
+      "api": "http://47.93.226.51:9090/v1/api/ume/searcher/search",
+      "collection": "huluarticle",
+      "time": "2019-02-10T11:32:11.741",
+      "keyword": "北京",
+      "totalFound": "20"
+    },
+    {
+      "collkey": "154976893679458",
+      "logType": "search",
+      "ip": "107.190.108.98",
+      "api": "http://47.93.226.51:9090/v1/api/ume/searcher/search",
+      "collection": "huluarticle",
+      "time": "2019-02-10T11:22:13.353",
+      "keyword": "北京",
+      "totalFound": "20"
+    },
+    {
+      "collkey": "154976894790159",
+      "logType": "search",
+      "ip": "107.190.108.98",
+      "api": "http://47.93.226.51:9090/v1/api/ume/searcher/search",
+      "collection": "huluarticle",
+      "time": "2019-02-10T11:22:25.979",
+      "keyword": "北京",
+      "totalFound": "1"
+    },
+    {
+      "collkey": "154976954621168",
+      "logType": "search",
+      "ip": "107.190.108.98",
+      "api": "http://47.93.226.51:9090/v1/api/ume/searcher/search",
+      "collection": "huluarticle",
+      "time": "2019-02-10T11:32:24.595",
+      "keyword": "北京",
+      "totalFound": "1"
+    },
+    {
+      "collkey": "1549943308038116",
+      "logType": "search",
+      "ip": "107.190.108.98",
+      "api": "http://47.93.226.51:9090/v1/api/ume/searcher/search",
+      "collection": "huluarticle",
+      "time": "2019-02-12T11:48:23.126",
+      "keyword": "北京",
+      "totalFound": "20"
+    },
+    {
+      "collkey": "1549942991201112",
+      "logType": "article",
+      "ip": "107.190.108.98",
+      "api": "http://47.93.226.51:9090/v1/api/ume/searcher/search",
+      "collection": "huluarticle",
+      "time": "2019-02-12T11:43:07.886",
+      "keyword": "北京",
+      "totalFound": "1"
+    },
+    {
+      "collkey": "1550024174982141",
+      "logType": "article",
+      "ip": "107.190.108.98",
+      "collection": "huluarticle",
+      "totalFound": "1",
+      "api": "http://47.93.226.51:9090/v1/api/ume/searcher/search",
+      "time": "2019-02-13T10:16:13.146",
+      "keyword": "北京"
+    },
+    {
+      "collkey": "1550024096630140",
+      "logType": "search",
+      "ip": "107.190.108.98",
+      "api": "http://47.93.226.51:9090/v1/api/ume/searcher/search",
+      "collection": "huluarticle",
+      "time": "2019-02-13T10:14:52.074",
+      "keyword": "北京",
+      "totalFound": "20"
+    },
+    {
+      "collkey": "1550445789063203",
+      "logType": "search",
+      "ip": "107.190.108.98",
+      "api": "http://47.93.226.51:9090/v1/api/ume/searcher/search",
+      "collection": "huluarticle",
+      "time": "2019-02-18T07:23:02.704",
+      "keyword": "北京",
+      "totalFound": "20"
+    },
+    {
+      "collkey": "1550550308848206",
+      "logType": "search",
+      "ip": "135.23.219.136",
+      "api": "http://47.93.226.51:9090/v1/api/ume/searcher/search",
+      "collection": "huluarticle",
+      "time": "2019-02-19T12:25:03.060",
+      "keyword": "北京",
+      "totalFound": "20"
+    },
+    {
+      "collkey": "154976777851653",
+      "logType": "search",
+      "ip": "70.31.40.26",
+      "api": "http://47.93.226.51:9090/v1/api/ume/searcher/search",
+      "collection": "huluarticle",
+      "time": "2019-02-10T11:02:55.741",
+      "keyword": "北京",
+      "totalFound": "20"
+    },
+    {
+      "collkey": "154976900469663",
+      "logType": "search",
+      "ip": "107.190.108.98",
+      "api": "http://47.93.226.51:9090/v1/api/ume/searcher/search",
+      "collection": "huluarticle",
+      "time": "2019-02-10T11:23:23.413",
+      "keyword": "北京",
+      "totalFound": "1"
+    },
+    {
+      "collkey": "154976760915049",
+      "logType": "search",
+      "ip": "70.31.40.26",
+      "api": "http://47.93.226.51:9090/v1/api/ume/searcher/search",
+      "collection": "huluarticle",
+      "time": "2019-02-10T11:00:07.400",
+      "keyword": "北京",
+      "totalFound": "1"
+    }
+  ]
+}
