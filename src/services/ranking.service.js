@@ -15,9 +15,7 @@ class RankingService extends BaseService {
       method: 'get',
       headers: {
         ...this.header,
-        top: 10,
-        // startTime: startTime,
-        // endTime: endTime
+        top: 10
       },
     }).then(this.checkStatus)
       .then(this.parseJson)

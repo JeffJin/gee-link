@@ -74,7 +74,7 @@ class BaseService {
       const error = new Error(`HTTP Error ${response.statusText}`);
       error.status = response.statusText;
       error.response = response;
-      console.error(error);
+      // console.error(error);
       // throw error;
     }
   }

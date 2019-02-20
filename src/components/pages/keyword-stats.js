@@ -26,7 +26,7 @@ class KeywordStats extends React.Component {
         {
           progress
         }
-        <SearchBox {...this.props} searchField={'keyword'}/>
+        <SearchBox {...this.props} basePath={'keyword'} searchField={'keyword'}/>
         <div className="keyword-stats flex-box">
           <div className={'left flex-5'}>
             <div className={'stat-box-container flex-box'}>

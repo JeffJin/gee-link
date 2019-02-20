@@ -21,7 +21,7 @@ class DataBrowseRankingContent extends React.Component {
   }
 
   getData = () => {
-    rankingService.getDataBrowseRanking().then(data => {
+    rankingService.getDataBrowseRanking('month').then(data => {
       this.props.onLoadDataBrowseRanking(data);
     });
   };
@@ -37,9 +37,9 @@ const mapStateToProps = (state) => {
   return {
     rankingItems: state.ranking.dataBrowseRanking.map((r, i) => {
       return {
-        id: r.title,
+        id: r.collkey,
         rank: i + 1,
-        desc: r.title,
+        desc: r.subject,
         value: r.count
       }
     }),

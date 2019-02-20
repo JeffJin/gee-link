@@ -46,7 +46,7 @@ const mapStateToProps = (state) => {
     }),
     headers: ['排名', '数据内容', '浏览数'],
     title: '相关数据',
-    route: '/data'
+    route: '/data/details'
   };
 };
 

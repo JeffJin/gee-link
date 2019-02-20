@@ -29,7 +29,7 @@ class DataStats extends React.Component {
         {
           progress
         }
-        <SearchBox {...this.props}/>
+        <SearchBox {...this.props} basePath={'data'}/>
         <div className="data-stats">
           <div className={'data-stats-row-1'}>
             <div className={'data-stats-col-1'}>

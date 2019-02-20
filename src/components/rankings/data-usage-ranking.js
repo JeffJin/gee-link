@@ -53,7 +53,7 @@ const mapStateToProps = (state) => {
     }),
     headers: ['排名', '标题内容', '被浏览次数'],
     title: '数据浏览 TOP 10',
-    route: '/data'
+    route: '/data/details'
   };
 };
 

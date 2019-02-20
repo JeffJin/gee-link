@@ -19,7 +19,7 @@ export function ResultItem(props) {
         <div className={'flex-3'}></div>
       </div>
       <div className={'row summary'}>
-        <p>{renderHTML(props.data.summary)}</p>
+        <p className={'info'}>{renderHTML(props.data.summary)}</p>
       </div>
     </div>);
 }
@@ -63,7 +63,7 @@ export function IpinfoResultItem(props) {
       <div className={'row summary'}>
         <p>IP： {props.data.ip}</p>
         <p>API： {props.data.api}</p>
-        <p>用户信息： {props.data.ipinfo.country} {props.data.ipinfo.country} {props.data.ipinfo.country}</p>
+        <p>用户信息： {props.data.ipinfo.country}, {props.data.ipinfo.city}, {props.data.ipinfo.prv}</p>
       </div>
     </div>);
 }

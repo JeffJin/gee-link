@@ -96,12 +96,12 @@ export class SearchResult extends React.Component {
   }
 
   parseIpInfo(ipinfo) {
-    const temp = ipinfo.replace('{').replace('}').split(',');
+    const temp = ipinfo.replace('{', '').replace('}', '').split(',');
     let result = {};
     for (let i = 0; i < temp.length; i++) {
       const key = temp[i].split('=')[0];
       const value = temp[i].split('=')[1];
-      result[key.trim()] = value.trim();
+      result[key.replace(' ', '')] = value.replace(' ', '');
     }
     return result;
   }
@@ -176,7 +176,7 @@ export class SearchResult extends React.Component {
         {
           progress
         }
-        <SearchBox {...this.props}/>
+        <SearchBox {...this.props} basePath={this.props.basePath} searchField={this.state.field}/>
         <div className="search-result">
           {
             summary

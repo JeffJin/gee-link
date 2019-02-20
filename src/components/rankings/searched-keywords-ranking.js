@@ -45,7 +45,7 @@ const mapStateToProps = (state) => {
       }),
       headers: ['排名', '关键词', '被搜索次数'],
       title: '关键词搜索 TOP 10',
-      route: '/keyword'
+      route: '/keyword/details'
     };
 };
 

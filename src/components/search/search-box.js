@@ -39,14 +39,14 @@ export class SearchBox extends React.Component {
       <Paper className={'search-box'} elevation={1}>
         <InputBase
           className={'input'}
-          placeholder="Search For"
+          placeholder="Search For ..."
           value={this.state.keyword}
           onChange={this.handleChange}
           onKeyPress={(ev) => {
             if (ev.key === 'Enter') {
               // Do code here
               ev.preventDefault();
-              let url = '/search?keyword=' + this.state.keyword;
+              let url = `/${this.props.basePath}/search?keyword=${this.state.keyword}`;
               if (this.props.searchField) {
                 url += '&field=' + this.props.searchField;
               }
@@ -59,7 +59,7 @@ export class SearchBox extends React.Component {
           aria-label="Search"
           onClick={this.handleSearch}
         >
-          <NavLink to={`/search?keyword=${this.state.keyword}&field=${this.props.searchField}`} className='nav'>
+          <NavLink to={`/${this.props.basePath}/search?keyword=${this.state.keyword}&field=${this.props.searchField}`} className='nav'>
             <SearchIcon />
           </NavLink>
         </IconButton>

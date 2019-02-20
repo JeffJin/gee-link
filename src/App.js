@@ -16,9 +16,7 @@ import {store} from "./store/store";
 import KeywordDetails from "./components/pages/keyword-details";
 import UserDetails from "./components/pages/user-details";
 import DataDetails from "./components/pages/data-search-details";
-import {SearchBox} from './components/search/search-box';
 import {SearchResult} from "./components/search/search-result";
-import LinearProgress from "@material-ui/core/es/LinearProgress/LinearProgress";
 
 class App extends React.Component {
   state = {
@@ -44,12 +42,16 @@ class App extends React.Component {
         </Drawer>
         <main className={'content'}>
           <Switch>
+            <Route path={'/main/search'}  render={(props) => <SearchResult {...props} basePath={'main'}/>} />
+            <Route path={'/data/search'}  render={(props) => <SearchResult {...props} basePath={'data'}/>} />
+            <Route path={'/user/search'}  render={(props) => <SearchResult {...props} basePath={'user'}/>} />
+            <Route path={'/keyword/search'}  render={(props) => <SearchResult {...props} basePath={'keyword'}/>} />
             <Route exact path='/keyword' render={(props) => <KeywordStats {...props}/>}/>
             <Route exact path='/data' render={(props) => <DataStats {...props}/>}/>
             <Route exact path='/user' render={(props) => <UserStats {...props}/>}/>
             <Route path='/main' render={(props) => <MainPage {...props}/>}/>
             <Route
-              path={'/keyword/:id'}
+              path={'/keyword/details/:id'}
               render={(props) => {
                 return (
                   <KeywordDetails
@@ -60,7 +62,7 @@ class App extends React.Component {
               }}
             />
             <Route
-              path={'/user/:id'}
+              path={'/user/details/:id'}
               render={({ match }) => {
                 return (
                   <UserDetails
@@ -70,7 +72,7 @@ class App extends React.Component {
               }}
             />
             <Route
-              path={'/data/:id'}
+              path={'/data/details/:id'}
               render={({ match }) => {
                 return (
                   <DataDetails
@@ -79,7 +81,6 @@ class App extends React.Component {
                 );
               }}
             />
-            <Route path={'/search'}  render={(props) => <SearchResult {...props}/>} />
             <Route exact path='/' render={() => (
               <Redirect
                 to='/main'
@@ -92,24 +93,6 @@ class App extends React.Component {
     );
   }
 }
-
-//
-// const mapStateToProps = (state) => {
-//   return {
-//     isInProgress: state.isInProgress
-//   };
-// };
-//
-// const mapDispatchToProps = (dispatch) => (
-//   {
-//     dispatch: dispatch
-//   }
-// );
-//
-// export const App = connect(
-//   mapStateToProps,
-//   mapDispatchToProps
-// )(AppContent);
 
 const WrappedApp = () => (
   <Provider store={store}>

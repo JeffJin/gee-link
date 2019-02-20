@@ -45,7 +45,7 @@ const mapStateToProps = (state) => {
     }),
     headers: ['排名', '用户ID', '时间'],
     title: '最近搜索用户',
-    route: '/user'
+    route: '/user/details'
   };
 };
 
