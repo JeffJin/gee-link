@@ -33,6 +33,9 @@ class KeywordSearchTrendContent extends React.Component {
 
   render() {
     const config = {
+      credits: {
+        enabled: false
+      },
       chart: {
         type: 'column'
       },

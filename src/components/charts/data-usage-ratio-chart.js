@@ -29,6 +29,9 @@ class DataUsageRatioContent extends React.Component {
 
   render() {
     const config = {
+      credits: {
+        enabled: false
+      },
       chart: {
         plotBackgroundColor: null,
         plotBorderWidth: null,

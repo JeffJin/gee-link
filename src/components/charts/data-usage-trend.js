@@ -42,7 +42,9 @@ class DataUsageTrendContent extends React.Component {
 
   render() {
     const config = {
-      chart: {
+      credits: {
+        enabled: false
+      },      chart: {
         type: 'column'
       },
       title: {

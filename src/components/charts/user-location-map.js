@@ -51,6 +51,9 @@ class UserLocationMapContent extends React.Component {
 
   render() {
     const mapOptions = {
+      credits: {
+        enabled: false
+      },
       title: {
         text: ''
       },

@@ -15,6 +15,9 @@ class IndividualSearchChartContent extends React.Component {
 
   render() {
     const chartConfig = {
+      credits: {
+        enabled: false
+      },
       chart: {
         zoomType: 'x',
         height: '200'

@@ -46,6 +46,9 @@ class UserSearchTrendContent extends React.Component {
 
   render() {
     const chartOptions = {
+      credits: {
+        enabled: false
+      },
       chart: {
         type: 'column'
       },

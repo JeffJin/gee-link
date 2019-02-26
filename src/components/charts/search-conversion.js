@@ -30,6 +30,9 @@ class SearchConversionContent extends React.Component {
 
   render() {
     const config = {
+      credits: {
+        enabled: false
+      },
       chart: {
         type: 'bar'
       },
