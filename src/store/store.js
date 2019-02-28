@@ -41,6 +41,8 @@ const initialStates = {
     missedKeywordRanking: [],
     categorizedRanking: [],
     relatedDataRanking: [],
+    relatedUserRanking: [],
+    relatedKeywordRanking: [],
     recentSearchUserRanking: [],
   },
   stats: {
@@ -64,6 +66,7 @@ const initialStates = {
     dataUsageRatio: [],
     dataSearchRatio: [],
     dataUsageTrend: [],
+    dataSearchUsageTrend: [],
     userActivityHistory: [],
   },
   dataUsageRecord: {},

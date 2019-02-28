@@ -67,7 +67,7 @@ class UserLocationMapContent extends React.Component {
       },
       series: [{
         mapData: chinaMap,
-        name: 'China',
+        name: '中国',
         data: this.props.data,
         states: {
           hover: {

@@ -45,7 +45,7 @@ const mapStateToProps = (state) => {
   return {
     rankingItems: state.ranking.dataUsageRanking.map((r, i) => {
       return {
-        id: r.collkey,
+        id: r.subject,
         rank: i + 1,
         desc: r.subject,
         value: r.count

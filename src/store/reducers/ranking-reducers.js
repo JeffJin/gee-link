@@ -56,6 +56,18 @@ export function rankingDataReducer(state = {}, action) {
         relatedDataRanking: action.payload,
       };
     }// related data
+    case CommonAction.LOAD_RELATED_USER_RANKINGS: {
+      return {
+        ...state,
+        relatedUserRanking: action.payload,
+      };
+    }// related data
+    case CommonAction.LOAD_RELATED_KEYWORD_RANKINGS: {
+      return {
+        ...state,
+        relatedKeywordRanking: action.payload,
+      };
+    }// related data
     case CommonAction.LOAD_RECENT_SEARCH_USER_RANKINGS: {
       return {
         ...state,

@@ -62,6 +62,12 @@ export function chartDataReducer(state = {}, action) {
         dataUsageTrend: action.payload,
       };
     }
+    case CommonAction.LOAD_DATA_SEARCH_USAGE_TREND: {
+      return {
+        ...state,
+        dataSearchUsageTrend: action.payload,
+      };
+    }
     case CommonAction.LOAD_USER_ACTIVITY_HISTORY: {
       return {
         ...state,
@@ -131,6 +137,12 @@ export function chartConfigReducer(state = {}, action) {
       };
     }
     case CommonAction.LOAD_DATA_USAGE_TREND_CONFIG: {
+      return {
+        ...state,
+        dataUsageTrendConfig: action.payload,
+      };
+    }
+    case CommonAction.LOAD_DATA_SEARCH_USAGE_TREND_CONFIG: {
       return {
         ...state,
         dataUsageTrendConfig: action.payload,

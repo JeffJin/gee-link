@@ -314,7 +314,7 @@ class DataService extends BaseService {
         let results = [];
         for (let key in data) {
           if(data.hasOwnProperty(key)){
-            results.push([key, data[key]]);
+            results.push([key, parseInt((data[key] * 10000).toFixed(2)) / 100]);
           }
         }
         return results.sort((a, b) => {
@@ -502,6 +502,39 @@ class DataService extends BaseService {
       .then(this.parseJson)
       .then((result) => {
         return result;
+      });
+  }
+
+  getDataSearchUsageTrend(unitType) {
+    const url = 'http://47.93.226.51:9012/v1/api/ume/datamap/data/trend?unit=' + unitType;
+    return fetch(url, {
+      method: 'get',
+      headers: {
+        ...this.header
+      },
+    }).then(this.checkStatus)
+      .then(this.parseJson)
+      .then(data => {
+        let results = [];
+        for (let key in data) {
+          if(data.hasOwnProperty(key)){
+            results.push([key, data[key]]);
+          }
+        }
+        return results.sort((a, b) => {
+          const timeA = moment(a[0], 'YYYY-MM-DD').toDate().getTime();
+          const timeB = moment(b[0], 'YYYY-MM-DD').toDate().getTime();
+
+          if (timeA > timeB) {
+            return 1;
+          }
+          else if (timeA < timeB) {
+            return -1;
+          }
+          else {
+            return 0;
+          }
+        });
       });
   }
 }

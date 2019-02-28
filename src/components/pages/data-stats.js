@@ -49,7 +49,7 @@ class DataStats extends React.Component {
           </div>
           <div className={'data-stats-row-2'}>
             <div className={'data-stats-col-1'}>
-              <DataUsageTrend />
+              <DataUsageTrend/>
             </div>
             <div className={'data-stats-col-2'}>
               <DataUsageRanking/>

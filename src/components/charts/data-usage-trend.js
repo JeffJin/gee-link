@@ -4,9 +4,6 @@ import Highcharts from "highcharts";
 import {CommonAction} from "../../store/reducers/actions";
 import {dataService} from "../../services/data.service";
 import connect from "react-redux/es/connect/connect";
-import moment from "moment";
-import {utils} from "../../services/utils";
-
 
 function loadDataAction(data) {
   return {
@@ -73,7 +70,7 @@ class DataUsageTrendContent extends React.Component {
         enabled: false
       },
       tooltip: {
-        pointFormat: '<b>{point.y:.1f} millions</b>'
+        pointFormat: '<b>{point.y}</b>'
       },
       series: [{
         name: 'Population',
@@ -83,7 +80,7 @@ class DataUsageTrendContent extends React.Component {
           rotation: -90,
           color: '#FFFFFF',
           align: 'right',
-          format: '{point.y:.1f}', // one decimal
+          format: '{point.y}', // one decimal
           y: 10, // 10 pixels down from the top
           style: {
             fontSize: '13px',

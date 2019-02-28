@@ -65,7 +65,7 @@ class KeywordSearchTrendContent extends React.Component {
         enabled: false
       },
       tooltip: {
-        pointFormat: '<b>{point.y:.1f} millions</b>'
+        pointFormat: '<b>{point.y}</b>'
       },
       series: [{
         name: 'Population',
@@ -75,7 +75,7 @@ class KeywordSearchTrendContent extends React.Component {
           rotation: -90,
           color: '#FFFFFF',
           align: 'right',
-          format: '{point.y:.1f}', // one decimal
+          format: '{point.y}', // one decimal
           y: 10, // 10 pixels down from the top
           style: {
             fontSize: '13px',

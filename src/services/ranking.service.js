@@ -178,6 +178,47 @@ class RankingService extends BaseService {
         return data;
       });
   }
+
+  getRelatedKeywordRanking(dataId) {
+    const data = [
+      {keyword: '那些年的自然语言', count: 544},
+      {keyword: '人工智能的前世与今生', count: 444},
+      {keyword: '自然语言能否识别文字', count: 322},
+      {keyword: '算法的运用', count: 311},
+      {keyword: '机器学习的模型建立', count: 222},
+      {keyword: 'python入门教程', count: 221},
+      {keyword: '云计算的概念', count: 190},
+      {keyword: '服务器的维护', count: 188},
+      {keyword: '服务器', count: 111},
+      {keyword: 'AI和BI有什么区别', count: 22},
+    ];
+    return new Promise(function (resolve, reject) {
+      setTimeout(function () {
+        resolve(data);
+      }, 500);
+    });
+  }
+
+  getRelatedUserRanking(dataId) {
+    const data = [
+      {ip: '223.345746745', count: 999},
+      {ip: '666.645746745', count: 777},
+      {ip: '845.645746745', count: 666},
+      {ip: '905.645746745', count: 664},
+      {ip: '115.645746745', count: 444},
+      {ip: '225.645746745', count: 77},
+      {ip: '335.645746745', count: 76},
+      {ip: '345.645746745', count: 44},
+      {ip: '665.645746745', count: 33},
+      {ip: '885.645746745', count: 32},
+      {ip: '994.564574674', count: 22}
+    ];
+    return new Promise(function (resolve, reject) {
+      setTimeout(function () {
+        resolve(data);
+      }, 500);
+    });
+  }
 }
 
 export const rankingService = new RankingService();
