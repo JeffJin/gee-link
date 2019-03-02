@@ -64,7 +64,7 @@ class KeywordDetails extends React.Component {
             </div>
           </div>
           <div className={'flex-1'}>
-            <CategorizedRanking/>
+            <CategorizedRanking keyword={this.props.keywordId} label={'所属分类排行'}/>
           </div>
         </div>
         <div className={'row'}>

@@ -31,7 +31,9 @@ export class SearchBox extends React.Component {
   };
 
   handleSearch = event => {
-    console.log('search for ', this.state.keyword, this.props);
+    if (!this.state.keyword) {
+      event.preventDefault();
+    }
   };
 
   render(){
@@ -43,7 +45,7 @@ export class SearchBox extends React.Component {
           value={this.state.keyword}
           onChange={this.handleChange}
           onKeyPress={(ev) => {
-            if (ev.key === 'Enter') {
+            if (ev.key === 'Enter' && this.state.keyword) {
               // Do code here
               ev.preventDefault();
               let url = `/${this.props.basePath}/search?keyword=${this.state.keyword}`;
@@ -59,7 +61,10 @@ export class SearchBox extends React.Component {
           aria-label="Search"
           onClick={this.handleSearch}
         >
-          <NavLink to={`/${this.props.basePath}/search?keyword=${this.state.keyword}&field=${this.props.searchField}`} className='nav'>
+          <NavLink to={`/${this.props.basePath}/search?keyword=${this.state.keyword}&field=${this.props.searchField}`}
+                   onClick={ this.handleSearch }
+                   className='nav'
+          >
             <SearchIcon />
           </NavLink>
         </IconButton>

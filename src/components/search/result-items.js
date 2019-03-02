@@ -8,7 +8,7 @@ export function ResultItem(props) {
   return (
     <div className={'search-result-row'}>
       <div className={'row title'}>
-        <NavLink to={`/details/${props.data.umekey}`} className='nav'>
+        <NavLink to={`/data/details/${props.data.title}`} className='nav'>
           {renderHTML(props.data.title)}
         </NavLink>
       </div>
@@ -29,8 +29,8 @@ export function KeywordResultItem(props) {
   return (
     <div className={'search-result-row'}>
       <div className={'row title'}>
-        <NavLink to={`/keyword/details/${props.data.collkey}`} className='nav'>
-          {props.data.logType} - {props.data.ip}
+        <NavLink to={`/user/details/${props.data.ip}`} className='nav'>
+          {props.data.ip}
         </NavLink>
       </div>
       <div className={'row attr flex-box'}>
@@ -40,7 +40,12 @@ export function KeywordResultItem(props) {
       </div>
       <div className={'row summary'}>
         <p>IP： {props.data.ip}</p>
-        <p>关键词： {props.data.keyword}</p>
+        <p>
+          关键词：
+          <NavLink to={`/keyword/details/${props.data.keyword}`} className='nav'>
+            {props.data.keyword}
+          </NavLink>
+        </p>
         <p>API： {props.data.api}</p>
       </div>
     </div>);
@@ -51,8 +56,8 @@ export function IpinfoResultItem(props) {
   return (
     <div className={'search-result-row'}>
       <div className={'row title'}>
-        <NavLink to={`/keyword/details/${props.data.collkey}`} className='nav'>
-          {props.data.logType} - {props.data.ip}
+        <NavLink to={`/user/details/${props.data.ip}`} className='nav'>
+          {props.data.ip}
         </NavLink>
       </div>
       <div className={'row attr flex-box'}>

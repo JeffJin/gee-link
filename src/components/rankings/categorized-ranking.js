@@ -22,7 +22,7 @@ class CategorizedRankingContent extends React.Component {
   }
 
   getData = () => {
-    rankingService.getCategorizedRanking().then(data => {
+    rankingService.getCategorizedRanking(this.props.keyword).then(data => {
       this.props.onLoadCategorizedRanking(data);
     });
   };
@@ -32,7 +32,7 @@ class CategorizedRankingContent extends React.Component {
       <div className={'categorized-ranking'}>
         <div className="flex-vertical">
           <div className={'header'}>
-            所属分类排行
+            {this.props.label}
           </div>
           {
             this.props.data.map((r, index) => (

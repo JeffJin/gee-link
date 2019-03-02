@@ -20,7 +20,7 @@ class RankingService extends BaseService {
     }).then(this.checkStatus)
       .then(this.parseJson)
       .then((result) => {
-        return result.slice(0, 10);
+        return result ? result.slice(0, 10) : [];
       });
   }
 

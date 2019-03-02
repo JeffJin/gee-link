@@ -114,6 +114,10 @@ export class SearchResult extends React.Component {
       result = s;
     }
 
+    if (result === null || result === undefined) {
+      return '';
+    }
+
     return result.replace(/<(?:.|\n)*?>/gm, '');
   }
 

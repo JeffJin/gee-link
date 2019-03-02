@@ -20,6 +20,9 @@ class SearchService extends BaseService {
   }
 
   async searchGeneral(key, pageIndex = 0, pageSize = 20) {
+    if (!key) {
+      return [];
+    }
     const url = 'http://47.93.226.51:9090/v1/api/ume/searcher/search';
     const request = {
       collectionName: 'huluarticle',
@@ -66,6 +69,9 @@ class SearchService extends BaseService {
   //    time: "2019-02-10T11:02:55.741"
   //    totalFound: "20"
   async searchKeyword(key, pageIndex = 0, pageSize = 20) {
+    if (!key) {
+      return [];
+    }
     const url = `http://47.93.226.51:9012/v1/api/ume/datamap/data/search?field=keyword&keyword=${key}&rows=${pageSize}&start=${pageIndex}`;
 
     return await fetch(url, {
@@ -84,6 +90,9 @@ class SearchService extends BaseService {
   }
 
   async searchUser(key, pageIndex = 0, pageSize = 20) {
+    if (!key) {
+      return [];
+    }
     const url = `http://47.93.226.51:9012/v1/api/ume/datamap/data/search?field=ipinfo&keyword=${key}&rows=${pageSize}&start=${pageIndex}`;
 
     return await fetch(url, {
