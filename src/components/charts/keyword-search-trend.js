@@ -26,7 +26,7 @@ class KeywordSearchTrendContent extends React.Component {
   }
 
   getChartData = (keyword) => {
-    dataService.getKeywordSearchTrend(keyword, this.state.selectedTimeRange).then(data => {
+    dataService.getKeywordSearchTrend(keyword || '', this.state.selectedTimeRange).then(data => {
       this.props.onLoadData(data);
     });
   };
