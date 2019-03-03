@@ -18,7 +18,7 @@ function loadDataAction(data) {
 class UserSearchTrendContent extends React.Component {
   state = {
     selectedTimeRange: 'month',
-    startTime: moment().subtract(1, 'days').format('YYYYMMDD') + '-000001',
+    startTime: moment().subtract(1, 'months').format('YYYYMMDD') + '-000001',
     endTime: moment().format('YYYYMMDD-hhmmss'),
     unitType: 'hour',
   };

@@ -17,7 +17,7 @@ class BrowseUserRankingContent extends React.Component {
   }
 
   componentDidMount() {
-    this.getData('month');
+    this.getData('year');
   }
 
   getData = (unit) => {
