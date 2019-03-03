@@ -9,6 +9,7 @@ import {MissedKeywordsRanking} from "../rankings/missed-keywords-ranking";
 import {SearchedKeywordsRanking} from "../rankings/searched-keywords-ranking";
 import LinearProgress from "@material-ui/core/es/LinearProgress";
 import {SearchBox} from "../search/search-box";
+import {TotalSearchStat} from "../stat-boxes/total-search-stat-box";
 
 class KeywordStats extends React.Component {
   state = {
@@ -30,7 +31,7 @@ class KeywordStats extends React.Component {
         <div className="keyword-stats flex-box">
           <div className={'left flex-5'}>
             <div className={'stat-box-container flex-box'}>
-              <TotalDataStat page={'keyword'}/>
+              <TotalSearchStat/>
               <TodaySearchStat />
               <AverageSearchStat />
               <IndividualSearchStat />
