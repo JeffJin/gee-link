@@ -21,7 +21,7 @@ class TotalDataStatContent extends React.Component {
   }
 
   getData = () => {
-    dataService.getTotalDataStats().then(data => {
+    dataService.getTotalDataStats(this.props.page).then(data => {
       this.props.onLoadStats(data.count);
     });
   };

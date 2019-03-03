@@ -23,12 +23,13 @@ class SearchConversionContent extends React.Component {
   }
 
   getChartData = () => {
-    dataService.getKeywordSearchConversion().then(data => {
+    dataService.getKeywordSearchConversion(this.props.keyword || '', this.props.unit).then(data => {
       this.props.onLoadData(data);
     });
   };
 
   render() {
+
     const config = {
       credits: {
         enabled: false
@@ -50,7 +51,8 @@ class SearchConversionContent extends React.Component {
             fontSize: '13px',
             fontFamily: 'Verdana, sans-serif'
           }
-        }
+        },
+        // max: 100
       },
       yAxis: {
         min: 0,

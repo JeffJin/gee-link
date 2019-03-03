@@ -30,12 +30,12 @@ class KeywordStats extends React.Component {
         <div className="keyword-stats flex-box">
           <div className={'left flex-5'}>
             <div className={'stat-box-container flex-box'}>
-              <TotalDataStat />
+              <TotalDataStat page={'keyword'}/>
               <TodaySearchStat />
               <AverageSearchStat />
               <IndividualSearchStat />
             </div>
-            <SearchConversion />
+            <SearchConversion unit={'month'}/>
             <KeywordSearchTrend />
           </div>
           <div className={'right flex-2'}>

@@ -38,7 +38,7 @@ const mapStateToProps = (state) => {
   return {
     rankingItems: state.ranking.relatedKeywordRanking.map((r, i) => {
       return {
-        id: r.keyword,
+        id: r.collkey,
         rank: i + 1,
         desc: r.keyword,
         value: r.count

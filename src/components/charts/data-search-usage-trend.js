@@ -26,8 +26,7 @@ class DataSearchUsageTrendContent extends React.Component {
   }
 
   getChartData = (unitType) => {
-    console.log('data search usage trend', unitType, this.props.dataId);
-    dataService.getDataSearchUsageTrend(unitType).then(data => {
+    dataService.getDataSearchUsageTrend(unitType, this.props.dataId).then(data => {
       this.props.onLoadData(data);
     });
   };
@@ -94,7 +93,7 @@ class DataSearchUsageTrendContent extends React.Component {
       <div className={'data-usage-trend'}>
         <div className={'box-header'}>
           <div className={'box-header-block'}></div>
-          <div className={'title'}>搜索/使用趋势图</div>
+          <div className={'title'}>使用趋势图</div>
           <div className={'tooltip'}></div>
           <div className={'select'}>
             <select id={'timeSelect'} onChange={this.changeTime} value={this.state.selectedTimeRange} disabled>

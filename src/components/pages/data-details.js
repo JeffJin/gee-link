@@ -4,27 +4,45 @@ import {RelatedUserRanking} from "../rankings/related-user-ranking";
 import {RelatedKeywordRanking} from "../rankings/related-keyword-ranking";
 import StateBox from "../stat-boxes/stat-box";
 import {CategorizedRanking} from "../rankings/categorized-ranking";
+import {dataService} from "../../services/data.service";
+import moment from "moment";
 
 class DataDetails extends React.Component {
   state = {
     isInProgress: false,
-    title: '金正恩的少年时代',
-    author: '张君',
-    summary: '一位60岁上下的亚洲女人走过纽约时代广场，她经过各种耀眼的霓虹灯广告、各式异国美食餐厅和数间电影院，走过只穿着白色内裤的纽约活地标“裸体牛仔”、芝麻街玩偶和一众票贩子的身旁。这个女人烫着微微的小卷，穿着保守的衣服，扬起脸来饶有兴趣地望向时代广场的大型广告牌，看上去和其他任何一个向往美国梦的移民并无二致。 但是她并不是一位普通的移民，她是朝鲜“永远的总书记”金正日之妻高英姬的妹妹、现最高领导人',
-    lastUpdated: {value: 0, label: '最近更新时间'},
+    title: '',
+    author: '',
+    summary: '',
+    lastUpdated: {value: moment(new Date()).format('YYYY-MM-DD'), label: '最近更新时间'},
     browsedData: {value: 0, label: '被浏览次数'},
     forwardedData: {value: 0, label: '被转发次数'},
     reviewedData: {value: 0, label: '被评论次数'},
     reportedData: {value: 0, label: '被举报次数'},
     savedData: {value: 0, label: '被收藏次数'},
+    categorizedResults: []
   };
 
   constructor(props) {
     super(props);
   }
 
-  componentDidMount() {
-    
+  async componentDidMount() {
+    const result = await dataService.getDataDetails(this.props.dataId);
+    this.setState({
+      title: result.title,
+      author: result.author.concat(' '),
+      summary: result.summary,
+      browsedData: {value: result.viewedCnt || 0, label: '被浏览次数'}
+    });
+    const categorizedData = Object.keys(result).filter(key => {
+      return key.startsWith('_GL_');
+    }).map(k => {
+        return {keyword: result[k][0], count: 0};
+      });
+
+    this.setState({categorizedResults: categorizedData});
+
+    console.log(result);
   }
   
   render() {
@@ -32,7 +50,7 @@ class DataDetails extends React.Component {
       <div className={'data-details'}>
         <div className={'row-1'}>
           <div className={'data-info'}>
-            <div className={'header'}>{this.props.dataId}</div>
+            <div className={'header'}>数据信息</div>
             <div className={'info'}>
               <div className={'title'}>title: {this.state.title}</div>
               <div className={'author'}>author: {this.state.author}</div>
@@ -48,7 +66,21 @@ class DataDetails extends React.Component {
             </div>
           </div>
           <div className={'data-category'}>
-            <CategorizedRanking keyword={this.props.dataId} label={'数据所属分类'}/>
+            <div className={'categorized-ranking'}>
+              <div className="flex-vertical">
+                <div className={'header'}>
+                  数据所属分类
+                </div>
+                {
+                  this.state.categorizedResults.map((r, index) => (
+                    <div key={index} className={'flex-1 row'}>
+                      <span className={'key'}>{r.keyword}</span>
+                      <span className={'value'}>{r.count}</span>
+                    </div>
+                  ))
+                }
+              </div>
+            </div>
           </div>
         </div>
         <div className={'row-2'}>

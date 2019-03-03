@@ -43,7 +43,6 @@ class UserService extends BaseService {
     //   ['cn-jl', 30],
     //   ['cn-nx', 31]
     // ];
-
     const url = `http://47.93.226.51:9012/v1/api/ume/statistics/list/ipinfo?`;
     return await fetch(url, {
       method: 'get',
@@ -76,46 +75,25 @@ class UserService extends BaseService {
   //   userIp: '123.221.21.1',
   // }
   getUserDetailedStats(ip) {
-    const lastUpdatedUrl = `http://47.93.226.51:9012/v1/api/ume/statistics/user/${ip}/recentact`;
-    const p1 = fetch(lastUpdatedUrl, {
+    const url = `http://47.93.226.51:9012/v1/api/ume/datamap/customer/detail?ip=${ip}`;
+    return fetch(url, {
       method: 'get',
       headers: {
         ...this.header
       },
     }).then(this.checkStatus)
-      .then(this.parseJson);
-    const searchedUrl = `http://47.93.226.51:9012/v1/api/ume/statistics/count/search`;
-    const p2 = fetch(searchedUrl, {
-      method: 'get',
-      headers: {
-        ...this.header,
-        ip
-      },
-    }).then(this.checkStatus)
-      .then(this.parseJson);
-    const readUrl = `http://47.93.226.51:9012/v1/api/ume/statistics/count/read`;
-    const p3 = fetch(readUrl, {
-      method: 'get',
-      headers: {
-        ...this.header,
-        ip
-      },
-    }).then(this.checkStatus)
-      .then(this.parseJson);
-
-    return Promise.all([p1, p2, p3]).then(([r1, r2, r3]) => {
-      return {
-        lastUpdated: r1.time,
-        searched: r2.count,
-        read: r3.count,
-        liked: 543,
-        forwarded: 431,
-        reviewed: 431,
-        complained: 431
-      };
-    });
-
-
+      .then(this.parseJson)
+      .then(result => {
+        return {
+          lastUpdated: result.latestDateTime,
+          searched: result.search,
+          read: result.view,
+          liked: 0,
+          forwarded: 0,
+          reviewed: 0,
+          complained: 0
+        };
+      });
   }
 
   parseUserData = (result) => {
@@ -143,14 +121,11 @@ class UserService extends BaseService {
     }).then(this.checkStatus)
       .then(this.parseJson)
       .then(results => {
+        if (results && results.length) {
+          return results.map(r => r.keyword);
+        }
         return   [
-          '朝韩半岛正在起变化',
-          '谁在暗杀金正恩',
-          '美朝暗战首脑峰会',
-          '金正恩邀文在演访问朝鲜，能成吗',
-          '这架飞机将载着金正恩抵达新加坡',
-          '关于韩朝领导人峰会',
-          '金正恩访华后半岛局势走向及中国应对',
+          results.keyword
         ];
       });
   }

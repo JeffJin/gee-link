@@ -20,7 +20,16 @@ class DataService extends BaseService {
       });
   }
 
-  getTotalDataStats() {
+  getTotalDataStats(page = 'main') {
+    if(page === 'main') {
+      return this.getTotalDataNumber();
+    }
+    if(page === 'keyword') {
+      return this.getTotalSearchedNumber();
+    }
+  }
+
+  getTotalDataNumber() {
     const url = 'http://47.93.226.51:9012/v1/api/ume/statistics/count/doc';
     return fetch(url, {
       method: 'get',
@@ -32,8 +41,21 @@ class DataService extends BaseService {
       });
   }
 
+  //关键词页面， 总数据条数部分应显示总搜索数
+  getTotalSearchedNumber() {
+    const url = 'http://47.93.226.51:9012/v1/api/ume/statistics/count/search?unit=total';
+    return fetch(url, {
+      method: 'get',
+      headers: this.header,
+    }).then(this.checkStatus)
+      .then(this.parseJson)
+      .then((result) => {
+        return result;
+      });
+  }
+
   getTodaySearchStats() {
-    const url = 'http://47.93.226.51:9012/v1/api/ume/statistics/count/search';
+    const url = 'http://47.93.226.51:9012/v1/api/ume/statistics/count/search?unit=today';
     return fetch(url, {
       method: 'get',
       headers: this.header,
@@ -301,8 +323,8 @@ class DataService extends BaseService {
   //       ['周六', 12],
   //       ['周日', 12]
   //     ];
-  getKeywordSearchConversion(unit = 'month') {
-    const url = 'http://47.93.226.51:9012/v1/api/ume/keyword/search.view.rate?unit=' + unit;
+  getKeywordSearchConversion(keyword, unit = 'month') {
+    const url = 'http://47.93.226.51:9012/v1/api/ume/keyword/search.view.rate?unit=' + unit + '&keyword=' + keyword;
     return fetch(url, {
       method: 'get',
       headers: {
@@ -345,7 +367,7 @@ class DataService extends BaseService {
   //       ['周日', 1224]
   //     ];
   getKeywordSearchTrend(keyword, searchRange) {
-    const url = 'http://47.93.226.51:9012/v1/api/ume/keyword/trend?unit=' + searchRange;
+    const url = 'http://47.93.226.51:9012/v1/api/ume/keyword/trend?unit=' + searchRange + '&keyword=' + keyword;
     return fetch(url, {
       method: 'get',
       headers: {
@@ -406,22 +428,7 @@ class DataService extends BaseService {
   //     "search": 1,
   //     "view": 0
   //   },
-  //   "2019-02-18": {
-  //     "search": 1,
-  //     "view": 2
-  //   },
-  //   "2019-02-07": {
-  //     "search": 3,
-  //     "view": 0
-  //   },
-  //   "2019-02-17": {
-  //     "search": 7,
-  //     "view": 7
-  //   },
-  //   "2019-02-06": {
-  //     "search": 12,
-  //     "view": 0
-  //   },
+  //}
   getUserSearchTrend(unitType) {
     const url = `http://47.93.226.51:9012/v1/api/ume/datamap/customer/trend?unit=` + unitType;
     return fetch(url, {
@@ -433,8 +440,8 @@ class DataService extends BaseService {
       .then(this.parseJson)
       .then((results) => {
         const times = [];
-        const searchSet = {name: '搜索关键词', data: []};
-        const viewSet = {name: '使用数据', data: []};
+        const searchSet = {name: '搜索用户数', data: []};
+        const viewSet = {name: '阅读用户数', data: []};
         for(let key in results) {
           if (results.hasOwnProperty(key)) {
             times.push(key);
@@ -447,66 +454,25 @@ class DataService extends BaseService {
       });
   }
 
-  //{
-  //           searched: 321,
-  //           searchedUsers: 432,
-  //           targeted: 543,
-  //           average: 431
-  //         }
   getKeywordStats(keyword) {
-    const p1 = this.getKeywordSearchedNumber(keyword);
-    const p2 = this.getSearchedUserNumber(keyword);
-    const p3 = this.getKeywordFoundNumber(keyword);
-    return Promise.all([p1, p2, p3]).then(([v1, v2, v3]) => {
-      return {
-        searched: v1.count,
-        searchedUsers: v2.count,
-        targeted: v3.count,
-        average: v1.count / v2.count
-      };
-    });
-  }
-
-  getKeywordSearchedNumber(keyword) {
-    const url = 'http://47.93.226.51:9012/v1/api/ume/statistics/count/keyword/' + keyword;
+    const url = 'http://47.93.226.51:9012/v1/api/ume/keyword/statistics?keyword=' + keyword;
     return fetch(url, {
       method: 'get',
       headers: this.header,
     }).then(this.checkStatus)
       .then(this.parseJson)
       .then((result) => {
-        return result;
+        return {
+          searched: result ? result.total : 0,
+          searchedUsers: result ? result.userCnt : 0,
+          targeted: result ? result.foundCnt : 0,
+          average: result ? parseFloat(result.average).toFixed(2) : 0
+        };
       });
   }
 
-  //keyword 搜索用户数
-  getSearchedUserNumber(keyword) {
-    const url = 'http://47.93.226.51:9012/v1/api/ume/statistics/count/keyword/' + keyword + '/unique';
-    return fetch(url, {
-      method: 'get',
-      headers: this.header,
-    }).then(this.checkStatus)
-      .then(this.parseJson)
-      .then((result) => {
-        return result;
-      });
-  }
-
-  //命中数 /count/keyword/{keyword}/found
-  getKeywordFoundNumber(keyword) {
-    const url = 'http://47.93.226.51:9012/v1/api/ume/statistics/count/keyword/' + keyword + '/found';
-    return fetch(url, {
-      method: 'get',
-      headers: this.header,
-    }).then(this.checkStatus)
-      .then(this.parseJson)
-      .then((result) => {
-        return result;
-      });
-  }
-
-  getDataSearchUsageTrend(unitType) {
-    const url = 'http://47.93.226.51:9012/v1/api/ume/datamap/data/trend?unit=' + unitType;
+  getDataSearchUsageTrend(unit, collkey) {
+    const url = `http://47.93.226.51:9012/v1/api/ume/datamap/data/usage/${collkey}?unit=${unit}`;
     return fetch(url, {
       method: 'get',
       headers: {
@@ -536,6 +502,17 @@ class DataService extends BaseService {
           }
         });
       });
+  }
+
+  getDataDetails(collkey) {
+    const url = `http://47.93.226.51:9012/v1/api/ume/datamap/data/detail/${collkey}`;
+    return fetch(url, {
+      method: 'get',
+      headers: {
+        ...this.header
+      },
+    }).then(this.checkStatus)
+      .then(this.parseJson);
   }
 }
 

@@ -4,7 +4,7 @@ import moment from "moment";
 
 export default class Ranking extends React.Component {
   state = {
-    selectedTimeRange: 'month',
+    selectedTimeRange: this.props.selectedTimeRange || 'year',
     startTime: moment().subtract(1, 'days').format('YYYYMMDD') + '-000001',
     endTime: moment().format('YYYYMMDD-hhmmss'),
     unitType: 'day',

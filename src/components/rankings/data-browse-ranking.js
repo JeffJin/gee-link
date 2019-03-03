@@ -21,14 +21,14 @@ class DataBrowseRankingContent extends React.Component {
   }
 
   getData = () => {
-    rankingService.getDataBrowseRanking('month').then(data => {
+    rankingService.getDataBrowseRanking('year', this.props.ip).then(data => {
       this.props.onLoadDataBrowseRanking(data);
     });
   };
 
   render() {
     return (
-      <Ranking title={'数据浏览 TOP 10'} data={this.props}/>
+      <Ranking title={this.props.label || '数据浏览 TOP 10'} data={this.props} selectedTimeRange={'year'}/>
     );
   }
 }
@@ -44,8 +44,8 @@ const mapStateToProps = (state) => {
       }
     }),
     headers: ['排名', '数据内容', '被使用次数'],
-    title: '使用排行榜 TOP 10',
-    route: '/user'
+    title: '数据浏览 TOP 10',
+    route: '/data/details'
   };
 };
 

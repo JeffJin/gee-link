@@ -21,7 +21,7 @@ class RecentSearchUserRankingContent extends React.Component {
   }
 
   getData = (keyword) => {
-    rankingService.getRecentSearchUserRanking(keyword).then(data => {
+    rankingService.getRecentSearchUserRanking(keyword, 'year').then(data => {
       this.props.onLoadRecentSearchUserRanking(data);
     });
   };
@@ -43,7 +43,7 @@ const mapStateToProps = (state) => {
         value: r.count
       }
     }),
-    headers: ['排名', '用户ID', '时间'],
+    headers: ['排名', '用户IP', '时间'],
     title: '最近搜索用户',
     route: '/user/details'
   };

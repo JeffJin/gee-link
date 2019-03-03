@@ -8,6 +8,7 @@ import {NavLink} from "react-router-dom";
 import moment from "moment";
 import {UserActivityHistory} from "../charts/user-activity-history";
 import {userService} from "../../services/user.service";
+import {DataBrowseRanking} from "../rankings/data-browse-ranking";
 
 class UserDetails extends React.Component {
   state = {
@@ -81,28 +82,17 @@ class UserDetails extends React.Component {
               <UserSearchTrend uid={this.props.userIp}/>
             </div>
             <div className={'row'}>
-              <UserActivityHistory uid={this.props.userIp}/>
+              {/*<UserActivityHistory uid={this.props.userIp}/>*/}
             </div>
           </div>
           <div className={'flex-1'}>
             <div className={'row recent-browsed'}>
               <div className="flex-vertical">
-                <div className={'header'}>
-                  最近浏览的数据
-                </div>
-                {
-                  this.state.recentBrowsed.map((r, index) => (
-                    <div key={index} className={'flex-1 row'}>
-                      <div className={'value'}>
-                        <NavLink to={`keyword/${r}`} className='nav'>{r}</NavLink>
-                      </div>
-                    </div>
-                  ))
-                }
+                <DataBrowseRanking ip={this.props.userIp} label={'最近浏览的数据'}/>
               </div>
             </div>
             <div className={'row recent-searched'}>
-              <SearchedKeywordsRanking uid={this.props.userIp} />
+              <SearchedKeywordsRanking ip={this.props.userIp} />
             </div>
           </div>
         </div>

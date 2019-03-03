@@ -29,7 +29,7 @@ class DataUsageRankingContent extends React.Component {
   }
 
   getData = (timeRange) => {
-    rankingService.getDataBrowseRanking(timeRange).then(data => {
+    rankingService.getDataUsageRanking(timeRange, this.props.keyword || '').then(data => {
       this.props.onLoadDataUsageRanking(data);
     });
   };
@@ -45,14 +45,14 @@ const mapStateToProps = (state) => {
   return {
     rankingItems: state.ranking.dataUsageRanking.map((r, i) => {
       return {
-        id: r.subject,
+        id: r.collkey,
         rank: i + 1,
         desc: r.subject,
         value: r.count
       }
     }),
     headers: ['排名', '标题内容', '被浏览次数'],
-    title: '数据浏览 TOP 10',
+    title: '使用排行榜 TOP 10',
     route: '/data/details'
   };
 };

@@ -28,6 +28,7 @@ class CategorizedRankingContent extends React.Component {
   };
 
   render() {
+    const results = this.props.data.slice(0, 6);
     return (
       <div className={'categorized-ranking'}>
         <div className="flex-vertical">
@@ -35,7 +36,7 @@ class CategorizedRankingContent extends React.Component {
             {this.props.label}
           </div>
           {
-            this.props.data.map((r, index) => (
+            results.map((r, index) => (
               <div key={index} className={'flex-1 row'}>
                 <span className={'key'}>{r.keyword}</span>
                 <span className={'value'}>{r.count}</span>

@@ -37,7 +37,7 @@ class MainPage extends React.Component {
         <SearchBox {...this.props} basePath={'main'}/>
         <div className="main-page">
           <div className={'stat-box-container flex-box'}>
-            <TotalDataStat/>
+            <TotalDataStat page={'main'}/>
             <TotalSearchStat/>
             <IndividualSearchStat/>
             <IndividualUserStat/>

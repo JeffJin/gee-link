@@ -66,7 +66,8 @@ class UserSearchTrendContent extends React.Component {
         min: 0,
         title: {
           text: ''
-        }
+        },
+        allowDecimals: false
       },
       tooltip: {
         headerFormat: '<span style="font-size:10px">{point.key}</span><table>',

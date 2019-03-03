@@ -22,7 +22,7 @@ class RelatedUserRankingContent extends React.Component {
   }
 
   getData = () => {
-    rankingService.getRelatedUserRanking().then(data => {
+    rankingService.getRelatedUserRanking(this.props.dataId).then(data => {
       this.props.onLoadRelatedUserRanking(data);
     });
   };
@@ -46,7 +46,7 @@ const mapStateToProps = (state) => {
     }),
     headers: ['排名', '数据内容', '浏览数'],
     title: '相关数据',
-    route: '/data/details'
+    route: '/user/details'
   };
 };
 

@@ -17,11 +17,11 @@ class SearchedKeywordsRankingContent extends React.Component {
   }
 
   componentDidMount() {
-    this.getData(this.props.uid || '');
+    this.getData(this.props.ip || '');
   }
 
-  getData = (uid) => {
-    rankingService.getSearchedKeywordsRanking(uid).then(data => {
+  getData = (ip) => {
+    rankingService.getSearchedKeywordsRanking(ip).then(data => {
       this.props.onLoadSearchedKeywordsRanking(data);
     });
   };
