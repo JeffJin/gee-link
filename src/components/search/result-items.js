@@ -8,7 +8,7 @@ export function ResultItem(props) {
   return (
     <div className={'search-result-row'}>
       <div className={'row title'}>
-        <NavLink to={`/data/details/${props.data.title}`} className='nav'>
+        <NavLink to={`/data/details/${props.data.collkey}`} className='nav'>
           {renderHTML(props.data.title)}
         </NavLink>
       </div>

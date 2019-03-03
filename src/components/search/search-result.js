@@ -62,6 +62,7 @@ export class SearchResult extends React.Component {
         year: r.meta.year,
         score: r.score,
         umekey: r.umekey,
+        collkey: r.collkey,
         summary: this.cleanUpString(r.meta.summary)
       }
     });

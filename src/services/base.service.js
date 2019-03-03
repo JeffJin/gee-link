@@ -81,9 +81,9 @@ class BaseService {
 
   parseJson(response) {
     try{
-      return response.json();
+      return response && response.json ? response.json() : response;
     } catch {
-      return null;
+      return {};
     }
   }
 }
