@@ -30,7 +30,10 @@ class RealTimeUserChartContent extends React.Component {
         text: ''
       },
       xAxis: {
-        type: 'datetime'
+        type: 'datetime',
+        labels: {
+          format: '{value:%b%e}'
+        },
       },
       yAxis: {
         min: 0,

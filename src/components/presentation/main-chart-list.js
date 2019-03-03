@@ -23,8 +23,8 @@ export class MainChartListContent extends React.Component {
   componentDidMount() {
     const today = moment();
     const endTime = today.format('YYYYMMDD-hhmmss');
-    let startTime = moment().subtract(1, 'days').format('YYYYMMDD') + '-000001';
-    this.updateCharts(startTime, endTime, 'hour');
+    let startTime = moment().subtract(1, 'months').format('YYYYMMDD') + '-000001';
+    this.updateCharts(startTime, endTime, 'day');
   }
 
   showChartHelp() {
@@ -90,7 +90,7 @@ export class MainChartListContent extends React.Component {
           </div>
           <div className={'box-header'}>
             <div className={'select'}>
-              <select id={'timeSelect'} onChange={this.changeTime} value={this.state.selectedTimeRange}>
+              <select id={'timeSelect'} onChange={this.changeTime} value={this.state.selectedTimeRange} disabled={true}>
                 <option value="day">近24小时</option>
                 <option value="week">近一周</option>
                 <option value="month">近一个月</option>
