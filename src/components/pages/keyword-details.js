@@ -9,6 +9,7 @@ import {KeywordSearchTrend} from "../charts/keyword-search-trend";
 import {dataService} from "../../services/data.service";
 import {RelatedDataRanking} from "../rankings/related-data-ranking";
 import {RecentSearchUserRanking} from "../rankings/recent-search-user-ranking";
+import {DataUsageRanking} from "../rankings/data-usage-ranking";
 
 class KeywordDetails extends React.Component {
   state = {
@@ -70,7 +71,7 @@ class KeywordDetails extends React.Component {
         <div className={'row'}>
           <div className={'ranking-container flex-box'}>
             <div className={'flex-1'}>
-              <DataBrowseRanking keyword={this.props.keywordId}/>
+              <DataUsageRanking label={'被浏览数据 TOP 10'} keyword={this.props.keywordId}/>
             </div>
             <div className={'flex-1'}>
               <RecentSearchUserRanking keyword={this.props.keywordId}/>

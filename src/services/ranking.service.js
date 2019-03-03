@@ -85,7 +85,6 @@ class RankingService extends BaseService {
 
   //热搜排行榜， 关键词搜索
   getSearchedKeywordsRanking(ip, unit = 'year') {
-    // const url = 'http://47.93.226.51:9012/v1/api/ume/keyword/top?found=true&rows=10&unit=year&ip=' + ip;
     const url = `http://47.93.226.51:9012/v1/api/ume/datamap/customer/keywords?ip=${ip}&rows=10&unit=${unit}`;
 
     return fetch(url, {

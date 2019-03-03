@@ -36,7 +36,7 @@ class DataUsageRankingContent extends React.Component {
 
   render() {
     return (
-      <Ranking title={'使用排行榜 TOP 10'} data={this.props}/>
+      <Ranking title={this.props.label || '使用排行榜 TOP 10'} data={this.props}/>
     );
   }
 }
