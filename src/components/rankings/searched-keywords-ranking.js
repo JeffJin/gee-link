@@ -43,7 +43,7 @@ const mapStateToProps = (state) => {
           value: r.count
         }
       }),
-      headers: ['排名', '关键词', '被搜索次数'],
+      headers: ['排名', '关键词', '搜索次数'],
       title: '关键词搜索 TOP 10',
       route: '/keyword/details'
     };

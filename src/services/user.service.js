@@ -48,9 +48,6 @@ class UserService extends BaseService {
       method: 'get',
       headers: {
         ...this.header,
-        // startTime,
-        // endTime,
-        // unitType,
         countrycode: 'cn'
       },
     }).then(this.checkStatus)

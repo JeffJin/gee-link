@@ -3,7 +3,6 @@ import {DataSearchUsageTrend} from "../charts/data-search-usage-trend";
 import {RelatedUserRanking} from "../rankings/related-user-ranking";
 import {RelatedKeywordRanking} from "../rankings/related-keyword-ranking";
 import StateBox from "../stat-boxes/stat-box";
-import {CategorizedRanking} from "../rankings/categorized-ranking";
 import {dataService} from "../../services/data.service";
 import moment from "moment";
 

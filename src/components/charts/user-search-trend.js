@@ -32,7 +32,7 @@ class UserSearchTrendContent extends React.Component {
   }
 
   getChartData = (timeRange) => {
-    dataService.getUserSearchTrend(timeRange).then(data => {
+    dataService.getUserSearchTrend(timeRange, this.props.ip || '').then(data => {
       this.props.onLoadData(data);
     });
   };

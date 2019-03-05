@@ -79,7 +79,7 @@ class UserDetails extends React.Component {
               </div>
             </div>
             <div className={'row'}>
-              <UserSearchTrend uid={this.props.userIp}/>
+              <UserSearchTrend ip={this.props.userIp}/>
             </div>
             <div className={'row'}>
               {/*<UserActivityHistory uid={this.props.userIp}/>*/}

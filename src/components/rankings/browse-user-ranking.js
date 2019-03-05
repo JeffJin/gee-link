@@ -44,7 +44,7 @@ const mapStateToProps = (state) => {
         value: r.count
       }
     }),
-    headers: ['排名', 'UID', '搜索次数'],
+    headers: ['排名', '用户ID', '搜索次数'],
     title: '搜索用户 TOP 10',
     route: '/user/details'
   };

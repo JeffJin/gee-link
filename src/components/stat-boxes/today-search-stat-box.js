@@ -34,7 +34,7 @@ class TodaySearchStatContent extends React.Component {
 }
 
 const mapStateToProps = (state) => {
-  return {value: state.stats.todaySearchStats, label: '今日被浏览次数'};
+  return {value: state.stats.todaySearchStats, label: '今日搜索数'};
 };
 
 const mapDispatchToProps = (dispatch) => (

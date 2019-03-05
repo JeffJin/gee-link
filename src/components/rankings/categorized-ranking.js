@@ -39,7 +39,7 @@ class CategorizedRankingContent extends React.Component {
             results.map((r, index) => (
               <div key={index} className={'flex-1 row'}>
                 <span className={'key'}>{r.keyword}</span>
-                <span className={'value'}>{r.count}</span>
+                <span className={'value'}>{r.count}条</span>
               </div>
             ))
           }

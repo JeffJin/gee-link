@@ -429,8 +429,8 @@ class DataService extends BaseService {
   //     "view": 0
   //   },
   //}
-  getUserSearchTrend(unitType) {
-    const url = `http://47.93.226.51:9012/v1/api/ume/datamap/customer/trend?unit=` + unitType;
+  getUserSearchTrend(unitType, ip = '') {
+    const url = `http://47.93.226.51:9012/v1/api/ume/datamap/customer/trend?unit=${unitType}&ip=${ip}`;
     return fetch(url, {
       method: 'get',
       headers: {

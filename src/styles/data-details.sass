@@ -2,7 +2,7 @@
   display: block
   height: 100vh
   .row-1
-    height: 50%
+    height: 290px
     display: flex
     padding: 0.5rem 1rem
 
@@ -20,24 +20,30 @@
         padding: 10px
 
       .info
-        height: 200px
+        height: 130px
         margin-left: 30px
         margin-right: 30px
         div
           padding-top: 5px
 
         .summary
-          height: 150px
+          height: 80px
           overflow: hidden
 
       .stats
         display: flex
         .stat-box
           margin: 8px
-
+          min-height: 80px
+          .value
+            top: 25%
+          .desc
+            top: 30%
           &:first-child
             .value
               font-size: 20px
+            .desc
+              top: 35%
 
     .data-category
       flex: 1
@@ -45,9 +51,11 @@
       @import "components/categorized-stats"
 
   .row-2
-    height: 50%
     display: flex
     padding: 0.5rem 1rem
+    .ranking
+      height: 100%
+
     .trend
       flex: 2
       border: 2px solid #0095e9
