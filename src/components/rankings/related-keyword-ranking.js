@@ -38,15 +38,15 @@ const mapStateToProps = (state) => {
   return {
     rankingItems: state.ranking.relatedKeywordRanking.map((r, i) => {
       return {
-        id: r.collkey,
+        id: r.keyword,
         rank: i + 1,
         desc: r.keyword,
         value: r.count
       }
     }),
-    headers: ['排名', '数据内容', '浏览数'],
+    headers: ['排名', '关键词', '浏览数'],
     title: '相关数据',
-    route: '/data/details'
+    route: '/keyword/details'
   };
 };
 
