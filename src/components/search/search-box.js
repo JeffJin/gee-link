@@ -49,9 +49,6 @@ export class SearchBox extends React.Component {
               // Do code here
               ev.preventDefault();
               let url = `/${this.props.basePath}/search?keyword=${this.state.keyword}`;
-              if (this.props.searchField) {
-                url += '&field=' + this.props.searchField;
-              }
               this.props.history.push(url);
             }
           }}
@@ -61,7 +58,7 @@ export class SearchBox extends React.Component {
           aria-label="Search"
           onClick={this.handleSearch}
         >
-          <NavLink to={`/${this.props.basePath}/search?keyword=${this.state.keyword}&field=${this.props.searchField}`}
+          <NavLink to={`/${this.props.basePath}/search?keyword=${this.state.keyword}`}
                    onClick={ this.handleSearch }
                    className='nav'
           >

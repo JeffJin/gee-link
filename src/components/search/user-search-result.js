@@ -6,7 +6,7 @@ import LinearProgress from "@material-ui/core/es/LinearProgress";
 import Pagination from "material-ui-flat-pagination";
 import {IpinfoResultItem, KeywordResultItem, ResultItem} from "./result-items";
 
-export class SearchResult extends React.Component {
+export class UserSearchResult extends React.Component {
   state = {
     result: {},
     isInProgress: false,
@@ -76,7 +76,7 @@ export class SearchResult extends React.Component {
       pageSize: pageSize,
       offset: pageSize * pageIndex
     });
-    searchService.searchGeneral(keyword, pageIndex, pageSize).then((result) => {
+    searchService.searchUser(keyword, pageIndex, pageSize).then((result) => {
       this.setState({
         result: {
           items: this.formatResults(result.resultList || result.results),
@@ -99,9 +99,19 @@ export class SearchResult extends React.Component {
     let results = [];
     let summary = '';
     if (this.state.result.items) {
-      results = this.state.result.items.map((r, index) => (
-        <ResultItem key={index} data={r}/>
-      ));
+      if (this.state.field === 'keyword') {
+        results = this.state.result.items.map((r, index) => (
+          <KeywordResultItem key={index} data={r}/>
+        ));
+      } else if (this.state.field === 'ipinfo') {
+        results = this.state.result.items.map((r, index) => (
+          <IpinfoResultItem key={index} data={r}/>
+        ));
+      } else {
+        results = this.state.result.items.map((r, index) => (
+          <ResultItem key={index} data={r}/>
+        ));
+      }
 
       summary = <div className={'header-summary'}>
         共为您找到相关结果 {this.state.result.total} 个
@@ -117,7 +127,7 @@ export class SearchResult extends React.Component {
         {
           progress
         }
-        <SearchBox {...this.props} basePath={this.props.basePath}/>
+        <SearchBox {...this.props} basePath={'user'}/>
         <div className="search-result">
           {
             summary

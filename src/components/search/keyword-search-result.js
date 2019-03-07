@@ -6,13 +6,13 @@ import LinearProgress from "@material-ui/core/es/LinearProgress";
 import Pagination from "material-ui-flat-pagination";
 import {IpinfoResultItem, KeywordResultItem, ResultItem} from "./result-items";
 
-export class SearchResult extends React.Component {
+export class KeywordSearchResult extends React.Component {
   state = {
     result: {},
     isInProgress: false,
     pageIndex: 0,
     pageSize: 20,
-    offset: 0,
+    offset: 0
   };
 
   constructor(props) {
@@ -43,30 +43,15 @@ export class SearchResult extends React.Component {
   formatResults(results) {
     return results.map(r => {
       return {
-        title: this.cleanUpString(r.meta.title),
-        author: r.meta.author,
-        year: r.meta.year,
-        score: r.score,
-        umekey: r.umekey,
         collkey: r.collkey,
-        summary: this.cleanUpString(r.meta.summary)
+        logType: r.logType,
+        ip: r.ip,
+        api: r.api,
+        time: r.time,
+        keyword: r.keyword,
+        totalFound: r.totalFound
       }
     });
-  }
-
-  cleanUpString(s) {
-    let result = '';
-    if(s && s.length){
-      result = s.join(' ');
-    } else {
-      result = s;
-    }
-
-    if (result === null || result === undefined) {
-      return '';
-    }
-
-    return result.replace(/<(?:.|\n)*?>/gm, '');
   }
 
   getSearchResult = (keyword, pageIndex, pageSize) => {
@@ -76,7 +61,7 @@ export class SearchResult extends React.Component {
       pageSize: pageSize,
       offset: pageSize * pageIndex
     });
-    searchService.searchGeneral(keyword, pageIndex, pageSize).then((result) => {
+    searchService.searchKeyword(keyword, pageIndex, pageSize).then((result) => {
       this.setState({
         result: {
           items: this.formatResults(result.resultList || result.results),
@@ -92,7 +77,8 @@ export class SearchResult extends React.Component {
   handlePageSelection(offset) {
     const pageIndex = parseInt(offset / this.state.pageSize);
     const keyword = this.getFieldValue('keyword');
-    this.getSearchResult(keyword, pageIndex, this.state.pageSize);
+    const field = this.getFieldValue('field');
+    this.getSearchResult(keyword, field, pageIndex, this.state.pageSize);
   }
 
   render(){
@@ -100,9 +86,8 @@ export class SearchResult extends React.Component {
     let summary = '';
     if (this.state.result.items) {
       results = this.state.result.items.map((r, index) => (
-        <ResultItem key={index} data={r}/>
+        <KeywordResultItem key={index} data={r}/>
       ));
-
       summary = <div className={'header-summary'}>
         共为您找到相关结果 {this.state.result.total} 个
       </div>;
@@ -117,7 +102,7 @@ export class SearchResult extends React.Component {
         {
           progress
         }
-        <SearchBox {...this.props} basePath={this.props.basePath}/>
+        <SearchBox {...this.props} basePath={'keyword'}/>
         <div className="search-result">
           {
             summary

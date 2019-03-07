@@ -18,6 +18,9 @@ import UserDetails from "./components/pages/user-details";
 import DataDetails from "./components/pages/data-details";
 import {SearchResult} from "./components/search/search-result";
 import Highcharts from 'highcharts'
+import {KeywordSearchResult} from "./components/search/keyword-search-result";
+import {UserSearchResult} from "./components/search/user-search-result";
+import {DataSearchResult} from "./components/search/data-search-result";
 
 Highcharts.setOptions({
   lang: {
@@ -61,10 +64,10 @@ class App extends React.Component {
         </Drawer>
         <main className={'content'}>
           <Switch>
-            <Route path={'/main/search'}  render={(props) => <SearchResult {...props} basePath={'main'}/>} />
-            <Route path={'/data/search'}  render={(props) => <SearchResult {...props} basePath={'data'}/>} />
-            <Route path={'/user/search'}  render={(props) => <SearchResult {...props} basePath={'user'}/>} />
-            <Route path={'/keyword/search'}  render={(props) => <SearchResult {...props} basePath={'keyword'}/>} />
+            <Route path={'/main/search'}  render={(props) => <SearchResult {...props}/>} />
+            <Route path={'/data/search'}  render={(props) => <DataSearchResult {...props}/>} />
+            <Route path={'/user/search'}  render={(props) => <UserSearchResult {...props}/>} />
+            <Route path={'/keyword/search'}  render={(props) => <KeywordSearchResult {...props}/>} />
             <Route exact path='/keyword' render={(props) => <KeywordStats {...props}/>}/>
             <Route exact path='/data' render={(props) => <DataStats {...props}/>}/>
             <Route exact path='/user' render={(props) => <UserStats {...props}/>}/>
