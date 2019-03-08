@@ -117,7 +117,7 @@ export class SearchResult extends React.Component {
         {
           progress
         }
-        <SearchBox {...this.props} basePath={this.props.basePath}/>
+        <SearchBox {...this.props} basePath={'main'}/>
         <div className="search-result">
           {
             summary

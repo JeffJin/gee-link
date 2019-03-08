@@ -13,12 +13,11 @@ class SearchService extends BaseService {
     }
     const url = 'http://47.93.226.51:9090/v1/api/ume/searcher/search';
     const request = {
-      collectionName: 'huluarticle',
+      collectionName: 'datamap',
       customerId: '6671A13AB54710D932C8F2E51FFE8CC3',
       queryString: key,
-      facetField: ['year', '_GL_labeltax_taxonomy', '_GL_regiontax_taxonomy', 'resourceName'],
-      returnField: ['title', 'collkey', 'summary', '_GL_labeltax_taxonomy', '_GL_regiontax_taxonomy', 'author', 'year'],
-      highLightField: ['title', 'summary'],
+      returnField: ['title', 'summary','ip','time','keyword','logType','ipinfo','api','totalFound'],
+      highLightField: ['title', 'summary','keyword'],
       preciseSearch: '1',
       closeFullSearch: false,
       topicAlias: 'label',
