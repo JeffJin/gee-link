@@ -36,7 +36,7 @@ export function KeywordResultItem(props) {
       <div className={'row attr flex-box'}>
         <div className={'flex-1'}>类型： {props.data.logType}</div>
         <div className={'flex-2'}>时间： {moment(props.data.time).format('MMM DD, YYYY')}</div>
-        <div className={'flex-3'}></div>
+        <div className={'flex-3'}>Total Found: {props.data.totalFound}</div>
       </div>
       <div className={'row summary'}>
         <p>IP： {props.data.ip}</p>

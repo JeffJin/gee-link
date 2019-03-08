@@ -5,6 +5,7 @@ import {SearchBox} from "./search-box";
 import LinearProgress from "@material-ui/core/es/LinearProgress";
 import Pagination from "material-ui-flat-pagination";
 import {IpinfoResultItem, KeywordResultItem, ResultItem} from "./result-items";
+import UserDetails from "../pages/user-details";
 
 export class SearchResult extends React.Component {
   state = {
@@ -43,27 +44,31 @@ export class SearchResult extends React.Component {
   formatResults(results) {
     return results.map(r => {
       return {
-        title: this.cleanUpString(r.meta.title),
-        author: r.meta.author,
-        year: r.meta.year,
+        title: r.meta.title && r.meta.title.length ? this.cleanUpString(r.meta.title[0]) : 'n/a',
+        author: r.meta.author && r.meta.author[0] ? r.meta.author[0] : '',
+        year: r.meta.year && r.meta.year[0] ? r.meta.year[0] : '',
+        ip: r.meta.ip && r.meta.ip[0] ? r.meta.ip[0] : '',
+        api: r.meta.api && r.meta.api[0] ? r.meta.api[0] : '',
+        time: r.meta.time && r.meta.time[0] ? r.meta.time[0] : '',
+        totalFound: r.meta.totalFound && r.meta.totalFound[0] ? r.meta.totalFound[0] : '',
+        logType: r.meta.logType && r.meta.logType[0] ? r.meta.logType[0] : '',
         score: r.score,
         umekey: r.umekey,
         collkey: r.collkey,
-        summary: this.cleanUpString(r.meta.summary)
+        summary: r.meta.summary && r.meta.summary[0] ? this.cleanUpString(r.meta.summary) : ''
       }
     });
   }
 
   cleanUpString(s) {
+    if (s === null || s === undefined) {
+      return '';
+    }
     let result = '';
-    if(s && s.length){
+    if(s && s.join){
       result = s.join(' ');
     } else {
       result = s;
-    }
-
-    if (result === null || result === undefined) {
-      return '';
     }
 
     return result.replace(/<(?:.|\n)*?>/gm, '');
@@ -97,11 +102,19 @@ export class SearchResult extends React.Component {
 
   render(){
     let results = [];
+    let keywordResults = [];
+    let userResults = [];
     let summary = '';
     if (this.state.result.items) {
       results = this.state.result.items.map((r, index) => (
         <ResultItem key={index} data={r}/>
-      ));
+    ));
+      keywordResults = this.state.result.items.map((r, index) => (
+        <KeywordResultItem key={index} data={r}/>
+    ));
+      userResults = this.state.result.items.map((r, index) => (
+        <KeywordResultItem key={index} data={r}/>
+    ));
 
       summary = <div className={'header-summary'}>
         共为您找到相关结果 {this.state.result.total} 个
@@ -124,6 +137,12 @@ export class SearchResult extends React.Component {
           }
           {
             results
+          }
+          {
+            keywordResults
+          }
+          {
+            userResults
           }
         </div>
         <Pagination
