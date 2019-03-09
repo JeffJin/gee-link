@@ -43,31 +43,28 @@ export class UserSearchResult extends React.Component {
   formatResults(results) {
     return results.map(r => {
       return {
-        title: this.cleanUpString(r.meta.title),
-        author: r.meta.author,
-        year: r.meta.year,
-        score: r.score,
-        umekey: r.umekey,
         collkey: r.collkey,
-        summary: this.cleanUpString(r.meta.summary)
+        logType: r.logType,
+        ip: r.ip,
+        api: r.api,
+        time: r.time,
+        totalFound: r.totalFound,
+        ipinfo: this.parseIpInfo(r.ipinfo)
       }
     });
   }
 
-  cleanUpString(s) {
-    let result = '';
-    if(s && s.length){
-      result = s.join(' ');
-    } else {
-      result = s;
+  parseIpInfo(ipinfo) {
+    const temp = ipinfo.replace('{', '').replace('}', '').split(',');
+    let result = {};
+    for (let i = 0; i < temp.length; i++) {
+      const key = temp[i].split('=')[0];
+      const value = temp[i].split('=')[1];
+      result[key.replace(' ', '')] = value.replace(' ', '');
     }
-
-    if (result === null || result === undefined) {
-      return '';
-    }
-
-    return result.replace(/<(?:.|\n)*?>/gm, '');
+    return result;
   }
+
 
   getSearchResult = (keyword, pageIndex, pageSize) => {
     this.setState({

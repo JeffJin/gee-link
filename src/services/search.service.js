@@ -7,23 +7,12 @@ class SearchService extends BaseService {
     super();
   }
 
-  async searchGeneral(key, pageIndex = 0, pageSize = 20, tab = 'all') {
+  async searchGeneral(key, pageIndex = 0, pageSize = 20) {
     if (!key) {
       return [];
     }
     const url = 'http://47.93.226.51:9090/v1/api/ume/searcher/search';
-    let returnFields = [];
-    if (tab === 'keyword' || tab === 'ip') {
-      returnFields = ['ip','time','keyword','logType','ipinfo','api','totalFound']
-    }
-    else if (tab === 'data') {
-      returnFields = ['title', 'summary','author','year'];
-    }
-    else {
-      returnFields = ['title', 'summary','ip','time','keyword','logType','ipinfo','api','totalFound'];
-    }
-
-    console.log('search general', tab, returnFields);
+    let returnFields = ['title', 'summary','ip','time','keyword','logType','ipinfo','api','totalFound'];
     const request = {
       collectionName: 'datamap',
       customerId: '6671A13AB54710D932C8F2E51FFE8CC3',

@@ -96,18 +96,87 @@ export class SearchResult extends React.Component {
       pageSize: pageSize,
       offset: pageSize * pageIndex
     });
-    searchService.searchGeneral(keyword, pageIndex, pageSize, selectedTab).then((result) => {
-      this.setState({
-        result: {
-          items: this.formatResults(result.resultList),
-          metadata: result.facetResult,
-          total: result.numFound
-        },
-        isInProgress: false
+    if(selectedTab === 'data') {
+      searchService.searchData(keyword, pageIndex, pageSize).then((result) => {
+        this.setState({
+          result: {
+            items: this.formatDataResults(result.resultList),
+            metadata: result.facetResult,
+            total: result.numFound
+          },
+          isInProgress: false
+        });
+        this.forceUpdate();
       });
-      this.forceUpdate();
-    });
+    } else if(selectedTab === 'keyword' || selectedTab === 'ip') {
+      searchService.searchKeyword(keyword, pageIndex, pageSize).then((result) => {
+        this.setState({
+          result: {
+            items: this.formatKeywordResults(result.results),
+            metadata: result.facetResult,
+            total: result.numFound
+          },
+          isInProgress: false
+        });
+        this.forceUpdate();
+      });
+    } else {
+      searchService.searchGeneral(keyword, pageIndex, pageSize).then((result) => {
+        this.setState({
+          result: {
+            items: this.formatResults(result.resultList),
+            metadata: result.facetResult,
+            total: result.numFound
+          },
+          isInProgress: false
+        });
+        this.forceUpdate();
+      });
+    }
   };
+
+  formatDataResults(results) {
+    return results.map(r => {
+      return {
+        title: this.cleanUpString(r.meta.title),
+        author: r.meta.author,
+        year: r.meta.year,
+        score: r.score,
+        umekey: r.umekey,
+        collkey: r.collkey,
+        summary: this.cleanUpString(r.meta.summary)
+      }
+    });
+  }
+
+  formatKeywordResults(results) {
+    return results.map(r => {
+      return {
+        collkey: r.collkey,
+        logType: r.logType,
+        ip: r.ip,
+        api: r.api,
+        time: r.time,
+        keyword: r.keyword,
+        totalFound: r.totalFound,
+        ipinfo: this.parseIpInfo(r.ipinfo)
+      }
+    });
+  }
+
+  parseIpInfo(ipinfo) {
+    if(!ipinfo) {
+      return {};
+    }
+    const temp = ipinfo.replace('{', '').replace('}', '').split(',');
+    let result = {};
+    for (let i = 0; i < temp.length; i++) {
+      const key = temp[i].split('=')[0];
+      const value = temp[i].split('=')[1];
+      result[key.replace(' ', '')] = value.replace(' ', '');
+    }
+    return result;
+  }
 
   handlePageSelection(offset) {
     const pageIndex = parseInt(offset / this.state.pageSize);
