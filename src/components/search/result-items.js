@@ -13,13 +13,13 @@ export function ResultItem(props) {
         </NavLink>
       </div>
       <div className={'row attr flex-box'}>
-        <div className={'flex-1'}>作者： {props.data.author}</div>
-        <div className={'flex-1'}>时间： {props.data.year}</div>
-        <div className={'flex-1'}>score： {props.data.score}</div>
+        <div className={'flex-1'}>作者： {props.data.author || ''}</div>
+        <div className={'flex-1'}>时间： {props.data.year || ''}</div>
+        <div className={'flex-1'}>score： {props.data.score || ''}</div>
         <div className={'flex-3'}></div>
       </div>
       <div className={'row summary'}>
-        <p className={'info'}>{renderHTML(props.data.summary)}</p>
+        <p className={'info'}>{renderHTML(props.data.summary || '')}</p>
       </div>
     </div>);
 }

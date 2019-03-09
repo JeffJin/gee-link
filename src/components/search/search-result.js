@@ -4,8 +4,8 @@ import queryString from 'query-string'
 import {SearchBox} from "./search-box";
 import LinearProgress from "@material-ui/core/es/LinearProgress";
 import Pagination from "material-ui-flat-pagination";
-import {IpinfoResultItem, KeywordResultItem, ResultItem} from "./result-items";
-import UserDetails from "../pages/user-details";
+import {KeywordResultItem, ResultItem} from "./result-items";
+import Button from "@material-ui/core/Button";
 
 export class SearchResult extends React.Component {
   state = {
@@ -14,15 +14,22 @@ export class SearchResult extends React.Component {
     pageIndex: 0,
     pageSize: 20,
     offset: 0,
+    selectedTab: 'all'
   };
 
   constructor(props) {
     super(props);
   }
 
-  componentDidMount() {
+  search(tab) {
     const keyword = this.getFieldValue('keyword');
-    this.getSearchResult(keyword, this.state.pageIndex, this.state.pageSize);
+    console.log('search in search result', keyword, tab);
+
+    this.getSearchResult(keyword, this.state.pageIndex, this.state.pageSize, tab);
+  }
+
+  componentDidMount() {
+    this.search(this.state.selectedTab);
   }
 
   getFieldValue(key) {
@@ -37,25 +44,33 @@ export class SearchResult extends React.Component {
     if (nextProps.location !== this.props.location) {
       const query = queryString.parse(nextProps.location.search);
       const keyword = query['keyword'];
-      this.getSearchResult(keyword, this.state.pageIndex, this.state.pageSize);
+      this.getSearchResult(keyword, this.state.pageIndex, this.state.pageSize, this.state.selectedTab);
     }
   }
+
+  changeSelectedTab = (tab) => () => {
+    console.log('selected tab changed', tab);
+    this.setState({selectedTab: tab});
+    this.search(tab);
+  };
 
   formatResults(results) {
     return results.map(r => {
       return {
-        title: r.meta.title && r.meta.title.length ? this.cleanUpString(r.meta.title[0]) : 'n/a',
+        title: r.meta.title && r.meta.title.length ? this.cleanUpString(r.meta.title[0]) : '',
         author: r.meta.author && r.meta.author[0] ? r.meta.author[0] : '',
+        summary: r.meta.summary && r.meta.summary[0] ? this.cleanUpString(r.meta.summary) : '',
         year: r.meta.year && r.meta.year[0] ? r.meta.year[0] : '',
+        ipinfo: r.meta.ipinfo && r.meta.ipinfo[0] ? r.meta.ipinfo[0] : '',
         ip: r.meta.ip && r.meta.ip[0] ? r.meta.ip[0] : '',
         api: r.meta.api && r.meta.api[0] ? r.meta.api[0] : '',
         time: r.meta.time && r.meta.time[0] ? r.meta.time[0] : '',
         totalFound: r.meta.totalFound && r.meta.totalFound[0] ? r.meta.totalFound[0] : '',
         logType: r.meta.logType && r.meta.logType[0] ? r.meta.logType[0] : '',
+        keyword: r.meta.keyword && r.meta.keyword[0] ? r.meta.keyword[0] : '',
         score: r.score,
         umekey: r.umekey,
         collkey: r.collkey,
-        summary: r.meta.summary && r.meta.summary[0] ? this.cleanUpString(r.meta.summary) : ''
       }
     });
   }
@@ -74,17 +89,17 @@ export class SearchResult extends React.Component {
     return result.replace(/<(?:.|\n)*?>/gm, '');
   }
 
-  getSearchResult = (keyword, pageIndex, pageSize) => {
+  getSearchResult = (keyword, pageIndex, pageSize, selectedTab) => {
     this.setState({
       isInProgress: true,
       pageIndex: pageIndex,
       pageSize: pageSize,
       offset: pageSize * pageIndex
     });
-    searchService.searchGeneral(keyword, pageIndex, pageSize).then((result) => {
+    searchService.searchGeneral(keyword, pageIndex, pageSize, selectedTab).then((result) => {
       this.setState({
         result: {
-          items: this.formatResults(result.resultList || result.results),
+          items: this.formatResults(result.resultList),
           metadata: result.facetResult,
           total: result.numFound
         },
@@ -97,24 +112,22 @@ export class SearchResult extends React.Component {
   handlePageSelection(offset) {
     const pageIndex = parseInt(offset / this.state.pageSize);
     const keyword = this.getFieldValue('keyword');
-    this.getSearchResult(keyword, pageIndex, this.state.pageSize);
+    this.getSearchResult(keyword, pageIndex, this.state.pageSize, this.state.selectedTab);
   }
 
   render(){
     let results = [];
-    let keywordResults = [];
-    let userResults = [];
     let summary = '';
     if (this.state.result.items) {
-      results = this.state.result.items.map((r, index) => (
-        <ResultItem key={index} data={r}/>
-    ));
-      keywordResults = this.state.result.items.map((r, index) => (
-        <KeywordResultItem key={index} data={r}/>
-    ));
-      userResults = this.state.result.items.map((r, index) => (
-        <KeywordResultItem key={index} data={r}/>
-    ));
+      results = this.state.result.items.map((r, index) => {
+        if (r.title && r.title.length && (this.state.selectedTab === 'all' || this.state.selectedTab === 'data')){
+          return <ResultItem key={index} data={r}/>;
+        }
+        else if (r.logType && r.logType.length &&
+          (this.state.selectedTab === 'all' || this.state.selectedTab === 'ip' || this.state.selectedTab === 'keyword'))  {
+          return <KeywordResultItem key={index} data={r}/>;
+        }
+      });
 
       summary = <div className={'header-summary'}>
         共为您找到相关结果 {this.state.result.total} 个
@@ -131,18 +144,26 @@ export class SearchResult extends React.Component {
           progress
         }
         <SearchBox {...this.props} basePath={'main'}/>
+        <div className={'tabs'}>
+          <Button variant="outlined" color={ this.state.selectedTab === 'ip' ? 'primary' : 'default'} onClick={this.changeSelectedTab('ip')} className={'tabButton'}>
+            用户
+          </Button>
+          <Button variant="outlined" color={ this.state.selectedTab === 'data' ? 'primary' : 'default'} onClick={this.changeSelectedTab('data')} className={'tabButton'}>
+            数据
+          </Button>
+          <Button variant="outlined" color={ this.state.selectedTab === 'keyword' ? 'primary' : 'default'} onClick={this.changeSelectedTab('keyword')} className={'tabButton'}>
+            关键词
+          </Button>
+          <Button variant="outlined" color={ this.state.selectedTab === 'all' ? 'primary' : 'default'} onClick={this.changeSelectedTab('all')} className={'tabButton'}>
+            全部
+          </Button>
+        </div>
         <div className="search-result">
           {
             summary
           }
           {
             results
-          }
-          {
-            keywordResults
-          }
-          {
-            userResults
           }
         </div>
         <Pagination
