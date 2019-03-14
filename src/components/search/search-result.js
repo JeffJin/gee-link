@@ -51,6 +51,7 @@ export class SearchResult extends React.Component {
   changeSelectedTab = (tab) => () => {
     console.log('selected tab changed', tab);
     this.setState({selectedTab: tab});
+    this.resetData();
     this.search(tab);
   };
 
@@ -134,6 +135,18 @@ export class SearchResult extends React.Component {
       });
     }
   };
+
+  resetData() {
+    this.setState({
+      result: {
+        items: [],
+        metadata: {},
+        total: 0
+      },
+      isInProgress: false
+    });
+    this.forceUpdate();
+  }
 
   formatDataResults(results) {
     return results.map(r => {
