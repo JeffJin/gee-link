@@ -76,8 +76,7 @@ export class UserSearchResult extends React.Component {
     searchService.searchUser(keyword, pageIndex, pageSize).then((result) => {
       this.setState({
         result: {
-          items: this.formatResults(result.resultList || result.results),
-          metadata: result.facetResult,
+          items: this.formatResults(result.results),
           total: result.numFound
         },
         isInProgress: false
@@ -96,20 +95,9 @@ export class UserSearchResult extends React.Component {
     let results = [];
     let summary = '';
     if (this.state.result.items) {
-      if (this.state.field === 'keyword') {
-        results = this.state.result.items.map((r, index) => (
-          <KeywordResultItem key={index} data={r}/>
-        ));
-      } else if (this.state.field === 'ipinfo') {
-        results = this.state.result.items.map((r, index) => (
-          <IpinfoResultItem key={index} data={r}/>
-        ));
-      } else {
-        results = this.state.result.items.map((r, index) => (
-          <ResultItem key={index} data={r}/>
-        ));
-      }
-
+      results = this.state.result.items.map((r, index) => (
+        <IpinfoResultItem key={index} data={r}/>
+      ));
       summary = <div className={'header-summary'}>
         共为您找到相关结果 {this.state.result.total} 个
       </div>;
