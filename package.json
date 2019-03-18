@@ -2,6 +2,7 @@
   "name": "gee-link",
   "version": "0.1.0",
   "private": true,
+  "homepage": "http://47.93.225.51:8681/datamap",
   "dependencies": {
     "@material-ui/core": "^3.8.1",
     "@material-ui/icons": "^3.0.1",

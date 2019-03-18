@@ -8,7 +8,7 @@ export function ResultItem(props) {
   return (
     <div className={'search-result-row'}>
       <div className={'row title'}>
-        <NavLink to={`/data/details/${props.data.collkey}`} className='nav'>
+        <NavLink to={`${process.env.PUBLIC_URL}/data/details/${props.data.collkey}`} className='nav'>
           {renderHTML(props.data.title)}
         </NavLink>
       </div>
@@ -29,7 +29,7 @@ export function KeywordResultItem(props) {
   return (
     <div className={'search-result-row'}>
       <div className={'row title'}>
-        <NavLink to={`/user/details/${props.data.ip}`} className='nav'>
+        <NavLink to={`${process.env.PUBLIC_URL}/user/details/${props.data.ip}`} className='nav'>
           {props.data.ip}
         </NavLink>
       </div>
@@ -42,7 +42,7 @@ export function KeywordResultItem(props) {
         <p>IP： {props.data.ip}</p>
         <p>
           关键词：
-          <NavLink to={`/keyword/details/${props.data.keyword}`} className='nav'>
+          <NavLink to={`${process.env.PUBLIC_URL}/keyword/details/${props.data.keyword}`} className='nav'>
             {props.data.keyword}
           </NavLink>
         </p>
@@ -56,7 +56,7 @@ export function IpinfoResultItem(props) {
   return (
     <div className={'search-result-row'}>
       <div className={'row title'}>
-        <NavLink to={`/user/details/${props.data.ip}`} className='nav'>
+        <NavLink to={`${process.env.PUBLIC_URL}/user/details/${props.data.ip}`} className='nav'>
           {props.data.ip}
         </NavLink>
       </div>

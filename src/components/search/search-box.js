@@ -48,7 +48,7 @@ export class SearchBox extends React.Component {
             if (ev.key === 'Enter' && this.state.keyword) {
               // Do code here
               ev.preventDefault();
-              let url = `/${this.props.basePath}/search?keyword=${this.state.keyword}`;
+              let url = `${process.env.PUBLIC_URL}/${this.props.basePath}/search?keyword=${this.state.keyword}`;
               this.props.history.push(url);
             }
           }}
@@ -58,7 +58,7 @@ export class SearchBox extends React.Component {
           aria-label="Search"
           onClick={this.handleSearch}
         >
-          <NavLink to={`/${this.props.basePath}/search?keyword=${this.state.keyword}`}
+          <NavLink to={`${process.env.PUBLIC_URL}/${this.props.basePath}/search?keyword=${this.state.keyword}`}
                    onClick={ this.handleSearch }
                    className='nav'
           >

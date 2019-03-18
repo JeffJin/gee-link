@@ -2,8 +2,6 @@ import connect from "react-redux/es/connect/connect";
 import React from "react";
 import {CommonAction} from "../../store/reducers/actions";
 import {rankingService} from "../../services/ranking.service";
-import Ranking from "./ranking";
-import {NavLink} from "react-router-dom";
 
 function loadCategorizedRankingAction(data) {
   return {

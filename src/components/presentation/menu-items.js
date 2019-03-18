@@ -14,7 +14,7 @@ export const leftMenuItems = (
       <ListItemIcon className={'menu-icon'}>
         <StarBorderOutlined/>
       </ListItemIcon>
-      <NavLink to={'/main'} className='nav'>
+      <NavLink to={`${process.env.PUBLIC_URL}/main`} className='nav'>
         首页
       </NavLink>
       <ListItemIcon className={'menu-icon'}>
@@ -25,7 +25,7 @@ export const leftMenuItems = (
       <ListItemIcon className={'menu-icon'}>
         <PublicOutlined/>
       </ListItemIcon>
-      <NavLink to={'/keyword'} className='nav'>
+      <NavLink to={`${process.env.PUBLIC_URL}/keyword`} className='nav'>
         关键词统计
       </NavLink>
       <ListItemIcon className={'menu-icon'}>
@@ -36,7 +36,7 @@ export const leftMenuItems = (
       <ListItemIcon className={'menu-icon'}>
         <InsertChartOutlined/>
       </ListItemIcon>
-      <NavLink to={'/data'} className='nav'>
+      <NavLink to={`${process.env.PUBLIC_URL}/data`} className='nav'>
         数据统计
       </NavLink>
       <ListItemIcon className={'menu-icon'}>
@@ -47,7 +47,7 @@ export const leftMenuItems = (
       <ListItemIcon className={'menu-icon'}>
         <PeopleOutlined/>
       </ListItemIcon>
-      <NavLink to={'/user'} className='nav'>
+      <NavLink to={`${process.env.PUBLIC_URL}/user`} className='nav'>
         用户统计
       </NavLink>
       <ListItemIcon className={'menu-icon'}>

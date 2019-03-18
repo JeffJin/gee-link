@@ -83,7 +83,7 @@ export default class Ranking extends React.Component {
           this.props.data.rankingItems.map((item, index) => (
             <div key={index} className="ranking-item">
               <div className={'ranking-col-0'}>{item.rank}.</div>
-              <div className={'ranking-col-1'}><NavLink to={`${this.props.data.route}/${item.id}`} className='nav'>{item.desc}</NavLink></div>
+              <div className={'ranking-col-1'}><NavLink to={`${process.env.PUBLIC_URL}/${this.props.data.route}/${item.id}`} className='nav'>{item.desc}</NavLink></div>
               <div className={'ranking-col-2'}>{item.value}</div>
             </div>
           ))

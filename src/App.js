@@ -64,16 +64,16 @@ class App extends React.Component {
         </Drawer>
         <main className={'content'}>
           <Switch>
-            <Route path={'/main/search'}  render={(props) => <SearchResult {...props}/>} />
-            <Route path={'/data/search'}  render={(props) => <DataSearchResult {...props}/>} />
-            <Route path={'/user/search'}  render={(props) => <UserSearchResult {...props}/>} />
-            <Route path={'/keyword/search'}  render={(props) => <KeywordSearchResult {...props}/>} />
-            <Route exact path='/keyword' render={(props) => <KeywordStats {...props}/>}/>
-            <Route exact path='/data' render={(props) => <DataStats {...props}/>}/>
-            <Route exact path='/user' render={(props) => <UserStats {...props}/>}/>
-            <Route path='/main' render={(props) => <MainPage {...props}/>}/>
+            <Route path={`${process.env.PUBLIC_URL}/main/search`}  render={(props) => <SearchResult {...props}/>} />
+            <Route path={`${process.env.PUBLIC_URL}/data/search`}  render={(props) => <DataSearchResult {...props}/>} />
+            <Route path={`${process.env.PUBLIC_URL}/user/search`} render={(props) => <UserSearchResult {...props}/>} />
+            <Route path={`${process.env.PUBLIC_URL}/keyword/search`}  render={(props) => <KeywordSearchResult {...props}/>} />
+            <Route exact path={`${process.env.PUBLIC_URL}/keyword`} render={(props) => <KeywordStats {...props}/>}/>
+            <Route exact path={`${process.env.PUBLIC_URL}/data`} render={(props) => <DataStats {...props}/>}/>
+            <Route exact path={`${process.env.PUBLIC_URL}/user`} render={(props) => <UserStats {...props}/>}/>
+            <Route path={`${process.env.PUBLIC_URL}/main`} render={(props) => <MainPage {...props}/>}/>
             <Route
-              path={'/keyword/details/:id'}
+              path={`${process.env.PUBLIC_URL}/keyword/details/:id`}
               render={(props) => {
                 return (
                   <KeywordDetails
@@ -84,7 +84,7 @@ class App extends React.Component {
               }}
             />
             <Route
-              path={'/user/details/:id'}
+              path={`${process.env.PUBLIC_URL}/user/details/:id`}
               render={({ match }) => {
                 return (
                   <UserDetails
@@ -94,7 +94,7 @@ class App extends React.Component {
               }}
             />
             <Route
-              path={'/data/details/:id'}
+              path={`${process.env.PUBLIC_URL}/data/details/:id`}
               render={({ match }) => {
                 return (
                   <DataDetails
@@ -103,9 +103,9 @@ class App extends React.Component {
                 );
               }}
             />
-            <Route exact path='/' render={() => (
+            <Route exact path={`${process.env.PUBLIC_URL}/`} render={() => (
               <Redirect
-                to='/main'
+                to={`${process.env.PUBLIC_URL}/main`}
               />
             )}/>
             <Route component={MainPage}/>

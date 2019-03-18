@@ -2,11 +2,8 @@ import React from 'react';
 import {SearchedKeywordsRanking} from "../rankings/searched-keywords-ranking";
 import LinearProgress from "@material-ui/core/es/LinearProgress";
 import StateBox from "../stat-boxes/stat-box";
-import {dataService} from "../../services/data.service";
 import {UserSearchTrend} from "../charts/user-search-trend";
-import {NavLink} from "react-router-dom";
 import moment from "moment";
-import {UserActivityHistory} from "../charts/user-activity-history";
 import {userService} from "../../services/user.service";
 import {DataBrowseRanking} from "../rankings/data-browse-ranking";
 
