@@ -4,7 +4,7 @@ import queryString from 'query-string'
 import {SearchBox} from "./search-box";
 import LinearProgress from "@material-ui/core/es/LinearProgress";
 import Pagination from "material-ui-flat-pagination";
-import {KeywordResultItem, ResultItem} from "./result-items";
+import {IpinfoResultItem, KeywordResultItem, ResultItem} from "./result-items";
 import Button from "@material-ui/core/Button";
 
 export class SearchResult extends React.Component {
@@ -109,11 +109,23 @@ export class SearchResult extends React.Component {
         });
         this.forceUpdate();
       });
-    } else if(selectedTab === 'keyword' || selectedTab === 'ip') {
+    } else if(selectedTab === 'keyword') {
       searchService.searchKeyword(keyword, pageIndex, pageSize).then((result) => {
         this.setState({
           result: {
             items: this.formatKeywordResults(result.results),
+            metadata: result.facetResult,
+            total: result.numFound
+          },
+          isInProgress: false
+        });
+        this.forceUpdate();
+      });
+    } else if(selectedTab === 'ip') {
+      searchService.searchUser(keyword, pageIndex, pageSize).then((result) => {
+        this.setState({
+          result: {
+            items: this.formatUserResults(result.results),
             metadata: result.facetResult,
             total: result.numFound
           },
@@ -177,6 +189,20 @@ export class SearchResult extends React.Component {
     });
   }
 
+  formatUserResults(results) {
+    return results.map(r => {
+      return {
+        collkey: r.collkey,
+        logType: r.logType,
+        ip: r.ip,
+        api: r.api,
+        time: r.time,
+        totalFound: r.totalFound,
+        ipinfo: this.parseIpInfo(r.ipinfo)
+      }
+    });
+  }
+
   parseIpInfo(ipinfo) {
     if(!ipinfo) {
       return {};
@@ -206,8 +232,12 @@ export class SearchResult extends React.Component {
           return <ResultItem key={index} data={r}/>;
         }
         else if (r.logType && r.logType.length &&
-          (this.state.selectedTab === 'all' || this.state.selectedTab === 'ip' || this.state.selectedTab === 'keyword'))  {
+          (this.state.selectedTab === 'all' || this.state.selectedTab === 'keyword'))  {
           return <KeywordResultItem key={index} data={r}/>;
+        }
+        else if (r.logType && r.logType.length &&
+          (this.state.selectedTab === 'all' || this.state.selectedTab === 'ip'))  {
+          return <IpinfoResultItem key={index} data={r}/>;
         }
       });
 

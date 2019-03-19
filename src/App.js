@@ -47,6 +47,9 @@ class App extends React.Component {
   };
 
   render() {
+    var logoStyle = {
+      backgroundImage: 'url(' + `${process.env.PUBLIC_URL}/assets/geelink.png` + ')',
+    };
     return (
       <div className={'root'}>
         <CssBaseline/>
@@ -57,7 +60,7 @@ class App extends React.Component {
           }}
           open={this.state.open}
         >
-          <div className={'toolbar-icon'}>
+          <div className={'toolbar-icon'} style={logoStyle}>
           </div>
           <Divider className={'divider'}/>
           <List>{leftMenuItems}</List>
