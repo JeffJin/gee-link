@@ -87,7 +87,8 @@ export class SearchResult extends React.Component {
       result = s;
     }
 
-    return result.replace(/<(?:.|\n)*?>/gm, '');
+    return result;
+    // return result.replace(/<(?:.|\n)*?>/gm, '');
   }
 
   getSearchResult = (keyword, pageIndex, pageSize, selectedTab) => {
@@ -226,6 +227,7 @@ export class SearchResult extends React.Component {
   render(){
     let results = [];
     let summary = '';
+    let pagination = '';
     if (this.state.result.items) {
       results = this.state.result.items.map((r, index) => {
         if (r.title && r.title.length && (this.state.selectedTab === 'all' || this.state.selectedTab === 'data')){
@@ -241,13 +243,24 @@ export class SearchResult extends React.Component {
         }
       });
 
-      summary = <div className={'header-summary'}>
-        共为您找到相关结果 {this.state.result.total} 个
-      </div>;
+      if(this.state.result.total > 0) {
+        pagination = <div className={'pagination'}>
+          <Pagination
+              limit={20}
+              offset={this.state.offset}
+              total={this.state.result.total}
+              onClick={(e, offset) => this.handlePageSelection(offset)}/>
+        </div>;
+      }
     }
     let progress = '';
     if(this.state.isInProgress) {
       progress = <LinearProgress className={'progress'}/>
+      summary = <div className={'header-summary'}>正在所搜，请稍等...</div>;
+    } else {
+      summary = <div className={'header-summary'}>
+        共为您找到相关结果 <strong><i>{this.state.result.total}</i></strong> 个
+      </div>;
     }
 
     return (
@@ -274,16 +287,12 @@ export class SearchResult extends React.Component {
           {
             summary
           }
+          <div className={'pagination-container'}>{ pagination }</div>
           {
             results
           }
         </div>
-        <Pagination
-          limit={20}
-          offset={this.state.offset}
-          total={this.state.result.total}
-          onClick={(e, offset) => this.handlePageSelection(offset)}
-        />
+        <div className={'pagination-container'}>{ pagination }</div>
       </div>
     );
   }

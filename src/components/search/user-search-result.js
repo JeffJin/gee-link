@@ -82,19 +82,30 @@ export class UserSearchResult extends React.Component {
   render(){
     let results = [];
     let summary = '';
+    let pagination = '';
     if (this.state.result.items) {
       results = this.state.result.items.map((r, index) => (
         <IpinfoResultItem key={index} data={r}/>
       ));
-      summary = <div className={'header-summary'}>
-        共为您找到相关结果 {this.state.result.total} 个
-      </div>;
+      if(this.state.result.total > 0) {
+        pagination = <div className={'pagination'}>
+          <Pagination
+              limit={20}
+              offset={this.state.offset}
+              total={this.state.result.total}
+              onClick={(e, offset) => this.handlePageSelection(offset)}/>
+        </div>;
+      }
     }
     let progress = '';
     if(this.state.isInProgress) {
       progress = <LinearProgress className={'progress'}/>
+      summary = <div className={'header-summary'}>正在所搜，请稍等...</div>;
+    } else {
+      summary = <div className={'header-summary'}>
+        共为您找到相关结果 <strong><i>{this.state.result.total}</i></strong> 个
+      </div>;
     }
-
     return (
       <div>
         {
@@ -105,16 +116,12 @@ export class UserSearchResult extends React.Component {
           {
             summary
           }
+          <div className={'pagination-container'}>{ pagination }</div>
           {
             results
           }
         </div>
-        <Pagination
-          limit={20}
-          offset={this.state.offset}
-          total={this.state.result.total}
-          onClick={(e, offset) => this.handlePageSelection(offset)}
-        />
+        <div className={'pagination-container'}>{ pagination }</div>
       </div>
     );
   }

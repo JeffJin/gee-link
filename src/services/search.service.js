@@ -18,7 +18,10 @@ class SearchService extends BaseService {
       customerId: '6671A13AB54710D932C8F2E51FFE8CC3',
       queryString: key,
       returnField: returnFields,
-      highLightField: ['title', 'summary','keyword'],
+      highLightField: ['title', 'summary'],
+      highLightEnd: '</font>',
+      highLightStart: '<font color="red">',
+      noHighlight: "0",
       preciseSearch: '1',
       closeFullSearch: false,
       topicAlias: 'label',
@@ -26,7 +29,6 @@ class SearchService extends BaseService {
       qcAlgorithmAlias: '',
       numOfDoc: pageSize,
       startDoc: pageIndex,
-      noHighlight: '1'
     };
 
     return await fetch(url, {
@@ -64,7 +66,9 @@ class SearchService extends BaseService {
       qcAlgorithmAlias: '',
       numOfDoc: pageSize,
       startDoc: pageIndex,
-      noHighlight: '1'
+      highLightEnd: '</font>',
+      highLightStart: '<font color="red">',
+      noHighlight: '0'
     };
 
     return await fetch(url, {
@@ -83,17 +87,6 @@ class SearchService extends BaseService {
       });
   }
 
-  //numFound: 24
-  // results: [{collkey: "154976777851653", logType: "search", ip: "70.31.40.26",…},…]
-  //  0: {collkey: "154976777851653", logType: "search", ip: "70.31.40.26",…}
-  //    api: "http://47.93.226.51:9090/v1/api/ume/searcher/search"
-  //    collection: "huluarticle"
-  //    collkey: "154976777851653"
-  //    ip: "70.31.40.26"
-  //    keyword: "北京"
-  //    logType: "search"
-  //    time: "2019-02-10T11:02:55.741"
-  //    totalFound: "20"
   async searchKeyword(key, pageIndex = 0, pageSize = 20) {
     if (!key) {
       return [];

@@ -13,9 +13,9 @@ export function ResultItem(props) {
         </NavLink>
       </div>
       <div className={'row attr flex-box'}>
-        <div className={'flex-1'}>作者： {props.data.author || ''}</div>
-        <div className={'flex-1'}>时间： {props.data.year || ''}</div>
-        <div className={'flex-1'}>score： {props.data.score || ''}</div>
+        <div className={'flex-1 author'}>作者： {props.data.author || ''}</div>
+        <div className={'flex-1 time'}>时间： {props.data.year || ''}</div>
+        <div className={'flex-1 score'}>score： {props.data.score || ''}</div>
         <div className={'flex-3'}></div>
       </div>
       <div className={'row summary'}>
@@ -27,7 +27,7 @@ export function ResultItem(props) {
 export function KeywordResultItem(props) {
 
   return (
-    <div className={'search-result-row'}>
+    <div className={'search-result-row keyword'}>
       <div className={'row title'}>
         <NavLink to={`${process.env.PUBLIC_URL}/user/details/${props.data.ip}`} className='nav'>
           {props.data.ip}
@@ -42,11 +42,11 @@ export function KeywordResultItem(props) {
         <p>IP： {props.data.ip}</p>
         <p>
           关键词：
-          <NavLink to={`${process.env.PUBLIC_URL}/keyword/details/${props.data.keyword}`} className='nav'>
-            {props.data.keyword}
+          <NavLink to={`${process.env.PUBLIC_URL}/keyword/details/${props.data.keyword}`} className='keyword-nav'>
+            {renderHTML(props.data.keyword)}
           </NavLink>
         </p>
-        <p>API： {props.data.api}</p>
+        <p>API： <span className="api">{props.data.api}</span></p>
       </div>
     </div>);
 }
@@ -67,7 +67,7 @@ export function IpinfoResultItem(props) {
       </div>
       <div className={'row summary'}>
         <p>IP： {props.data.ip}</p>
-        <p>API： {props.data.api}</p>
+        <p>API： <span className={'api'} >{props.data.api}</span></p>
         <p>用户信息： {props.data.uid}</p>
       </div>
     </div>);
