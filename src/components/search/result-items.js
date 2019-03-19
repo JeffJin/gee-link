@@ -68,7 +68,7 @@ export function IpinfoResultItem(props) {
       <div className={'row summary'}>
         <p>IP： {props.data.ip}</p>
         <p>API： {props.data.api}</p>
-        <p>用户信息： {props.data.ipinfo.country}, {props.data.ipinfo.city}, {props.data.ipinfo.prv}</p>
+        <p>用户信息： {props.data.uid}</p>
       </div>
     </div>);
 }

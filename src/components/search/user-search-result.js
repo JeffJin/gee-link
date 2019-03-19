@@ -49,22 +49,10 @@ export class UserSearchResult extends React.Component {
         api: r.api,
         time: r.time,
         totalFound: r.totalFound,
-        ipinfo: this.parseIpInfo(r.ipinfo)
+        uid: r.uid
       }
     });
   }
-
-  parseIpInfo(ipinfo) {
-    const temp = ipinfo.replace('{', '').replace('}', '').split(',');
-    let result = {};
-    for (let i = 0; i < temp.length; i++) {
-      const key = temp[i].split('=')[0];
-      const value = temp[i].split('=')[1];
-      result[key.replace(' ', '')] = value.replace(' ', '');
-    }
-    return result;
-  }
-
 
   getSearchResult = (keyword, pageIndex, pageSize) => {
     this.setState({
