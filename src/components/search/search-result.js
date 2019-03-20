@@ -253,10 +253,12 @@ export class SearchResult extends React.Component {
         </div>;
       }
     }
-    let progress = '';
+    let progress = <div className={'progress-placeholder'}></div>;
+    let progressClass = this.state.isInProgress ? 'in-progress' : '';
+
     if(this.state.isInProgress) {
-      progress = <LinearProgress className={'progress'}/>
-      summary = <div className={'header-summary'}>正在所搜，请稍等...</div>;
+      progress = <LinearProgress className={'progress'}/>;
+      summary = <div className={'header-summary'}>正在搜索，请稍等...</div>;
     } else {
       summary = <div className={'header-summary'}>
         共为您找到相关结果 <strong><i>{this.state.result.total}</i></strong> 个
@@ -283,14 +285,14 @@ export class SearchResult extends React.Component {
             全部
           </Button>
         </div>
-        <div className="search-result">
+        <div className={'search-result ' + progressClass}>
           {
             summary
           }
           <div className={'pagination-container'}>{ pagination }</div>
-          {
-            results
-          }
+          <div className={'result-rows'}>
+            {results}
+          </div>
         </div>
         <div className={'pagination-container'}>{ pagination }</div>
       </div>

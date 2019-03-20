@@ -101,10 +101,12 @@ export class KeywordSearchResult extends React.Component {
       }
     }
 
-    let progress = '';
+    let progress = <div className={'progress-placeholder'}></div>;
+    let progressClass = this.state.isInProgress ? 'in-progress' : '';
+
     if(this.state.isInProgress) {
       progress = <LinearProgress className={'progress'}/>
-      summary = <div className={'header-summary'}>正在所搜，请稍等...</div>;
+      summary = <div className={'header-summary'}>正在搜索，请稍等...</div>;
     } else {
       summary = <div className={'header-summary'}>
         共为您找到相关结果 <strong><i>{this.state.result.total}</i></strong> 个
@@ -117,14 +119,14 @@ export class KeywordSearchResult extends React.Component {
           progress
         }
         <SearchBox {...this.props} basePath={'keyword'}/>
-        <div className="search-result">
+        <div className={'search-result ' + progressClass}>
           {
             summary
           }
           <div className={'pagination-container'}>{ pagination }</div>
-          {
-            results
-          }
+          <div className={'result-rows'}>
+            {results}
+          </div>
         </div>
         <div className={'pagination-container'}>{ pagination }</div>
       </div>
