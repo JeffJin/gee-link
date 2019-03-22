@@ -196,6 +196,7 @@ export class SearchResult extends React.Component {
         collkey: r.collkey,
         logType: r.logType,
         ip: r.ip,
+        uid: r.uid,
         api: r.api,
         time: r.time,
         totalFound: r.totalFound,
@@ -208,6 +209,12 @@ export class SearchResult extends React.Component {
     if(!ipinfo) {
       return {};
     }
+    try {
+      const result = JSON.parse(ipinfo);
+      return result;
+    } catch {
+    }
+
     const temp = ipinfo.replace('{', '').replace('}', '').split(',');
     let result = {};
     for (let i = 0; i < temp.length; i++) {

@@ -49,9 +49,31 @@ export class UserSearchResult extends React.Component {
         api: r.api,
         time: r.time,
         totalFound: r.totalFound,
-        uid: r.uid
+        uid: r.uid,
+        ipinfo: this.parseIpInfo(r.ipinfo)
       }
     });
+  }
+
+
+  parseIpInfo(ipinfo) {
+    if(!ipinfo) {
+      return {};
+    }
+    try {
+      const result = JSON.parse(ipinfo);
+      return result;
+    } catch {
+    }
+
+    const temp = ipinfo.replace('{', '').replace('}', '').split(',');
+    let result = {};
+    for (let i = 0; i < temp.length; i++) {
+      const key = temp[i].split('=')[0];
+      const value = temp[i].split('=')[1];
+      result[key.replace(' ', '')] = value.replace(' ', '');
+    }
+    return result;
   }
 
   getSearchResult = (keyword, pageIndex, pageSize) => {

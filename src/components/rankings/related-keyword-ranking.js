@@ -28,7 +28,7 @@ class RelatedKeywordRankingContent extends React.Component {
   //
   render() {
     return (
-      <Ranking title={'相关关键词'} data={this.props}/>
+      <Ranking title={'命中关键词'} data={this.props}/>
     );
   }
 }
@@ -43,7 +43,7 @@ const mapStateToProps = (state) => {
         value: r.count
       }
     }),
-    headers: ['排名', '关键词', '浏览数'],
+    headers: ['排名', '关键词', '搜索数'],
     title: '相关数据',
     route: '/keyword/details'
   };

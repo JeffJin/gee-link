@@ -44,8 +44,7 @@ const mapStateToProps = (state) => {
       }
     }),
     headers: ['排名', '关键词', '搜索次数'],
-    title: '搜索未命中排行榜 TOP 10',
-    route: '/keyword/details'
+    title: '搜索未命中排行榜 TOP 10'
   };
 };
 

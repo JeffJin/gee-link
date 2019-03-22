@@ -28,7 +28,7 @@ class RelatedUserRankingContent extends React.Component {
   //
   render() {
     return (
-      <Ranking title={'相关用户'} data={this.props}/>
+      <Ranking title={'使用用户'} data={this.props}/>
     );
   }
 }

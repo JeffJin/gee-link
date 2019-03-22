@@ -85,7 +85,7 @@ class UserDetails extends React.Component {
           <div className={'flex-1'}>
             <div className={'row recent-browsed'}>
               <div className="flex-vertical">
-                <DataBrowseRanking ip={this.props.userIp} label={'最近浏览的数据'}/>
+                <DataBrowseRanking ip={this.props.userIp} label={'数据使用TOP 10'}/>
               </div>
             </div>
             <div className={'row recent-searched'}>

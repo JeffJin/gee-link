@@ -24,6 +24,11 @@ export function ResultItem(props) {
     </div>);
 }
 
+export const TypeMap = {
+  search: '搜索',
+  article: '阅读'
+};
+
 export function KeywordResultItem(props) {
 
   return (
@@ -34,7 +39,7 @@ export function KeywordResultItem(props) {
         </NavLink>
       </div>
       <div className={'row attr flex-box'}>
-        <div className={'flex-1'}>类型： {props.data.logType}</div>
+        <div className={'flex-1'}>类型： {TypeMap[props.data.logType]}</div>
         <div className={'flex-2'}>时间： {moment(props.data.time).format('MMM DD, YYYY')}</div>
         <div className={'flex-3'}>Total Found: {props.data.totalFound}</div>
       </div>
@@ -47,6 +52,7 @@ export function KeywordResultItem(props) {
           </NavLink>
         </p>
         <p>API： <span className="api">{props.data.api}</span></p>
+        <p>用户信息： {props.data.ipinfo.country} {props.data.ipinfo.province} {props.data.ipinfo.city}</p>
       </div>
     </div>);
 }
@@ -57,18 +63,18 @@ export function IpinfoResultItem(props) {
     <div className={'search-result-row'}>
       <div className={'row title'}>
         <NavLink to={`${process.env.PUBLIC_URL}/user/details/${props.data.ip}`} className='nav'>
-          {props.data.ip}
+          {props.data.uid || props.data.ip}
         </NavLink>
       </div>
       <div className={'row attr flex-box'}>
-        <div className={'flex-1'}>类型： {props.data.logType}</div>
+        <div className={'flex-1'}>类型： {TypeMap[props.data.logType]}</div>
         <div className={'flex-2'}>时间： {moment(props.data.time).format('MMM DD, YYYY')}</div>
         <div className={'flex-3'}></div>
       </div>
       <div className={'row summary'}>
         <p>IP： {props.data.ip}</p>
         <p>API： <span className={'api'} >{props.data.api}</span></p>
-        <p>用户信息： {props.data.uid}</p>
+        <p>用户信息： {props.data.ipinfo.country} {props.data.ipinfo.province} {props.data.ipinfo.city}</p>
       </div>
     </div>);
 }
