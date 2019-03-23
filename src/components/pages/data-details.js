@@ -74,7 +74,7 @@ class DataDetails extends React.Component {
                   this.state.categorizedResults.map((r, index) => (
                     <div key={index} className={'flex-1 row'}>
                       <span className={'key'}>{r.keyword}</span>
-                      <span className={'value'}>{r.count}</span>
+                      {/*<span className={'value'}>{r.count}</span>*/}
                     </div>
                   ))
                 }
