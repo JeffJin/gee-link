@@ -40,8 +40,8 @@ export function KeywordResultItem(props) {
       </div>
       <div className={'row attr flex-box'}>
         <div className={'flex-1'}>类型： {TypeMap[props.data.logType]}</div>
-        <div className={'flex-2'}>时间： {moment(props.data.time).format('MMM DD, YYYY')}</div>
-        <div className={'flex-3'}>Total Found: {props.data.totalFound}</div>
+        <div className={'flex-2'}>时间： {moment(props.data.time).format('YYYY MMM DD')}</div>
+        <div className={'flex-3'}>共找到: {props.data.totalFound}</div>
       </div>
       <div className={'row summary'}>
         <p>IP： {props.data.ip}</p>
@@ -68,7 +68,7 @@ export function IpinfoResultItem(props) {
       </div>
       <div className={'row attr flex-box'}>
         <div className={'flex-1'}>类型： {TypeMap[props.data.logType]}</div>
-        <div className={'flex-2'}>时间： {moment(props.data.time).format('MMM DD, YYYY')}</div>
+        <div className={'flex-2'}>时间： {moment(props.data.time).format('YYYY MMM DD')}</div>
         <div className={'flex-3'}></div>
       </div>
       <div className={'row summary'}>

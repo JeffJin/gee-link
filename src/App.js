@@ -21,6 +21,11 @@ import Highcharts from 'highcharts'
 import {KeywordSearchResult} from "./components/search/keyword-search-result";
 import {UserSearchResult} from "./components/search/user-search-result";
 import {DataSearchResult} from "./components/search/data-search-result";
+import * as moment from "moment";
+import 'moment/locale/zh-cn';
+
+
+moment.locale('zh-cn');
 
 Highcharts.setOptions({
   lang: {

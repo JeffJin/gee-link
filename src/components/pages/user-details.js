@@ -37,7 +37,7 @@ class UserDetails extends React.Component {
         {complained: {label: '举报次数', value: result.complained}},
       );
       this.setState({stats: newStats});
-      this.setState({lastUpdated: moment(result.lastUpdated).toString()});
+      this.setState({lastUpdated: moment(result.lastUpdated).format('YYYY MMM DD').toString()});
     });
 
     userService.getRecentBrowsed(this.props.userIp).then((result) => {

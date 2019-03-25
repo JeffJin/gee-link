@@ -12,7 +12,7 @@ class DataDetails extends React.Component {
     title: '',
     author: '',
     summary: '',
-    lastUpdated: {value: moment(new Date()).format('YYYY-MM-DD'), label: '最近更新时间'},
+    lastUpdated: {value: moment(new Date()).format('YYYY MMM DD'), label: '最近更新时间'},
     browsedData: {value: 0, label: '被浏览次数'},
     forwardedData: {value: 0, label: '被转发次数'},
     reviewedData: {value: 0, label: '被评论次数'},
@@ -51,9 +51,9 @@ class DataDetails extends React.Component {
           <div className={'data-info'}>
             <div className={'header'}>数据信息</div>
             <div className={'info'}>
-              <div className={'title'}>title: {this.state.title}</div>
-              <div className={'author'}>author: {this.state.author}</div>
-              <div className={'summary'}>summary: {this.state.summary}</div>
+              <div className={'title'}>标题: {this.state.title}</div>
+              <div className={'author'}>作者: {this.state.author}</div>
+              <div className={'summary'}>摘要: {this.state.summary}</div>
             </div>
             <div className={'stats'}>
               <StateBox data={this.state.lastUpdated}/>
