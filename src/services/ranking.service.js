@@ -8,8 +8,8 @@ class RankingService extends BaseService {
   }
 
   // 数据浏览
-  getDataBrowseRanking(unit, ip = '') {
-    const url = `http://47.93.226.51:9012/v1/api/ume/datamap/customer/documents?ip=${ip}&rows=10&unit=${unit}`;
+  getDataBrowseRanking(unit, keyword = '') {
+    const url = `http://47.93.226.51:9012/v1/api/ume/datamap/data/usage?keyword=${keyword}&rows=10&unit=${unit}`;
 
     return fetch(url, {
       method: 'get',

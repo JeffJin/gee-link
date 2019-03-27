@@ -1,5 +1,5 @@
 import fetch from 'isomorphic-fetch';
-import BaseService from "./base.service";
+import BaseService from './base.service';
 
 class SearchService extends BaseService {
 
@@ -12,21 +12,21 @@ class SearchService extends BaseService {
       return [];
     }
     const url = 'http://47.93.226.51:9090/v1/api/ume/searcher/search';
-    let returnFields = ['title', 'summary','ip','time','keyword','logType','ipinfo','api','totalFound'];
+    let returnFields = ['title', 'summary','ip','time','keyword','logType','ipinfo','uid','api','totalFound'];
     const request = {
       collectionName: 'datamap',
       customerId: '6671A13AB54710D932C8F2E51FFE8CC3',
       queryString: key,
+      qcAlgorithmAlias: 'hunpai',
       returnField: returnFields,
-      highLightField: ['title', 'summary'],
+      highLightField: ['title', 'summary', 'uid', 'ipinfo', 'keyword', 'ip'],
       highLightEnd: '</font>',
       highLightStart: '<font color="red">',
-      noHighlight: "0",
+      noHighlight: '0',
       preciseSearch: '1',
       closeFullSearch: false,
       topicAlias: 'label',
       isGql: '1',
-      qcAlgorithmAlias: '',
       numOfDoc: pageSize,
       startDoc: pageIndex,
     };
