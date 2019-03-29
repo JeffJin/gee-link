@@ -70,7 +70,7 @@ class KeywordDetails extends React.Component {
         <div className={'row'}>
           <div className={'ranking-container flex-box'}>
             <div className={'flex-1'}>
-              <DataBrowseRanking/>
+              <DataBrowseRanking keyword={this.props.keywordId}/>
             </div>
             <div className={'flex-1'}>
               <RecentSearchUserRanking keyword={this.props.keywordId}/>

@@ -21,7 +21,7 @@ class DataBrowseRankingContent extends React.Component {
   }
 
   getData = () => {
-    rankingService.getDataBrowseRanking('year', this.props.ip).then(data => {
+    rankingService.getDataBrowseRanking('year', this.props.keyword).then(data => {
       this.props.onLoadDataBrowseRanking(data);
     });
   };
